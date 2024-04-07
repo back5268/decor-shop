@@ -49,6 +49,6 @@ export const sendMail = async ({ to, subject, text, html, attachments = [] }) =>
     let info = await transporter.sendMail(mailOptions);
     return { status: true, data: { ...attr, status: 1, mess: info.response } };
   } catch (error) {
-    return { ...attr, status: 2, mess: error.code };
+    return { status: false, data: { ...attr, status: 2, mess: error.code } };
   }
 };

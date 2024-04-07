@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const initState = {
   username: '',
-  fullName: '',
+  name: '',
   email: '',
   bio: '',
   address: '',
