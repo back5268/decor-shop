@@ -1,14 +1,8 @@
-import { NavigationScroll, Toastify } from './components/base';
-import Routes from './routes';
+import { Button } from '@components/ui/button';
 
 const App = () => {
   return (
-    <>
-      <Toastify />
-      <NavigationScroll>
-        <Routes />
-      </NavigationScroll>
-    </>
+    <Button>Click me</Button>
   );
 };
 
