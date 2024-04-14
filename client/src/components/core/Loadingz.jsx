@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loading = (props) => {
+const Loadingz = (props) => {
   const { size = 4, severity = 'primary', border = 2 } = props;
 
   return (
@@ -16,4 +16,4 @@ const Loading = (props) => {
   );
 };
 
-export default Loading;
+export default Loadingz;

@@ -1,8 +1,15 @@
-import { Button } from '@components/ui/button';
+import { AuthProvider } from '@context/AuthContext';
+import { NavigationScroll, Toastify } from './components/base';
+import Routes from './routes';
 
 const App = () => {
   return (
-    <Button>Click me</Button>
+    <AuthProvider>
+      <Toastify />
+      <NavigationScroll>
+        <Routes />
+      </NavigationScroll>
+    </AuthProvider>
   );
 };
 

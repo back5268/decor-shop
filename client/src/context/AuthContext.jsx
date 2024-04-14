@@ -1,5 +1,5 @@
 import { getInfoApi } from '@api';
-import { Loading } from '@components/base';
+import { Loadingz } from '@components/core';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 export const INITIAL_USER_INFO = {
@@ -30,15 +30,15 @@ const AuthContext = createContext(INITIAL_STATE);
 export function AuthProvider({ children }) {
   const [userInfo, setUserInfo] = useState(INITIAL_USER_INFO);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkAuth = async () => {
     try {
       const response = await getInfoApi();
-      if (response) {
-        setUserInfo(response);
-        setIsAuthenticated(true);
-      } else localStorage.removeItem('token');
+      // if (response) {
+      //   setUserInfo(response);
+      //   setIsAuthenticated(true);
+      // } else localStorage.removeItem('token');
     } catch (error) {
       return false;
     }
@@ -77,7 +77,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={value}>
       {isLoading ? (
         <div className="fixed inset-x-0 inset-y-0 bg-black z-50 opacity-30 flex justify-center items-center">
-          <Loading size={8} border={4} />
+          <Loadingz size={8} border={4} />
         </div>
       ) : (
         children

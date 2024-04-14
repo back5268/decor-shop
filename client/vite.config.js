@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dotenv from 'dotenv';
 import path from 'path';
+
+// Load environment variables from .env
+dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,7 +22,7 @@ export default defineConfig({
       '@lib': path.resolve(__dirname, 'src/lib'),
       '@routes': path.resolve(__dirname, 'src/routes'),
       '@store': path.resolve(__dirname, 'src/store'),
-      '@views': path.resolve(__dirname, 'src/views')
+      '@view': path.resolve(__dirname, 'src/view')
     }
   }
 })
