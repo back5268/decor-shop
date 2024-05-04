@@ -2,9 +2,9 @@ import { Checkbox } from '@material-tailwind/react'
 import React from 'react'
 
 const CheckBoxz = (props) => {
-  const { ...prop } = props
+  const { children, label, ...prop } = props
   return (
-    <Checkbox color="light-blue" {...prop} />
+    <Checkbox label={children || label} labelProps={{ className: 'text-sm text-color font-normal' }} color="cyan" {...prop} />
   )
 }
 

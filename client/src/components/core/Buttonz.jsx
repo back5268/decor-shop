@@ -1,11 +1,13 @@
-import { Button } from '@material-tailwind/react'
-import React from 'react'
+import { Button } from '@material-tailwind/react';
+import React from 'react';
 
 const Buttonz = (props) => {
-  const { label, children, ...prop } = props
+  const { type = 'button', size = "md", label, children, ...prop } = props;
   return (
-    <Button size="md" color="light-blue" {...prop}>{children || label}</Button>
-  )
-}
+    <Button type={type} size={size} color="cyan" {...prop}>
+      {children || label}
+    </Button>
+  );
+};
 
-export default Buttonz
+export default Buttonz;

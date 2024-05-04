@@ -5,7 +5,7 @@ const Radioz = (props) => {
   const { ...prop } = props
   
   return (
-    <Radio color="light-blue" {...prop} />
+    <Radio color="cyan" {...prop} />
   )
 }
 

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import { Input, Popover, PopoverHandler, PopoverContent } from '@material-tailwind/react';
 import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
-import React from 'react';
+import React, { useState } from 'react';
 
 const DatePickerz = (props) => {
   const { ...prop } = props;

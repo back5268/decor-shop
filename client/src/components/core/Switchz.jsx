@@ -4,7 +4,7 @@ import React from 'react';
 const Switchz = (props) => {
   const { label, ...prop } = props;
 
-  return <Switch color="light-blue" label={label} {...prop} />;
+  return <Switch color="cyan" label={label} {...prop} />;
 };
 
 export default Switchz;
