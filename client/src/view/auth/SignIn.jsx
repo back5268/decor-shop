@@ -7,7 +7,7 @@ import { SigninValidation } from '@lib/validation';
 import { useToastState } from '@store';
 import { getInfoApi, signinApi } from '@api';
 import { useAuthContext } from '@context/AuthContext';
-import { Buttonz, CheckBoxz, Inputz, Linkz } from '@components/core';
+import { Buttonz, CheckBoxz, Dropdownz, Inputz, Linkz } from '@components/core';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
@@ -37,11 +37,14 @@ const SignIn = () => {
     }
   };
 
+  console.log(errors);
+
   return (
     <FormAuth title="Welcome To Decor Day" subTitle="Vui lòng đăng nhập để tiếp tục">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <Inputz id="username" label="Tài khoản (*)" register={register} errors={errors} />
         <Inputz id="password" label="Mật khẩu (*)" register={register} errors={errors} type="password" />
+        <Dropdownz />
         <div className="mb-2 flex items-center justify-between">
           <CheckBoxz id="remember" label="Nhớ mật khẩu" />
           <Linkz to="/auth/forgot-password" label="Quên mật khẩu ?" />

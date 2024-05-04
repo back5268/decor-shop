@@ -1,6 +1,3 @@
-import { Buttonz } from '@components/core';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@components/ui/input-otp';
-import { Label } from '@components/ui/label';
 import { usePostApi } from '@lib/react-query';
 import { useToastState } from '@store';
 
@@ -16,24 +13,7 @@ const SendOtp = (props) => {
     }
   };
 
-  return (
-    <div className="grid w-full items-center gap-2">
-      <Label htmlFor={id}>Mã xác nhận (*)</Label>
-      <div className="flex align-item-center justify-between">
-        <InputOTP id={id} maxLength={6} onChange={(e) => setValue(id, e)} {...prop}>
-          <InputOTPGroup>
-            <InputOTPSlot index={0} className={errors[id] && 'border-red-500'} />
-            <InputOTPSlot index={1} className={errors[id] && 'border-red-500'} />
-            <InputOTPSlot index={2} className={errors[id] && 'border-red-500'} />
-            <InputOTPSlot index={3} className={errors[id] && 'border-red-500'} />
-            <InputOTPSlot index={4} className={errors[id] && 'border-red-500'} />
-            <InputOTPSlot index={5} className={errors[id] && 'border-red-500'} />
-          </InputOTPGroup>
-        </InputOTP>
-        <Buttonz onClick={onSendOtp} disabled={isSend} loading={isPending} label="Gửi OTP" />
-      </div>
-    </div>
-  );
+  return <div className="grid w-full items-center gap-2"></div>;
 };
 
 export default SendOtp;

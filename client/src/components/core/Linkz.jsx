@@ -1,13 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
 
-const Linkz = (props) => {
-  const { label, children, to, ...prop } = props;
+const Linkz = () => {
   return (
-    <Link to={to} className="text-sm font-medium leading-none text-primary" { ...prop}>
-      {label || children}
-    </Link>
-  );
-};
+    <div>Linkz</div>
+  )
+}
 
-export default Linkz;
+export default Linkz

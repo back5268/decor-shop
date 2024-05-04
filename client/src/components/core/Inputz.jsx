@@ -1,20 +1,13 @@
-import { Input } from '@components/ui/input';
-import { Label } from '@components/ui/label';
+import { Input } from '@material-tailwind/react';
 import React from 'react';
 
 const Inputz = (props) => {
-  const { id, label = '', placeholder, className, errors = {}, register = () => {}, ...prop } = props;
+  const { id, value, label, errors = {}, register, className, ...prop } = props;
+
   return (
-    <div className={`grid w-full items-center gap-2 ${className}`}>
-      {label && <Label htmlFor={id}>{label}</Label>}
-      <Input
-        id={id}
-        placeholder={placeholder || `Vui lòng nhập ${label.toLowerCase()}`}
-        {...register(id)}
-        className={errors[id] && 'border-red-500'}
-        {...prop}
-      />
-      {errors[id] && <span className="text-xs ml-2 text-red-500">{errors[id].message}</span>}
+    <div className={`flex flex-col gap-1 w-full p-2 ${className}`}>
+      <Input size="lg" color="light-blue" id={id} label={label} {...register(id)} error={errors[id]} {...prop} />
+      {errors[id] && <small className="w-full ml-2 text-red-600">{errors[id].message}</small>}
     </div>
   );
 };
