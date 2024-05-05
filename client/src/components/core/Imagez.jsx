@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Imagez = (props) => {
-  const { h = '8', w = '8', className, ...prop } = props;
+  const { h = '10', w = '10', className = "", ...prop } = props;
 
   return (
     <div className={`relative rounded-md h-${h} w-${w} ${className}`}>

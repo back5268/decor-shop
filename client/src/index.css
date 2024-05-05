@@ -8,6 +8,6 @@
   }
 
   body {
-    @apply text-color min-h-screen bg-background font-sans;
+    @apply text-color bg-background font-sans;
   }
 }

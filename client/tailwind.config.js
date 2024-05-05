@@ -16,6 +16,9 @@ module.exports = withMT({
       height: {
         'body-sidebar': 'calc(100vh - 18rem)'
       },
+      minWidth: {
+        '[200px]': '0px'
+      },
       colors: {
         background: 'rgba(248, 247, 250, 1)',
         color: 'rgba(47, 43, 61, 0.9)',
@@ -37,20 +40,13 @@ module.exports = withMT({
         instable: 'var(--origin-x) var(--origin-y)'
       },
       keyframes: {
-        'zoom-in': {
-          from: { transform: 'scale(0)' },
-          to: { transform: 'scale(1)' }
-        },
-        'zoom-out': {
-          from: { transform: 'scale(1)' },
-          to: { transform: 'scale(0)' }
+        progress: {
+          '0%': { transform: 'translateX(-20%)' },
+          '100%': { transform: 'translateX(100%)' }
         }
       },
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'caret-blink': 'caret-blink 1.25s ease-out infinite',
-        instable: 'var(--animation) 1s ease'
+        progress: 'progress 0.6s ease-in-out forwards'
       }
     }
   },

@@ -1,11 +1,14 @@
 import { AuthProvider } from '@context/AuthContext';
-import { NavigationScroll, Toastify } from './components/base';
+import { ConfirmDialog, LazyLoading, NavigationScroll, ScrollToTop, Toastify } from './components/base';
 import Routes from './routes';
 
 const App = () => {
   return (
     <AuthProvider>
+      <ConfirmDialog />
       <Toastify />
+      <LazyLoading />
+      <ScrollToTop />
       <NavigationScroll>
         <Routes />
       </NavigationScroll>

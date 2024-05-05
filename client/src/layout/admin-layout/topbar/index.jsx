@@ -1,4 +1,4 @@
-import { Buttonz } from '@components/core';
+import { Buttonz, Cardz } from '@components/core';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import React from 'react';
 import AvatarSection from './AvatarSection';
@@ -8,12 +8,9 @@ const TopBar = (props) => {
   const { showSidebar, setShowSidebar } = props;
 
   return (
-    <div className="fixed top-0 inset-x-0 z-20 p-4">
-      <div
-        className={`relative flex flex-col bg-clip-border rounded-xl shadow-md text-color 
-        transition-all duration-500 ease-in-out h-14 bg-white ${showSidebar ? 'ml-64' : ''}`}
-      >
-        <div className="flex justify-between items-center h-full px-4">
+    <div className="fixed top-0 inset-x-0 p-4 z-10">
+      <Cardz className={`h-14 ${showSidebar ? 'ml-64' : ''}`}>
+        <div className="flex justify-between items-center h-full">
           <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="black" className="p-1 text-color">
             <Bars3Icon className="h-8 w-8 stroke-1" />
           </Buttonz>
@@ -22,7 +19,7 @@ const TopBar = (props) => {
             <AvatarSection />
           </div>
         </div>
-      </div>
+      </Cardz>
     </div>
   );
 };

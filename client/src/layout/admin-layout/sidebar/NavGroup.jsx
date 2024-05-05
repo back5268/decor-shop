@@ -4,7 +4,7 @@ import React from 'react';
 import NavItem from './NavItem';
 
 const NavGroup = (props) => {
-  const { value, item = {}, open, handleOpen } = props;
+  const { value, item = {}, open, setOpen, pathname } = props;
   const isOpen = value === open;
 
   return (
@@ -14,7 +14,7 @@ const NavGroup = (props) => {
     >
       <NavItem className={isOpen ? 'bg-hover-sidebar' : ''}>
         <AccordionHeader
-          onClick={() => handleOpen(open === value ? 0 : value)}
+          onClick={() => setOpen(open === value ? 0 : value)}
           className="border-b-0 p-0 text-on-sidebar hover:text-on-sidebar"
         >
           <div className="grid place-items-center mr-4">
@@ -26,7 +26,7 @@ const NavGroup = (props) => {
       <AccordionBody className="py-1 text-on-sidebar">
         <nav className="flex flex-col gap-1 font-normal p-0">
           {item?.items?.map((child, index) => {
-            return <NavItem key={index} item={child} />;
+            return <NavItem key={index} item={child} pathname={pathname} />;
           })}
         </nav>
       </AccordionBody>

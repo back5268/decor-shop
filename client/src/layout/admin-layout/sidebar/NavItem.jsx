@@ -1,47 +1,40 @@
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import { ListItem } from '@material-tailwind/react';
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavItem = (props) => {
-  const { children, item = {}, className = '', ...prop } = props;
-  const { pathname } = useLocation();
+  const { children, item = {}, pathname = '', className = '', ...prop } = props;
   const Item = item.icon;
+  const isSelected =
+    item.type === 'item' ? (pathname === '/admin' ? item.route === '' : '/' + pathname.toString().split('/')[2] === item.route) : false;
 
-  useEffect(() => {
-    const currentIndex = document.location.pathname
-      .toString()
-      .split('/')
-      .findIndex((id) => id === item.id);
-      console.log(currentIndex);
-    // if (currentIndex >= 0) {
-    //   setIsOpen(item.id);
-    // }
-  }, [pathname]);
+  const Fragment = ({ children }) => {
+    if (item.type === 'item') {
+      const route = '/admin' + item.route;
+      return <Link to={route}>{children}</Link>;
+    } else return <>{children}</>;
+  };
 
   return (
-    <Link to={item.to}>
+    <Fragment>
       <ListItem
         {...prop}
-        className={`hover:bg-hover-sidebar focus:bg-hover-sidebar
-    active:bg-hover-sidebar hover:text-on-sidebar focus:text-on-sidebar active:text-on-sidebar p-2 ${className}`}
+        className={`transition-all duration-500 ease-in-out hover:text-on-sidebar p-2 !text-on-sidebar ${className} 
+        ${isSelected ? 'bg-primary hover:bg-primary focus:bg-primary active:bg-primary' : 'hover:bg-hover-sidebar focus:bg-hover-sidebar active:bg-hover-sidebar'}`}
       >
         {children ? (
           children
         ) : (
           <>
             <div className="grid place-items-center mr-4">
-              {item.icon ? (
-                <Item strokeWidth={3} className="h-5 w-5" />
-              ) : (
-                <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-              )}
+              {item.icon ? <Item strokeWidth={3} className="h-5 w-5" /> : <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />}
             </div>
             <span className="block antialiased text-sm leading-6 text-inherit mr-auto font-normal">{item.label}</span>
           </>
         )}
       </ListItem>
-    </Link>
+    </Fragment>
   );
 };
 
