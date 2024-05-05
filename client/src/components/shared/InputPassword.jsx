@@ -11,7 +11,7 @@ const InputPassword = (props) => {
       <button
         type="button"
         onClick={() => setShowPassword(!showPassword)}
-        className="absolute inset-y-0 right-0 flex items-center px-4 text-form focus:outline-none"
+        className="absolute right-0 top-5 flex px-4 text-form focus:outline-none"
       >
         {showPassword ? (
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

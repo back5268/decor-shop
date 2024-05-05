@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Sidebar from './sidebar';
+import TopBar from './topbar';
 
-const index = () => {
+const AdminLayout = () => {
+  const [showSidebar, setShowSidebar] = useState(true);
+
   return (
-    <div>index</div>
-  )
-}
+    <div>
+      <TopBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+      <Sidebar showSidebar={showSidebar} />
+    </div>
+  );
+};
 
-export default index
+export default AdminLayout;

@@ -18,3 +18,5 @@ export { default as Progressz } from './Progressz';
 export { default as Dialogz } from './Dialogz';
 export { default as Tabz } from './Tabz';
 export { default as TextAreaz } from './TextAreaz';
+export { default as Imagez } from './Imagez';
+export { default as Popoverz } from './Popoverz';

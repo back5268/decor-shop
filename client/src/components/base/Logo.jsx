@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Logo = (props) => {
-  const { height = '[40px]' } = props;
+  const { height = '8' } = props;
   return (
     <div className="flex justify-center">
       <div className={`h-${height}`}>
