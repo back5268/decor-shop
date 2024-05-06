@@ -9,7 +9,7 @@ class UserMd extends ModelBase {
   avatar;
   gender;
   birthday;
-  role;
+  type;
   address;
   notifies;
   lastLogin;
@@ -28,7 +28,7 @@ UserMd.init('User', {
   avatar: { type: String },
   gender: { type: Number, enum: [1, 2], description: '1: Name, 2: Nữ' },
   birthday: { type: Date },
-  role: { type: String, default: 'user' },
+  type: { type: String, default: 'user' },
   address: [
     {
       name: { type: String, required: true },
