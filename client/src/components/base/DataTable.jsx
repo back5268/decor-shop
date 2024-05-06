@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BiSearch, BiTrash } from 'react-icons/bi';
+import { TrashIcon, DocumentMagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useToastState, useConfirmState } from '@store';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeSpecialCharacter } from '@lib/helper';
@@ -163,12 +163,12 @@ const DataTable = (props) => {
                               <div className="flex gap-2 justify-center items-center">
                                 {baseActions.includes('detail') && (
                                   <Buttonz rounded={true} onClick={() => onViewDetail(item)}>
-                                    <BiSearch size={16} />
+                                    <DocumentMagnifyingGlassIcon size={16} />
                                   </Buttonz>
                                 )}
                                 {baseActions.includes('delete') && (
                                   <Buttonz rounded={true} severity="danger" onClick={() => onDelete(item)}>
-                                    <BiTrash size={16} />
+                                    <TrashIcon size={16} />
                                   </Buttonz>
                                 )}
                               </div>

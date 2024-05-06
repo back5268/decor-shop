@@ -6,6 +6,7 @@ const ObjectId = Schema.Types.ObjectId;
 class TemplateMd extends ModelBase {
   by;
   updateBy;
+  type;
   subject;
   code;
   content;
@@ -17,6 +18,7 @@ class TemplateMd extends ModelBase {
 TemplateMd.init('Template', {
   by: { type: ObjectId, ref: 'User', required: true },
   updateBy: { type: ObjectId, ref: 'User' },
+  type: { type: Number, required: true, enum: [1, 2, 3], description: '1: mẫu xác nhận đăng ký, 2: mẫu quên mật kkhẩu' },
   code: { type: String, required: true },
   subject: { type: String, required: true },
   content: { type: String, required: true },

@@ -6,13 +6,53 @@ const icons = {
 
 export const items = [
   { label: 'Dashboard', icon: icons.PresentationChartBarIcon, type: 'item', route: '' },
+  { label: 'Phân quyền', icon: icons.PresentationChartBarIcon, type: 'item', route: '/permissions' },
   {
     label: 'Quản lý người dùng',
     icon: '',
     type: 'group',
     items: [
-      { label: 'Quản lý nhân viên', type: 'item', route: '/users' },
+      { label: 'Quản lý nhân sự', type: 'item', route: '/personnel' },
       { label: 'Quản lý khách hàng', type: 'item', route: '/customers' }
     ]
-  }
+  },
+  {
+    label: 'Quản lý kho',
+    icon: '',
+    type: 'group',
+    items: [
+      { label: 'Danh mục sản phẩm', type: 'item', route: '/categories' },
+      { label: 'Quản lý sản phẩm', type: 'item', route: '/products' },
+      { label: 'Quản lý khuyến mãi', type: 'item', route: '/promotions' },
+    ]
+  },
+  {
+    label: 'Giao dịch',
+    icon: '',
+    type: 'group',
+    items: [
+      { label: 'Quản lý giỏ hàng', type: 'item', route: '/carts' },
+      { label: 'Quản lý đơn hàng', type: 'item', route: '/orders' },
+      { label: 'Lịch sử giao dịch', type: 'item', route: '/transactions' },
+    ]
+  },
+  {
+    label: 'Cấu hình',
+    icon: '',
+    type: 'group',
+    items: [
+      { label: 'Cấu hình mẫu thông báo', type: 'item', route: '/templates' },
+      { label: 'Lịch sử thông báo', type: 'item', route: '/logs' },
+      { label: 'Danh sách chặn', type: 'item', route: '/blacklist' },
+    ]
+  },
+  {
+    label: 'Phản hồi người dùng',
+    icon: '',
+    type: 'group',
+    items: [
+      { label: 'Đánh giá sản phẩm', type: 'item', route: '/evaluates' },
+      { label: 'Phản hồi người dùng', type: 'item', route: '/feedbacks' },
+    ]
+  },
 ];

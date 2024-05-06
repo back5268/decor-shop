@@ -3,7 +3,7 @@ import DataFilter from '@components/base/DataFilter';
 import { Dropdownz, Inputz } from '@components/core';
 import React, { useState } from 'react';
 
-const Users = () => {
+const Personnel = () => {
   const [params, setParams] = useState({});
   const [filter, setFilter] = useState({});
 
@@ -33,4 +33,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Personnel;
