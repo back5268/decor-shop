@@ -79,7 +79,7 @@ export const Comment = ({ userInfo, objectId, comment, setFocused, type, onWarni
             >
               Trả lời
             </span>
-            {(comment?.by === userInfo?._id || userInfo?.role === 'admin') && (
+            {(comment?.by === userInfo?._id || userInfo?.type === 'admin') && (
               <span className="cursor-pointer " onClick={onDelete}>
                 Xóa
               </span>

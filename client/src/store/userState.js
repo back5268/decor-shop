@@ -6,7 +6,7 @@ const initState = {
   email: '',
   bio: '',
   address: '',
-  role: '',
+  type: '',
   courses: [],
   posts: []
 };
@@ -14,9 +14,9 @@ const initState = {
 const useUserState = create((set, get) => ({
   userInfo: initState,
   isAuthenticated: false,
-  role: false,
-  setUserInfo: (userInfo) => set({ userInfo, isAuthenticated: true, role: userInfo?.role }),
-  clearUserInfo: () => set({ userInfo: initState, isAuthenticated: false, role: false })
+  type: false,
+  setUserInfo: (userInfo) => set({ userInfo, isAuthenticated: true, type: userInfo?.type }),
+  clearUserInfo: () => set({ userInfo: initState, isAuthenticated: false, type: false })
 }));
 
 const getUserState = () => useUserState.getState();

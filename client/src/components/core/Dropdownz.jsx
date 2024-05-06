@@ -2,13 +2,14 @@ import { Option, Select } from '@material-tailwind/react';
 import React from 'react';
 
 const Dropdownz = (props) => {
-  const { id, value, size = 'lg', optionValue = 'id', optionLabel = 'name', errors = {}, options = [], className = '', ...prop } = props;
+  const { id, value = '', onChange = () => {}, size = 'lg', optionValue = 'key', optionLabel = 'label', errors = {}, options = [], className = '', ...prop } = props;
 
   return (
     <div className={`flex flex-col gap-1 w-full p-2 ${className}`}>
       <Select
         id={id}
         value={value ? String(value) : ""}
+        onChange={onChange}
         size={size}
         color="light-blue"
         error={Boolean(errors[id])}
@@ -17,14 +18,14 @@ const Dropdownz = (props) => {
       >
         {options?.length > 0 ? (
           options.map((item) => {
-            let key, text;
+            let key, label;
             if (typeof item === 'object') {
               key = String(item[optionValue]);
-              text = String(item[optionLabel]);
-            } else key = text = String(item);
+              label = String(item[optionLabel]);
+            } else key = label = String(item);
             return (
               <Option key={key} value={key}>
-                {text}
+                {label}
               </Option>
             );
           })

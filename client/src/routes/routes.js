@@ -1,5 +1,5 @@
 import { Dashboard } from '@view/admin';
-import { Customers, Personel } from '@view/admin/users';
+import { Customers, Personnel } from '@view/admin/users';
 import { ForgotPassword, SignIn, SignUp } from '@view/auth';
 import { Home } from '@view/web';
 
@@ -10,7 +10,7 @@ const routes = [
 
   { path: '/', element: Home, public: true, layout: 'admin' },
   { path: '/admin', element: Dashboard, public: true, layout: 'admin' },
-  { path: '/admin/personel', element: Personel, public: true, layout: 'admin' },
+  { path: '/admin/personnel', element: Personnel, public: true, layout: 'admin' },
   { path: '/admin/customers', element: Customers, public: true, layout: 'admin' },
 ];
 

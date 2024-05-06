@@ -9,7 +9,7 @@ export const INITIAL_USER_INFO = {
   email: '',
   bio: '',
   address: '',
-  role: '',
+  type: '',
   avatar: '/images/avatar.jpg',
   courses: [],
   posts: [],

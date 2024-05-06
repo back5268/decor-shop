@@ -118,19 +118,19 @@ const DataTable = (props) => {
                     </th>
                     {columns.map((column, index) => {
                       return (
-                        <th scope="col" className="px-4 py-4 border-[1px] text-center" key={index}>
+                        <th scope="col" className="px-4 py-4 border-[1px] text-center font-medium" key={index}>
                           {column.label}
                         </th>
                       );
                     })}
                     {isStatus && (
-                      <th scope="col" className="px-4 py-4 border-[1px] text-center">
+                      <th scope="col" className="px-4 py-4 border-[1px] text-center font-medium">
                         Trạng thái
                       </th>
                     )}
                     {isActions && (
-                      <th scope="col" className="px-4 py-4 border-[1px] text-center">
-                        Actions
+                      <th scope="col" className="px-4 py-4 border-[1px] text-center font-medium">
+                        Thao tác
                       </th>
                     )}
                   </tr>

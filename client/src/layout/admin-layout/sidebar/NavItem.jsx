@@ -28,7 +28,7 @@ const NavItem = (props) => {
         ) : (
           <>
             <div className="grid place-items-center mr-4">
-              {item.icon ? <Item strokeWidth={3} className="h-5 w-5" /> : <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />}
+              {item.icon ? <Item className="h-5 w-5" /> : <ChevronRightIcon strokeWidth={4} className="h-3 w-5" />}
             </div>
             <span className="block antialiased text-sm leading-6 text-inherit mr-auto font-normal">{item.label}</span>
           </>

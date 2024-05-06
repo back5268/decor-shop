@@ -12,7 +12,7 @@ export const refreshObject = (object) => {
     if (object.hasOwnProperty(key)) {
       if (Array.isArray(object[key])) object[key] = [];
       else if (typeof object[key] === 'object') object[key] = {};
-      else object[key] = undefined;
+      else object[key] = '';
     }
   }
   return object;

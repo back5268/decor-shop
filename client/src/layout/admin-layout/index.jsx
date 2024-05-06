@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
 import TopBar from './topbar';
 
 const AdminLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(true);
+
+  useEffect(() => {
+    const checkWindowSize = () => {
+      if (window.innerWidth < 1300) setShowSidebar(false);
+      else setShowSidebar(true);
+    };
+    checkWindowSize();
+    window.addEventListener('resize', checkWindowSize);
+    return () => {
+      window.removeEventListener('resize', checkWindowSize);
+    };
+  }, []);
 
   return (
     <div className="antialiased font-normal text-base text-color">

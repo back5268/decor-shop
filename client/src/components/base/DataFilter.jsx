@@ -35,7 +35,6 @@ const DataFilter = (props) => {
     let filters = { ...filter };
     if (handleFilter) handleFilter();
     else {
-      filters = handleFilter(filter);
       setParams((pre) => {
         return {
           page: pre.page || 1,

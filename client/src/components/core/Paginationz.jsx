@@ -2,12 +2,12 @@ import React, { useCallback } from 'react';
 import { Dropdownz } from '.';
 import { ListItem } from '@material-tailwind/react';
 
-const ButtonPagination = ({ content, onClick = () => {}, active }) => {
+const ButtonPagination = ({ content, onClick = () => {}, active, className = "" }) => {
   return (
     <ListItem className="p-0">
       <button
         onClick={onClick}
-        className={`relative block rounded px-4 py-2 text-sm cursor-pointer transition-all duration-300 
+        className={`relative block rounded px-4 py-2 text-sm cursor-pointer transition-all duration-300 ${className}
         ${active ? 'bg-primary shadow-md shadow-cyan-200 text-white font-medium' : 'bg-gray-100 text-color hover:bg-gray-200'}`}
       >
         {content}
@@ -53,7 +53,7 @@ const Paginationz = (props) => {
                 clipRule="evenodd"
               />
             </svg>
-          }
+          } className="!px-2"
           onClick={() => setParams({ ...params, page: 1 })}
         />
         {renderPageLinks()}
@@ -66,7 +66,7 @@ const Paginationz = (props) => {
                 clipRule="evenodd"
               />
             </svg>
-          }
+          } className="!px-2"
           onClick={() => setParams({ ...params, page: Math.ceil(total / params.limit) || 1 })}
         />
       </ul>
