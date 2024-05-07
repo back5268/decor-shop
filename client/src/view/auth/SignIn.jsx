@@ -7,7 +7,7 @@ import { SigninValidation } from '@lib/validation';
 import { useToastState } from '@store';
 import { getInfoApi, signinApi } from '@api';
 import { useAuthContext } from '@context/AuthContext';
-import { Buttonz, CheckBoxz, Inputz, Linkz } from '@components/core';
+import { Buttonz, CheckBoxz, InputForm, Linkz } from '@components/core';
 import { useNavigate } from 'react-router-dom';
 import { InputPassword } from '@components/shared';
 
@@ -41,8 +41,8 @@ const SignIn = () => {
   return (
     <FormAuth title="Vui lòng đăng nhập để tiếp tục">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1">
-        <Inputz id="username" label="Tài khoản (*)" register={register} errors={errors} />
-        <InputPassword id="password" label="Mật khẩu (*)" register={register} errors={errors} />
+        <InputForm id="username" label="Tài khoản (*)" register={register} errors={errors} className="!w-full" />
+        <InputPassword id="password" label="Mật khẩu (*)" register={register} errors={errors} className="!w-full" />
         <div className="flex flex-col gap-2 px-2 mb-4">
           <div className="flex items-center justify-between">
             <CheckBoxz id="remember" label="Nhớ mật khẩu" />

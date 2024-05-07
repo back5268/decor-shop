@@ -36,7 +36,7 @@ export const PostValidation = yup.object({
 export const UserInfoValidation = yup.object({
   email: yup.string().email('Email không đúng định dạng!').required('Email không được bỏ trống!'),
   username: yup.string().required('Tài khoản không được bỏ trống!'),
-  fullName: yup.string().required('Họ tên không được bỏ trống!')
+  name: yup.string().required('Họ tên không được bỏ trống!')
 });
 
 export const ChangePasswordValidation = yup.object({

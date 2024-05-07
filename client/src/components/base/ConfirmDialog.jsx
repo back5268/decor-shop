@@ -1,14 +1,15 @@
 import React from 'react';
 import { useConfirmState } from '@store';
-import { Buttonz, Dialogz } from '@components/core';
+import { Buttonz, Dialogz, Hrz } from '@components/core';
 
 const ConfirmDialog = () => {
   const { confirmInfo = {}, open, hideConfirm } = useConfirmState();
 
   return (
-    <Dialogz open={open} setOpen={hideConfirm}>
-      <div className="p-6">{confirmInfo.title || 'Bạn có chắc chắn muốn tiếp tục?'}</div>
-      <div className="flex gap-2 justify-end py-4 mr-4">
+    <Dialogz title="Decor Shop" open={open} setOpen={hideConfirm} className="w-[500px]">
+      <div className="p-6 text-left">{confirmInfo.title || 'Bạn có chắc chắn muốn tiếp tục?'}</div>
+      <Hrz/>
+      <div className="flex gap-4 justify-end mt-4">
         <Buttonz label="Hủy" color="red" onClick={() => hideConfirm()} />
         <Buttonz
           label="Xác nhận"

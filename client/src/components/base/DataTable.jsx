@@ -12,7 +12,7 @@ const HeaderColumn = ({ children, className = '', ...prop }) => (
   </th>
 );
 const BodyColumn = ({ children, className = '', ...prop }) => (
-  <td className={`px-2 py-4 border-[1px] border-blue-gray-200 font-medium ${className}`} {...prop}>
+  <td className={`px-2 py-4 border-[1px] border-blue-gray-200 text-xs ${className}`} {...prop}>
     {children}
   </td>
 );
@@ -115,7 +115,7 @@ const DataTable = (props) => {
       )}
       <div className="flex flex-col overflow-x-auto">
         <div className="inline-block min-w-full py-2">
-          <div className="overflow-x-auto relative">
+          <div className="overflow-x-auto overflow-y-hidden relative">
             {isLoading && <Loading />}
             <table className="min-w-full text-sm">
               <thead>
@@ -150,13 +150,13 @@ const DataTable = (props) => {
                           <BodyColumn>
                             <div className="flex justify-center items-center gap-2">
                               {baseActions.includes('detail') && (
-                                <Buttonz rounded={true} onClick={() => onViewDetail(item)}>
-                                  <DocumentMagnifyingGlassIcon size={16} />
+                                <Buttonz onClick={() => onViewDetail(item)} variant="outlined" className="rounded-full p-2">
+                                  <DocumentMagnifyingGlassIcon className="w-5" />
                                 </Buttonz>
                               )}
                               {baseActions.includes('delete') && (
-                                <Buttonz rounded={true} severity="danger" onClick={() => onDelete(item)}>
-                                  <TrashIcon size={16} />
+                                <Buttonz color="red" onClick={() => onDelete(item)} variant="outlined" className="rounded-full p-2">
+                                  <TrashIcon className="w-5" />
                                 </Buttonz>
                               )}
                             </div>

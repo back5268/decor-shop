@@ -5,15 +5,13 @@ import { createContext, useContext, useEffect, useState } from 'react';
 export const INITIAL_USER_INFO = {
   _id: '',
   username: '',
-  fullName: '',
+  name: '',
   email: '',
   bio: '',
   address: '',
   type: '',
   avatar: '/images/avatar.jpg',
-  courses: [],
-  posts: [],
-  saves: []
+  notifies: []
 };
 
 const INITIAL_STATE = {
@@ -35,10 +33,10 @@ export function AuthProvider({ children }) {
   const checkAuth = async () => {
     try {
       const response = await getInfoApi();
-      // if (response) {
-      //   setUserInfo(response);
-      //   setIsAuthenticated(true);
-      // } else localStorage.removeItem('token');
+      if (response) {
+        setUserInfo(response);
+        setIsAuthenticated(true);
+      } else localStorage.removeItem('token');
     } catch (error) {
       return false;
     }

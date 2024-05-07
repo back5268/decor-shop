@@ -8,7 +8,7 @@ const Customers = () => {
   const [filter, setFilter] = useState({});
 
   const columns = [
-    { label: 'Họ tên', field: 'fullName' },
+    { label: 'Họ tên', field: 'name' },
     { label: 'Username', field: 'username' },
     { label: 'Email', field: 'email' },
     { label: 'Thời gian tạo', body: (item) => TimeBody(item.createdAt) },

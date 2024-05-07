@@ -8,6 +8,6 @@ export const userRouter = express.Router();
 userRouter.use(userMiddleware);
 userRouter.get('/getListUser', getListUser);
 userRouter.get('/detailUser', detailUser);
-userRouter.delete('/deleteUser', deleteUser);
+userRouter.post('/deleteUser', deleteUser);
 userRouter.post('/addUser', upload.single('avatar'), addUser);
 userRouter.post('/updateUser', upload.single('avatar'), updateUser);

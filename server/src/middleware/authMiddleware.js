@@ -25,7 +25,7 @@ export const authMiddleware = async (req, res, next) => {
 
 export const userMiddleware = async (req, res, next) => {
   try {
-    if (!req.userInfo || req.userInfo.type === "user")
+    if (!req.userInfo || req.userInfo.type !== "user")
       return res.status(400).json({ status: false, mess: 'Bạn không có quyền thực hiện tác vụ này!' });
     next();
   } catch (error) {

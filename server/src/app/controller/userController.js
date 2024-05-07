@@ -11,8 +11,8 @@ export const getListUser = async (req, res) => {
     if (error) return res.status(400).json({ status: false, mess: error });
     const { page, limit, keySearch, email, type, status } = value;
     const where = {};
-    if (keySearch) where.$or = [{ fullName: { $regex: keySearch, $options: 'i' } }, { username: { $regex: keySearch, $options: 'i' } }];
-    if (email) where.email = { $regex: email, $options: 'i' };
+    if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }];
+    if (email) where.$or = [{ email: { $regex: email, $options: 'i' } }, { username: { $regex: email, $options: 'i' } }];
     if (type) where.type = type;
     if (status || status === 0) where.status = status;
     const documents = await getListUserMd(where, page, limit);
@@ -25,7 +25,7 @@ export const getListUser = async (req, res) => {
 
 export const getListUserInfo = async (req, res) => {
   try {
-    const data = await getListUserMd({ status: 1 });
+    const data = await getListUserMd();
     res.json({ status: true, data });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
@@ -47,7 +47,7 @@ export const detailUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const { error, value } = validateData(detailUserValid, req.query);
+    const { error, value } = validateData(detailUserValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
     const { _id } = value;
     const data = await deleteUserMd({ _id });
@@ -67,7 +67,7 @@ export const addUser = async (req, res) => {
       value.avatar = await uploadFileToFirebase(req.file);
     }
 
-    const { data, mess } = await createUserRp(value);
+    const { data, mess } = await createUserRp({ ...value, type: "user" });
     if (data && !mess) res.json({ status: true, data });
     else res.status(400).json({ status: false, mess });
   } catch (error) {
@@ -79,7 +79,7 @@ export const updateUser = async (req, res) => {
   try {
     const { error, value } = validateData(updateUserValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    let { _id, fullName, username, email, password, bio, address, status, type, avatar } = value;
+    let { _id, name, username, email, password, code, bio, address, status, avatar, gender, birthday } = value;
 
     const user = await getDetailUserMd({ _id });
     if (!user) return res.status(400).json({ status: false, mess: 'Người dùng không tồn tại!' });
@@ -98,7 +98,8 @@ export const updateUser = async (req, res) => {
       avatar = await uploadFileToFirebase(req.file);
     }
 
-    const attr = { fullName, username, email, bio, address, status, type, avatar };
+    address = address ? (typeof address === 'object' ? address : [{address}]) : undefined;
+    const attr = { name, username, email, bio, address, status, avatar, code, gender, birthday };
     if (password) {
       const salt = await bcrypt.genSalt(10);
       attr.password = await bcrypt.hash(password, salt);
@@ -115,7 +116,7 @@ export const updateUserInfo = async (req, res) => {
   try {
     const { error, value } = validateData(updateUserInfoValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    let { username, fullName, email, bio, address, avatar } = value;
+    let { username, name, email, bio, address, avatar } = value;
 
     if (email) {
       const checkEmail = await getDetailUserMd({ email });
@@ -131,7 +132,7 @@ export const updateUserInfo = async (req, res) => {
       avatar = await uploadFileToFirebase(req.file);
     }
 
-    const attr = { username, fullName, email, bio, address, avatar };
+    const attr = { username, name, email, bio, address, avatar };
     const data = await updateUserMd({ _id: req.userInfo._id }, attr);
     res.status(201).json({ status: true, data });
   } catch (error) {

@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormAuth } from '@components/base';
-import { signupApi } from '@api';
+import { sendOtpSignupApi, signupApi } from '@api';
 import { usePostApi } from '@lib/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useToastState } from '@store';
-import { Buttonz, CheckBoxz, Inputz, Linkz } from '@components/core';
+import { Buttonz, CheckBoxz, InputForm, Linkz } from '@components/core';
 import { InputOtp, InputPassword } from '@components/shared';
 
 const SignUp = () => {
@@ -19,7 +19,8 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    watch
   } = useForm({
     resolver: yupResolver(SignupValidation)
   });
@@ -35,11 +36,21 @@ const SignUp = () => {
   return (
     <FormAuth title="Đăng ký tài khoản mới">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1">
-        <Inputz id="fullName" label="Họ tên (*)" register={register} errors={errors} />
-        <Inputz id="email" label="Email (*)" type="email" register={register} errors={errors} disabled={isSend} />
-        <Inputz id="username" label="Tài khoản (*)" register={register} errors={errors} disabled={isSend} />
-        <InputPassword id="password" label="Mật khẩu (*)" register={register} errors={errors} disabled={isSend} />
-        <InputOtp id="otp" register={register} errors={errors} />
+        <InputForm id="name" label="Họ tên (*)" register={register} errors={errors} className="!w-full" />
+        <InputForm id="email" label="Email (*)" type="email" register={register} errors={errors} className="!w-full" disabled={isSend} />
+        <InputForm id="username" label="Tài khoản (*)" register={register} errors={errors} className="!w-full" disabled={isSend} />
+        <InputPassword id="password" label="Mật khẩu (*)" register={register} errors={errors} className="!w-full" />
+        <InputOtp
+          id="otp"
+          register={register}
+          errors={errors}
+          email={watch('email')}
+          username={watch('username')}
+          isSend={isSend}
+          setIsSend={setIsSend}
+          SendOtpApi={sendOtpSignupApi}
+          className="!w-full"
+        />
         <div className="flex flex-col gap-2 px-2 mb-4">
           <div className="flex items-center justify-between">
             <CheckBoxz id="remember">

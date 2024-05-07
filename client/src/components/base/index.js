@@ -8,3 +8,4 @@ export { default as ConfirmDialog } from './ConfirmDialog';
 export { default as LazyLoading } from './LazyLoading';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as Logo } from './Logo';
+export * from './BodyTable';

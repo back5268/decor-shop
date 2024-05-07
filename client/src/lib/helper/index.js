@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const removeUndefinedProps = (obj) => {
   for (let prop in obj) {
     if (!(obj[prop] || obj[prop] === '' || obj[prop] === 0)) {
@@ -100,4 +102,9 @@ export const multiFormatDateString = (timestamp = '') => {
     default:
       return 'vừa xong';
   }
+};
+
+export const databseDate = (date, type = 'datetime') => {
+  let format = type === 'time' ? 'HH:mm:ss' : type === 'date' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss';
+  return moment(date).format(format);
 };

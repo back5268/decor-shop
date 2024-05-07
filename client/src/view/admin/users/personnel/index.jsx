@@ -1,5 +1,5 @@
 import { deleteUserApi, getListUserApi, updateUserApi } from '@api';
-import { DataTable, FormList } from '@components/base';
+import { DataTable, FormList, TimeBody } from '@components/base';
 import DataFilter from '@components/base/DataFilter';
 import { Dropdownz, Hrz, Inputz } from '@components/core';
 import { statuses } from '@constant';
@@ -18,7 +18,7 @@ const Personnel = () => {
   const { isLoading, data } = useGetApi(getListUserApi, { ...params, type: 'user' }, 'personel');
 
   const columns = [
-    { label: 'Họ tên', field: 'fullName' },
+    { label: 'Họ tên', field: 'name' },
     { label: 'Tài khoản', field: 'username' },
     { label: 'Email', field: 'email' },
     { label: 'Thời gian tạo', body: (item) => TimeBody(item.createdAt) },
@@ -41,12 +41,12 @@ const Personnel = () => {
         <Inputz
           value={filter.keySearch}
           onChange={(e) => setFilter({ ...filter, keySearch: e.target.value })}
-          label="Tìm kiếm theo tên, tài khoản"
+          label="Tìm kiếm theo tên, mã nhân viên"
         />
         <Inputz
           value={filter.email}
           onChange={(e) => setFilter({ ...filter, email: e.target.value })}
-          label="Tìm kiếm theo email"
+          label="Tìm kiếm theo email, tài khoản"
         />
         <Dropdownz
           value={filter.status}

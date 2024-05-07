@@ -12,7 +12,7 @@ import {
 } from '@models';
 import dotenv from 'dotenv';
 import { sendOtpAuthValid } from '@lib/validation';
-import { generateNumber, validateData } from '@utils';
+import { generateNumber, generateRandomString, validateData } from '@utils';
 import { sendMailForgotPassword, sendMailSignup } from '@lib/node-mailer';
 dotenv.config();
 
@@ -27,7 +27,8 @@ export const signinRp = async ({ username, password }) => {
   return { data: token };
 };
 
-export const createUserRp = async ({ name, username, email, password, otp }) => {
+export const createUserRp = async ({ name, username, email, code, bio, password, otp, type, avatar, address, gender, birthday }) => {
+  console.log(name, username, email, code, bio, password, otp, type, avatar, address, gender, birthday);
   const checkEmail = await getDetailUserMd({ email });
   if (checkEmail) return { mess: 'Email đã tồn tại!' };
   const checkUsername = await getDetailUserMd({ username });
@@ -39,9 +40,11 @@ export const createUserRp = async ({ name, username, email, password, otp }) => 
     await deleteUserVerifyMd({ _id: checkOtp._id });
   }
 
+  password = password ? password : generateRandomString()
+  address = typeof address === 'object' ? address : [{ address }]
   const salt = await bcrypt.genSalt(10);
   const newPassword = await bcrypt.hash(password, salt);
-  const data = await addUserMd({ name, username, email, password: newPassword, avatar });
+  const data = await addUserMd({ name, username, email, password: newPassword, address, avatar, code, bio, type, gender, birthday });
   return { data };
 };
 

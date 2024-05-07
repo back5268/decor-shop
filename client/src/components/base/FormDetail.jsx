@@ -47,7 +47,7 @@ const FormDetail = (props) => {
     const response = await mutateAsync(data);
     if (response) {
       onSuccess();
-      openToast({ title: `${newTitle} thành công!`, severity: 'success' });
+      showToast({title: `${newTitle} thành công!`, severity: 'success'});
       if (isModal) {
         setOpen(false);
         setParams((pre) => ({ ...pre, render: !pre.render }));

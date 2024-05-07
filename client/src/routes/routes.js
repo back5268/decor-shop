@@ -8,10 +8,10 @@ const routes = [
   { path: '/auth/signup', element: SignUp, public: true },
   { path: '/auth/forgot-password', element: ForgotPassword, public: true },
 
-  { path: '/', element: Home, public: true, layout: 'admin' },
-  { path: '/admin', element: Dashboard, public: true, layout: 'admin' },
-  { path: '/admin/personnel', element: Personnel, public: true, layout: 'admin' },
-  { path: '/admin/customers', element: Customers, public: true, layout: 'admin' },
+  { path: '/', element: Home, public: true, layout: 'web' },
+  { path: '/admin', element: Dashboard, layout: 'admin' },
+  { path: '/admin/personnel', element: Personnel, layout: 'admin' },
+  { path: '/admin/customers', element: Customers, layout: 'admin' },
 ];
 
 export default routes;

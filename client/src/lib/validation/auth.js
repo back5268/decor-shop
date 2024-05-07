@@ -12,7 +12,7 @@ export const SigninValidation = yup.object({
 export const SignupValidation = yup.object({
   email: yup.string().email('Email không đúng định dạng!').required('Email không được bỏ trống!'),
   username: yup.string().min(3, 'Tài khoản cần dài ít nhất 3 ký tự!').required(),
-  fullName: yup.string().min(3, 'Họ tên cần dài ít nhất 3 ký tự!').required(),
+  name: yup.string().min(3, 'Họ tên cần dài ít nhất 3 ký tự!').required(),
   otp: yup.string().min(6, 'Mã otp cần dài ít nhất 6 ký tự!').required(),
   password: yup
     .string()

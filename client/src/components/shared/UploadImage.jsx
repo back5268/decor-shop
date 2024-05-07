@@ -33,7 +33,7 @@ const UploadImage = ({ data, setData, label }) => {
       <input {...getInputProps()} className="cursor-pointer" />
       {fileUrl ? (
         <div className="flex flex-col justify-center items-center gap-4 h-72">
-          <Imagez src={fileUrl} w={40} h={40} alt={label} />
+          <Imagez src={fileUrl} alt={label} className="h-40 w-40" />
           <span className="w-full line-clamp-2 text-center">{fileUrl}</span>
           <div className="flex gap-2 items-center justify-center">
             <div {...getRootProps()}>

@@ -41,7 +41,7 @@ export const Comment = ({ userInfo, objectId, comment, setFocused, type, onWarni
         </div>
         <div className="flex flex-col gap-2 w-full">
           <div className="flex flex-col gap-1 p-2 bg-primary-100 rounded-md w-full">
-            <span className="font-semibold">{comment?.by?.fullName}</span>
+            <span className="font-semibold">{comment?.by?.name}</span>
             <span>{comment?.content}</span>
             {comment?.file && (
               <Link to={comment.file} target="_blank" className="h-[160px]">

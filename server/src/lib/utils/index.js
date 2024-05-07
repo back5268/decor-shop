@@ -20,6 +20,27 @@ export const generateNumber = (length) => {
   return result;
 };
 
+export const generateRandomString = (length = 6) => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  let hasNumber = false;
+
+  for (let i = 0; i < length; i++) {
+    const randomChar = characters.charAt(Math.floor(Math.random() * characters.length));
+    result += randomChar;
+    if (!hasNumber && /\d/.test(randomChar)) {
+      hasNumber = true;
+    }
+  }
+
+  if (!hasNumber) {
+    const randomNumber = Math.floor(Math.random() * 10);
+    result = result.slice(0, Math.floor(Math.random() * 5)) + randomNumber + result.slice(Math.floor(Math.random() * 5));
+  }
+
+  return result;
+}
+
 export function removeVietnameseTones(str) {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
   str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');

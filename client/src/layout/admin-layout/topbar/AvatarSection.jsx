@@ -21,8 +21,7 @@ const AvatarSection = () => {
       <div className="flex flex-col justify-center items-center w-64">
         <div className="flex gap-4 h-24 items-center w-full">
           <Imagez
-            h="16"
-            w="16"
+            className="h-20 w-20"
             src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
             alt="Avatar"
           />

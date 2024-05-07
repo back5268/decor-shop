@@ -7,13 +7,14 @@ import { AccessDenied, ErrorPage } from '@view/auth';
 
 const Router = () => {
   const { userInfo } = useAuthContext();
+  console.log(userInfo);
 
   return (
     <Routes>
       {routes.map((route, index) => {
         const DefaultLayout = route.layout ? (route.layout === 'admin' ? AdminLayout : WebLayout) : Fragment;
         const Page = route.element;
-        const checkPermission = route.types ? route.types.includes(userInfo?.type) : true;
+        const checkPermission = route.public ? true : userInfo?.type === 'user';
 
         return (
           <Route

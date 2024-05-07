@@ -4,12 +4,14 @@ class UserMd extends ModelBase {
   syncId;
   name;
   username;
+  code;
   email;
   password;
   avatar;
   gender;
   birthday;
   type;
+  bio;
   address;
   notifies;
   lastLogin;
@@ -23,20 +25,22 @@ UserMd.init('User', {
   syncId: { type: String },
   name: { type: String, required: true },
   username: { type: String, required: true },
+  code: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
   avatar: { type: String },
   gender: { type: Number, enum: [1, 2], description: '1: Name, 2: Nữ' },
   birthday: { type: Date },
-  type: { type: String, default: 'user' },
+  type: { type: String, default: 'customer' },
+  bio: { type: String },
   address: [
     {
-      name: { type: String, required: true },
-      phone: { type: String, required: true },
-      address: { type: String, required: true },
+      name: { type: String },
+      phone: { type: String },
+      address: { type: String },
       location: { type: String },
-      type: { type: String, required: true, enum: ['nha_rieng', 'van_phong'] },
-      isDefault: { type: Boolean, default: false }
+      type: { type: String, enum: ['nha_rieng', 'van_phong'] },
+      isDefault: { type: Boolean }
     }
   ],
   notifies: { type: Array, default: [] },

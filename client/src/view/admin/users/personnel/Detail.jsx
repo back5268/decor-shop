@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { addUserApi, getInfoApi, updateUserApi } from '@api';
 import { FormDetail } from '@components/base';
-import { checkEqualProp } from '@lib/helper';
+import { checkEqualProp, databseDate } from '@lib/helper';
 import { useAuthContext } from '@context/AuthContext';
 import { InputCalendarForm, InputForm, MultiRadioz, TextAreaz } from '@components/core';
 import { UploadImage } from '@components/shared';
@@ -42,9 +42,11 @@ const DetailUser = (props) => {
   useEffect(() => {
     if (isUpdate) {
       if (item.avatar) setAvatar(item.avatar);
+      if (item.birthday) setValue('birthday', new Date(item.birthday));
       for (const key in defaultValues) {
         setValue(key, item[key]);
       }
+      if (item.address) setValue('address', item.address?.[0]?.address);
     }
   }, [item]);
 
@@ -52,6 +54,8 @@ const DetailUser = (props) => {
     const newData = { ...data };
     if (avatar) newData.formData = { avatar };
     else if (item.avatar) newData.avatar = '';
+    if (newData.birthday && newData.birthday !== new Date(item.birthday)) newData.birthday = databseDate(newData.birthday);
+    else newData.birthday = undefined;
     if (isUpdate) return { ...checkEqualProp(newData, item), _id: open };
     else return newData;
   };
