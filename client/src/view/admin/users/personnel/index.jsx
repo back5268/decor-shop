@@ -1,7 +1,7 @@
 import { deleteUserApi, getListUserApi, updateUserApi } from '@api';
 import { DataTable, FormList } from '@components/base';
 import DataFilter from '@components/base/DataFilter';
-import { Dropdownz, Inputz } from '@components/core';
+import { Dropdownz, Hrz, Inputz } from '@components/core';
 import { statuses } from '@constant';
 import { useAuthContext } from '@context/AuthContext';
 import { useGetParams } from '@hook';
@@ -14,7 +14,7 @@ const Personnel = () => {
   const initParams = useGetParams();
   const [params, setParams] = useState(initParams);
   const [filter, setFilter] = useState({});
-  const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
   const { isLoading, data } = useGetApi(getListUserApi, { ...params, type: 'user' }, 'personel');
 
   const columns = [
@@ -36,29 +36,26 @@ const Personnel = () => {
 
   return (
     <FormList title="Danh sách nhân viên">
-      <DetailUser show={show} setShow={setShow} setParams={setParams} data={data?.documents} />
+      <DetailUser open={open} setOpen={setOpen} setParams={setParams} data={data?.documents} />
       <DataFilter setParams={setParams} filter={filter} setFilter={setFilter}>
         <Inputz
           value={filter.keySearch}
           onChange={(e) => setFilter({ ...filter, keySearch: e.target.value })}
           label="Tìm kiếm theo tên, tài khoản"
-          className="w-full lg:w-3/12"
         />
         <Inputz
           value={filter.email}
           onChange={(e) => setFilter({ ...filter, email: e.target.value })}
           label="Tìm kiếm theo email"
-          className="w-full lg:w-3/12"
         />
         <Dropdownz
           value={filter.status}
           onChange={(e) => setFilter({ ...filter, status: e })}
           options={statuses}
           label="Trạng thái"
-          className="w-full lg:w-3/12"
         />
       </DataFilter>
-      <hr className="mt-2 border-t-2" />
+      <Hrz />
       <DataTable
         isLoading={isLoading}
         title="Danh sách nhân sự"
@@ -68,10 +65,10 @@ const Personnel = () => {
         params={params}
         setParams={setParams}
         baseActions={['insert', 'detail', 'delete']}
-        setShow={setShow}
-        actionsInfo={{ onViewDetail: (item) => setShow(item._id), deleteApi: deleteUserApi }}
+        setShow={setOpen}
+        actionsInfo={{ onViewDetail: (item) => setOpen(item._id), deleteApi: deleteUserApi }}
         statusInfo={{ changeStatusApi: updateUserApi }}
-        headerInfo={{ onInsert: () => setShow(true) }}
+        headerInfo={{ onInsert: () => setOpen(true) }}
         onSuccess={onSuccess}
       />
     </FormList>

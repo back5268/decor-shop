@@ -18,7 +18,7 @@ export const items = [
     icon: icons.UsersIcon,
     type: 'group',
     items: [
-      { label: 'Quản lý nhân sự', type: 'item', route: '/personnel' },
+      { label: 'Quản lý nhân viên', type: 'item', route: '/personnel' },
       { label: 'Quản lý khách hàng', type: 'item', route: '/customers' }
     ]
   },

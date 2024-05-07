@@ -1,7 +1,8 @@
+import { TrashIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
 import { useCallback, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { convertFileToUrl } from '@lib/helper';
-import { TrashIcon, CloudArrowUpIcon } from '@heroicons/react/24/outline';
+import { Buttonz, Hrz, Imagez } from '@components/core';
 
 const UploadImage = ({ data, setData, label }) => {
   const [file, setFile] = useState([]);
@@ -24,27 +25,29 @@ const UploadImage = ({ data, setData, label }) => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <div className="card flex flex-col gap-4 cursor-pointer">
-      {label && <label className="inline-block pl-[0.15rem] font-medium text-left">{label}</label>}
-      <Hr />
+    <div className="card flex flex-col cursor-pointer m-2">
+      <div className="mb-4">
+        {label && <label className="inline-block font-medium text-left">{label}</label>}
+        <Hrz />
+      </div>
       <input {...getInputProps()} className="cursor-pointer" />
       {fileUrl ? (
-        <div className="flex flex-col justify-center items-center gap-4">
-          <div className="h-40 w-40 bg-cover rounded-md" style={{ backgroundImage: `url(${fileUrl})` }}></div>
-          <span className="truncate w-full">{fileUrl}</span>
+        <div className="flex flex-col justify-center items-center gap-4 h-72">
+          <Imagez src={fileUrl} w={40} h={40} alt={label} />
+          <span className="w-full line-clamp-2 text-center">{fileUrl}</span>
           <div className="flex gap-2 items-center justify-center">
             <div {...getRootProps()}>
               <Buttonz label="Đổi" />
             </div>
-            <Buttonz severity="danger" onClick={() => setData(null)}>
-              <TrashIcon size={16} />
+            <Buttonz color="red" variant="outlined" className="p-2" onClick={() => setData(null)}>
+              <TrashIcon className="w-6" />
             </Buttonz>
           </div>
         </div>
       ) : (
-        <div {...getRootProps()} className="flex justify-center flex-col gap-4 text-center items-center p-2">
-          <CloudArrowUpIcon size={32} />
-          <span>Drag and Drop file</span>
+        <div {...getRootProps()} className="flex justify-center flex-col gap-4 text-center items-center p-2 h-72">
+          <CloudArrowUpIcon className="w-32" />
+          <span className="font-medium">Drag and Drop file</span>
           <span className="text-center font-semibold dark:text-neutral-200">OR</span>
           <Buttonz label="Browse" />
         </div>

@@ -1,7 +1,42 @@
 import { Option, Select } from '@material-tailwind/react';
 import React from 'react';
 
-const Dropdownz = (props) => {
+export const Dropdownz = (props) => {
+  const { id, value = '', onChange = () => {}, size = 'lg', optionValue = 'key', optionLabel = 'label', options = [], className = '', ...prop } = props;
+
+  return (
+    <div className={`w-full md:w-6/12 lg:w-3/12 p-2 ${className}`}>
+      <Select
+        id={id}
+        value={value ? String(value) : ""}
+        onChange={onChange}
+        size={size}
+        color="light-blue"
+        className="rounded-md px-0"
+        {...prop}
+      >
+        {options?.length > 0 ? (
+          options.map((item) => {
+            let key, label;
+            if (typeof item === 'object') {
+              key = String(item[optionValue]);
+              label = String(item[optionLabel]);
+            } else key = label = String(item);
+            return (
+              <Option key={key} value={key}>
+                {label}
+              </Option>
+            );
+          })
+        ) : (
+          <div className="cursor-default">Không có dữ liệu</div>
+        )}
+      </Select>
+    </div>
+  );
+};
+
+export const DropdownForm = (props) => {
   const { id, value = '', onChange = () => {}, size = 'lg', optionValue = 'key', optionLabel = 'label', errors = {}, options = [], className = '', ...prop } = props;
 
   return (
@@ -37,5 +72,3 @@ const Dropdownz = (props) => {
     </div>
   );
 };
-
-export default Dropdownz;

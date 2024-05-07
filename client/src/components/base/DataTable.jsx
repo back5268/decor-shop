@@ -3,7 +3,19 @@ import { TrashIcon, DocumentMagnifyingGlassIcon } from '@heroicons/react/24/outl
 import { useToastState, useConfirmState } from '@store';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { removeSpecialCharacter } from '@lib/helper';
-import { Buttonz, Paginationz, Spinnerz, Switchz } from '@components/core';
+import { Buttonz, Paginationz, Switchz } from '@components/core';
+import { Loading } from '@components/shared';
+
+const HeaderColumn = ({ children, className = '', ...prop }) => (
+  <th className={`px-2 py-4 border-[1px] border-blue-gray-200 font-medium text-center ${className}`} {...prop}>
+    {children}
+  </th>
+);
+const BodyColumn = ({ children, className = '', ...prop }) => (
+  <td className={`px-2 py-4 border-[1px] border-blue-gray-200 font-medium ${className}`} {...prop}>
+    {children}
+  </td>
+);
 
 const DataTable = (props) => {
   const navigate = useNavigate();
@@ -85,7 +97,7 @@ const DataTable = (props) => {
   }, [JSON.stringify(params)]);
 
   return (
-    <div className="card mt-4">
+    <div className="card mt-4 text-color">
       {isHeader && (
         <div className="flex gap-2 justify-start mb-1">
           {baseActions.includes('insert') && <Buttonz onClick={onInsert}>Thêm mới</Buttonz>}
@@ -102,94 +114,66 @@ const DataTable = (props) => {
         </div>
       )}
       <div className="flex flex-col overflow-x-auto">
-        <div className="sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-            <div className="overflow-x-auto relative">
-              {isLoading && (
-                <div className="absolute w-full h-full bg-black opacity-30 z-10 flex justify-center items-center">
-                  <Spinnerz size={8} border={4} color="gray" />
-                </div>
-              )}
-              <table className="min-w-full text-left text-sm font-light">
-                <thead className="bg-neutral-100 font-medium dark:border-neutral-500 dark:text-neutral-800">
+        <div className="inline-block min-w-full py-2">
+          <div className="overflow-x-auto relative">
+            {isLoading && <Loading />}
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr>
+                  <HeaderColumn>#</HeaderColumn>
+                  {columns.map((column, index) => (
+                    <HeaderColumn key={index}>{column.label}</HeaderColumn>
+                  ))}
+                  {isStatus && <HeaderColumn>Trạng thái</HeaderColumn>}
+                  {isActions && <HeaderColumn>Thao tác</HeaderColumn>}
+                </tr>
+              </thead>
+              <tbody>
+                {data && data.length > 0 ? (
+                  data.map((item, index) => {
+                    const bgColor = index % 2 === 1 ? 'bg-gray-50' : '';
+                    return (
+                      <tr key={index}>
+                        <BodyColumn>{(params.page - 1) * params.limit + index + 1}</BodyColumn>
+                        {columns.map((column, i) => {
+                          const children = column.body && typeof column.body === 'function' ? column.body(item) : item[column.field];
+                          return <BodyColumn key={i}>{children}</BodyColumn>;
+                        })}
+                        {isStatus && (
+                          <BodyColumn>
+                            <div className="flex justify-center items-center">
+                              <Switchz checked={Boolean(item.status)} onChange={() => onChangeStatus(item)} />
+                            </div>
+                          </BodyColumn>
+                        )}
+                        {isActions && (
+                          <BodyColumn>
+                            <div className="flex justify-center items-center gap-2">
+                              {baseActions.includes('detail') && (
+                                <Buttonz rounded={true} onClick={() => onViewDetail(item)}>
+                                  <DocumentMagnifyingGlassIcon size={16} />
+                                </Buttonz>
+                              )}
+                              {baseActions.includes('delete') && (
+                                <Buttonz rounded={true} severity="danger" onClick={() => onDelete(item)}>
+                                  <TrashIcon size={16} />
+                                </Buttonz>
+                              )}
+                            </div>
+                          </BodyColumn>
+                        )}
+                      </tr>
+                    );
+                  })
+                ) : (
                   <tr>
-                    <th scope="col" className="px-4 py-4 border-[1px] text-center">
-                      #
-                    </th>
-                    {columns.map((column, index) => {
-                      return (
-                        <th scope="col" className="px-4 py-4 border-[1px] text-center font-medium" key={index}>
-                          {column.label}
-                        </th>
-                      );
-                    })}
-                    {isStatus && (
-                      <th scope="col" className="px-4 py-4 border-[1px] text-center font-medium">
-                        Trạng thái
-                      </th>
-                    )}
-                    {isActions && (
-                      <th scope="col" className="px-4 py-4 border-[1px] text-center font-medium">
-                        Thao tác
-                      </th>
-                    )}
+                    <BodyColumn className="text-center" colSpan={columns.length + 1 + Number(isActions) + Number(isStatus)}>
+                      Không có dữ liệu
+                    </BodyColumn>
                   </tr>
-                </thead>
-                <tbody>
-                  {data && data.length > 0 ? (
-                    data.map((item, index) => {
-                      const bgColor = index % 2 === 1 ? 'bg-neutral-50' : '';
-                      return (
-                        <tr key={index} className="dark:border-neutral-500">
-                          <td className={`px-4 py-4 font-medium border-[1px] text-center ${bgColor}`}>
-                            {(params.page - 1) * params.limit + index + 1}
-                          </td>
-                          {columns.map((column, i) => {
-                            return (
-                              <td key={i} className={`border-r px-4 py-4 border-[1px] ${bgColor}`}>
-                                {column.body && typeof column.body === 'function' ? column.body(item) : item[column.field]}
-                              </td>
-                            );
-                          })}
-                          {isStatus && (
-                            <td className={`border-r px-4 py-4 border-[1px] ${bgColor}`}>
-                              <div className="flex justify-center items-center">
-                                <Switchz checked={Boolean(item.status)} onChange={() => onChangeStatus(item)} />
-                              </div>
-                            </td>
-                          )}
-                          {isActions && (
-                            <td className={`border-r px-4 py-4 border-[1px] ${bgColor}`}>
-                              <div className="flex gap-2 justify-center items-center">
-                                {baseActions.includes('detail') && (
-                                  <Buttonz rounded={true} onClick={() => onViewDetail(item)}>
-                                    <DocumentMagnifyingGlassIcon size={16} />
-                                  </Buttonz>
-                                )}
-                                {baseActions.includes('delete') && (
-                                  <Buttonz rounded={true} severity="danger" onClick={() => onDelete(item)}>
-                                    <TrashIcon size={16} />
-                                  </Buttonz>
-                                )}
-                              </div>
-                            </td>
-                          )}
-                        </tr>
-                      );
-                    })
-                  ) : (
-                    <tr className="dark:border-neutral-500">
-                      <td
-                        className="px-4 py-4 font-medium border-[1px] text-center"
-                        colSpan={columns.length + 1 + Number(isActions) + Number(isStatus)}
-                      >
-                        Không có dữ liệu
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

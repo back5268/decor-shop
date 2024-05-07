@@ -4,12 +4,8 @@ import * as yup from 'yup';
 export const UserValidation = yup.object({
   email: yup.string().email('Email không đúng định dạng!').required('Email không được bỏ trống!'),
   username: yup.string().required('Tài khoản không được bỏ trống!'),
-  fullName: yup.string().required('Họ tên không được bỏ trống!'),
-  password: yup
-    .string()
-    .min(6, 'Mật khẩu cần dài ít nhất 6 ký tự!')
-    .matches(REGEX.PASSWORD, 'Mật khẩu cần chứa cả số và chữ số!')
-    .required('Mật khẩu không được bỏ trống!')
+  name: yup.string().required('Họ tên không được bỏ trống!'),
+  code: yup.string().required('Mã nhân viên không được bỏ trống!'),
 });
 
 export const CourseValidation = yup.object({

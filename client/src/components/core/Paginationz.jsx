@@ -7,7 +7,7 @@ const ButtonPagination = ({ content, onClick = () => {}, active, className = "" 
     <ListItem className="p-0">
       <button
         onClick={onClick}
-        className={`relative block rounded px-4 py-2 text-sm cursor-pointer transition-all duration-300 ${className}
+        className={`relative rounded text-sm cursor-pointer transition-all duration-300 w-9 h-9 flex justify-center items-center ${className}
         ${active ? 'bg-primary shadow-md shadow-cyan-200 text-white font-medium' : 'bg-gray-100 text-color hover:bg-gray-200'}`}
       >
         {content}
@@ -71,7 +71,7 @@ const Paginationz = (props) => {
         />
       </ul>
       <div className="min-w-20">
-        <Dropdownz size="md" options={rows} value={params.limit} onChange={e => setParams({ ...params, limit: Number(e) })} label="rows" />
+        <Dropdownz size="md" options={rows} value={params.limit} onChange={e => setParams({ ...params, limit: Number(e) })} label="rows" className="!w-24" />
       </div>
       <span className="text-sm bg-transparent">Tổng số: {total} bản ghi</span>
     </nav>

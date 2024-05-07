@@ -1,5 +1,5 @@
 import { getInfoApi } from '@api';
-import { Loadingz } from '@components/core';
+import { Loading } from '@components/shared';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 export const INITIAL_USER_INFO = {
@@ -73,17 +73,7 @@ export function AuthProvider({ children }) {
     checkAuth
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {isLoading ? (
-        <div className="fixed inset-x-0 inset-y-0 bg-black z-50 opacity-30 flex justify-center items-center">
-          <Loadingz size={8} border={4} />
-        </div>
-      ) : (
-        children
-      )}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{isLoading ? <Loading /> : children}</AuthContext.Provider>;
 }
 
 export const useAuthContext = () => useContext(AuthContext);

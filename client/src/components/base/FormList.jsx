@@ -1,13 +1,13 @@
-import { Cardz } from '@components/core';
+import { Cardz, Hrz } from '@components/core';
 import React from 'react';
 
 const FormList = (props) => {
-  const { title, children, ...prop } = props;
+  const { title, children } = props;
 
   return (
     <Cardz className="p-4">
-      <h2 className="font-semibold uppercase leading-normal">{title}</h2>
-      <hr className='mt-2 border-t-2' />
+      <h2 className="font-semibold uppercase leading-normal mb-2">{title}</h2>
+      <Hrz />
       {children}
     </Cardz>
   );

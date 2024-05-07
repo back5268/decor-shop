@@ -31,7 +31,7 @@ const Sidebar = (props) => {
 
   return (
     <div
-      className={`fixed left-0 inset-y-0 h-screen w-full max-w-[16rem] p-2 shadow-xl shadow-blue-gray-900/5 
+      className={`fixed left-0 inset-y-0 h-screen z-40 w-full max-w-[16rem] p-2 shadow-xl shadow-blue-gray-900/5 
       bg-sidebar text-on-sidebar transition-all duration-500 ease-in-out ${showSidebar ? '' : '-translate-x-full'}`}
     >
       <div className="mb-2 flex items-center gap-4 p-4">
@@ -42,7 +42,7 @@ const Sidebar = (props) => {
       </div>
       <Inputz
         size="md"
-        className="px-0"
+        className="px-0 !w-full"
         icon={<MagnifyingGlassIcon className="h-5 w-5 text-on-sidebar cursor-pointer" />}
         label="Tìm kiếm"
       />

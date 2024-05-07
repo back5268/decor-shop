@@ -50,7 +50,7 @@ const DataFilter = (props) => {
     <form onSubmit={onSubmit} className="my-4">
       <div className="flex items-center flex-wrap w-full">
         {props.children}
-        <div className={`p-2 w-full lg:w-3/12 ${className}`}>
+        <div className={`p-2 w-full md:w-6/12 lg:w-3/12 ${className}`}>
           <div className="flex gap-2 items-center justify-end">
             <Buttonz onClick={onClear} variant="outlined">
               Làm mới
