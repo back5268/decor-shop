@@ -1,9 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './sidebar';
 import TopBar from './topbar';
+import { INITIAL_USER_INFO, useAuthContext } from '@context/AuthContext';
+import { useToastState } from '@store';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLayout = ({ children }) => {
+  const navigate = useNavigate()
   const [showSidebar, setShowSidebar] = useState(true);
+  const { setUserInfo, setIsAuthenticated } = useAuthContext();
+  const { showToast } = useToastState();
+
+  const onSignOut = () => {
+    setUserInfo(INITIAL_USER_INFO);
+    setIsAuthenticated(false);
+    localStorage.removeItem('token');
+    showToast({ title: 'Đăng xuất thành công', severity: 'success' });
+    navigate('/');
+  };
 
   useEffect(() => {
     const checkWindowSize = () => {
@@ -25,8 +39,8 @@ const AdminLayout = ({ children }) => {
           className="fixed inset-x-0 inset-y-0 bg-black bg-opacity-50 z-30 w-screen h-screen block lg:hidden"
         ></div>
       )}
-      <TopBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-      <Sidebar showSidebar={showSidebar} />
+      <TopBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} onSignOut={onSignOut} />
+      <Sidebar showSidebar={showSidebar} onSignOut={onSignOut} />
       <div className={`relative transition-all duration-500 ease-in-out p-4 mt-20 ${showSidebar ? 'lg:ml-64' : ''}`}>{children}</div>
     </div>
   );

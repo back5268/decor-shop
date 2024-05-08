@@ -1,3 +1,4 @@
+import { Chipz } from '@components/core';
 import { formatNumber } from '@lib/helper';
 import moment from 'moment';
 
@@ -13,5 +14,6 @@ export const NumberBody = (value) => {
 
 export const Body = (data = [], value, key = 'key', label = 'label') => {
   const item = data.find((d) => d[key] === value) || {};
-  return <div className={`px-4 py-1 rounded-lg truncate ${item.color ? item.color : ''}`}>{item[label]}</div>;
+  if (item.color) return <Chipz color={item.color} value={item[label]} className="text-center" />
+  else return item[label]
 };

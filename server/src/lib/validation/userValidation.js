@@ -19,10 +19,9 @@ export const addUserValid = {
   code: 'string',
   email: 'email',
   bio: { type: 'string', allowNull: true },
-  address: { type: 'string', allowNull: true },
   avatar: { type: 'string', allowNull: true },
   gender: { type: 'number', allowNull: true },
-  birthday: { type: 'string', allowNull: true },
+  birthday: { type: 'string', allowNull: true }
 };
 
 export const updateUserValid = {
@@ -33,11 +32,10 @@ export const updateUserValid = {
   email: { type: 'string', allowNull: true },
   password: { type: 'string', allowNull: true },
   bio: { type: 'string', allowNull: true },
-  address: { type: 'string', allowNull: true },
   status: { type: 'number', allowNull: true },
   avatar: { type: 'string', allowNull: true },
   gender: { type: 'number', allowNull: true },
-  birthday: { type: 'string', allowNull: true },
+  birthday: { type: 'string', allowNull: true }
 };
 
 export const updateUserInfoValid = {
@@ -52,4 +50,8 @@ export const updateUserInfoValid = {
 export const changePasswordValid = {
   password: { type: 'string', pattern: REGEX.PASSWORD },
   newPassword: { type: 'string', pattern: REGEX.PASSWORD }
+};
+
+export const resetPasswordValid = {
+  _id: 'string'
 };

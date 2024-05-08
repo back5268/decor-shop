@@ -1,7 +1,7 @@
-import { addUserValid, changePasswordValid, detailUserValid, listUserValid, updateUserInfoValid, updateUserValid } from '@lib/validation';
+import { addUserValid, changePasswordValid, detailUserValid, listUserValid, resetPasswordValid, updateUserInfoValid, updateUserValid } from '@lib/validation';
 import { countListUserMd, deleteUserMd, getDetailUserMd, getListUserMd, updateUserMd } from '@models';
 import { createUserRp } from '@repository';
-import { validateData } from '@utils';
+import { generateRandomString, validateData } from '@utils';
 import { uploadFileToFirebase } from '@lib/firebase';
 import bcrypt from 'bcrypt';
 
@@ -11,7 +11,7 @@ export const getListUser = async (req, res) => {
     if (error) return res.status(400).json({ status: false, mess: error });
     const { page, limit, keySearch, email, type, status } = value;
     const where = {};
-    if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }];
+    if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }, { code: { $regex: keySearch, $options: 'i' } }];
     if (email) where.$or = [{ email: { $regex: email, $options: 'i' } }, { username: { $regex: email, $options: 'i' } }];
     if (type) where.type = type;
     if (status || status === 0) where.status = status;
@@ -79,7 +79,7 @@ export const updateUser = async (req, res) => {
   try {
     const { error, value } = validateData(updateUserValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    let { _id, name, username, email, password, code, bio, address, status, avatar, gender, birthday } = value;
+    let { _id, name, username, email, password, code, bio, status, avatar, gender, birthday } = value;
 
     const user = await getDetailUserMd({ _id });
     if (!user) return res.status(400).json({ status: false, mess: 'Người dùng không tồn tại!' });
@@ -94,12 +94,16 @@ export const updateUser = async (req, res) => {
       if (checkUsername) return res.status(400).json({ status: false, mess: 'Username đã tồn tại!' });
     }
 
+    if (code) {
+      const checkCode = await getDetailUserMd({ code });
+      if (checkCode) return res.status(400).json({ status: false, mess: 'Mã nhân viên đã tồn tại!' });
+    }
+
     if (req.file) {
       avatar = await uploadFileToFirebase(req.file);
     }
 
-    address = address ? (typeof address === 'object' ? address : [{address}]) : undefined;
-    const attr = { name, username, email, bio, address, status, avatar, code, gender, birthday };
+    const attr = { name, username, email, bio, status, avatar, code, gender, birthday };
     if (password) {
       const salt = await bcrypt.genSalt(10);
       attr.password = await bcrypt.hash(password, salt);
@@ -153,6 +157,22 @@ export const changePassword = async (req, res) => {
 
     const data = await updateUserMd({ _id: req.userInfo._id }, { password, token: '' });
     res.status(201).json({ status: true, data });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { error, value } = validateData(resetPasswordValid, req.body);
+    if (error) return res.status(400).json({ status: false, mess: error });
+
+    const newPassword = generateRandomString();
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(newPassword, salt);
+
+    const data = await updateUserMd({ _id: value._id }, { password, token: '' });
+    res.status(201).json({ status: true, data: newPassword });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }

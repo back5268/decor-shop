@@ -12,7 +12,7 @@ const HeaderColumn = ({ children, className = '', ...prop }) => (
   </th>
 );
 const BodyColumn = ({ children, className = '', ...prop }) => (
-  <td className={`px-2 py-4 border-[1px] border-blue-gray-200 text-xs ${className}`} {...prop}>
+  <td className={`p-2 border-[1px] border-blue-gray-200 text-xs ${className}`} {...prop}>
     {children}
   </td>
 );
@@ -39,7 +39,7 @@ const DataTable = (props) => {
     onSuccess = () => {},
     hideParams
   } = props;
-  const { onViewDetail = () => {}, deleteApi = () => {}, handleDelete = (item) => ({ _id: item._id }) } = actionsInfo;
+  const { onViewDetail = () => {}, deleteApi = () => {}, handleDelete = (item) => ({ _id: item._id }), moreActions } = actionsInfo;
   const { onInsert = () => {}, onImport = () => {}, exportApi } = headerInfo;
   const { changeStatusApi = () => {}, handleChangeStatus = (item) => ({ _id: item._id, status: item.status ? 0 : 1 }) } = statusInfo;
 
@@ -80,7 +80,7 @@ const DataTable = (props) => {
     });
   };
 
-  const isActions = baseActions.includes('detail') || baseActions.includes('delete');
+  const isActions = baseActions.includes('detail') || baseActions.includes('delete') || moreActions;
   const isHeader = baseActions.includes('insert') || baseActions.includes('import') || baseActions.includes('export');
   const isStatus = Boolean(statusInfo.changeStatusApi);
 
@@ -159,6 +159,24 @@ const DataTable = (props) => {
                                   <TrashIcon className="w-5" />
                                 </Buttonz>
                               )}
+                              {moreActions?.length > 0 &&
+                                moreActions.map((action, index) => {
+                                  const color = action.color || 'cyan';
+                                  const variant = action.variant || 'outlined';
+                                  const Icon = action.icon;
+
+                                  return (
+                                    <Buttonz
+                                      key={index}
+                                      color={color}
+                                      onClick={() => action.onClick(item)}
+                                      variant={variant}
+                                      className="rounded-full p-2"
+                                    >
+                                      <Icon className="w-5" />
+                                    </Buttonz>
+                                  );
+                                })}
                             </div>
                           </BodyColumn>
                         )}

@@ -49,7 +49,6 @@ export const items = [
     items: [
       { label: 'Cấu hình mẫu thông báo', type: 'item', route: '/templates' },
       { label: 'Lịch sử thông báo', type: 'item', route: '/logs' },
-      { label: 'Danh sách chặn', type: 'item', route: '/blacklist' }
     ]
   },
   {

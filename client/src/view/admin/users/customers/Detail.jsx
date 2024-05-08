@@ -19,7 +19,7 @@ const defaultValues = {
   gender: 1
 };
 
-const DetailUser = (props) => {
+const DetailCustomer = (props) => {
   const { userInfo, setUserInfo } = useAuthContext();
   const { open, setOpen, setParams, data } = props;
   const [avatar, setAvatar] = useState(null);
@@ -111,4 +111,4 @@ const DetailUser = (props) => {
   );
 };
 
-export default DetailUser;
+export default DetailCustomer;

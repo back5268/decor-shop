@@ -37,14 +37,14 @@ export const Dropdownz = (props) => {
 };
 
 export const DropdownForm = (props) => {
-  const { id, value = '', onChange = () => {}, size = 'lg', optionValue = 'key', optionLabel = 'label', errors = {}, options = [], className = '', ...prop } = props;
+  const { id, size = 'lg', optionValue = 'key', optionLabel = 'label', watch, setValue, errors = {}, options = [], className = '', ...prop } = props;
 
   return (
-    <div className={`flex flex-col gap-1 w-full p-2 ${className}`}>
+    <div className={`flex flex-col gap-1 w-full lg:w-6/12 p-2 ${className}`}>
       <Select
         id={id}
-        value={value ? String(value) : ""}
-        onChange={onChange}
+        value={watch(id) ? String(watch(id)) : ""}
+        onChange={e => setValue(id, e)}
         size={size}
         color="light-blue"
         error={Boolean(errors[id])}

@@ -27,12 +27,16 @@ export const signinRp = async ({ username, password }) => {
   return { data: token };
 };
 
-export const createUserRp = async ({ name, username, email, code, bio, password, otp, type, avatar, address, gender, birthday }) => {
-  console.log(name, username, email, code, bio, password, otp, type, avatar, address, gender, birthday);
+export const createUserRp = async ({ name, username, email, code, bio, password, otp, type, avatar, gender, birthday }) => {
   const checkEmail = await getDetailUserMd({ email });
   if (checkEmail) return { mess: 'Email đã tồn tại!' };
   const checkUsername = await getDetailUserMd({ username });
   if (checkUsername) return { mess: 'Tài khoản đã tồn tại!' };
+
+  if (code) {
+    const checkCode = await getDetailUserMd({ code });
+    if (checkCode) return res.status(400).json({ status: false, mess: 'Mã nhân viên đã tồn tại!' });
+  }
 
   if (otp) {
     const checkOtp = await getDetailUserVerifyMd({ type: 1, otp, email, username, expiredAt: { $gte: new Date() } });
@@ -40,11 +44,10 @@ export const createUserRp = async ({ name, username, email, code, bio, password,
     await deleteUserVerifyMd({ _id: checkOtp._id });
   }
 
-  password = password ? password : generateRandomString()
-  address = typeof address === 'object' ? address : [{ address }]
+  password = password ? password : generateRandomString();
   const salt = await bcrypt.genSalt(10);
   const newPassword = await bcrypt.hash(password, salt);
-  const data = await addUserMd({ name, username, email, password: newPassword, address, avatar, code, bio, type, gender, birthday });
+  const data = await addUserMd({ name, username, email, password: newPassword, avatar, code, bio, type, gender, birthday });
   return { data };
 };
 

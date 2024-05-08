@@ -8,7 +8,7 @@ import NavItem from './NavItem';
 import { useLocation } from 'react-router-dom';
 
 const Sidebar = (props) => {
-  const { showSidebar } = props;
+  const { showSidebar, onSignOut } = props;
   const { pathname } = useLocation();
   const [open, setOpen] = useState(0);
 
@@ -55,7 +55,7 @@ const Sidebar = (props) => {
       <hr className="my-3 border-on-sidebar" />
       <div className="flex flex-col gap-2">
         <Buttonz className="w-full">Chuyển đến trang chủ</Buttonz>
-        <Buttonz variant="outlined" className="w-full">
+        <Buttonz onClick={onSignOut} variant="outlined" className="w-full">
           Đăng xuất
         </Buttonz>
       </div>

@@ -54,6 +54,7 @@ export const ChangePasswordValidation = yup.object({
 
 export const TemplateValidation = yup.object({
   subject: yup.string().required('Tiêu đề không được bỏ trống!'),
-  code: yup.string().required('Mã template không được bỏ trống!'),
-  content: yup.string().required('Nội dung không được bỏ trống!')
+  code: yup.string().required('Mã mẫu thông báo không được bỏ trống!'),
+  content: yup.string().required('Nội dung không được bỏ trống!'),
+  type: yup.number().required('Loại thông báo không được bỏ trống!'),
 });

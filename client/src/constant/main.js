@@ -9,3 +9,21 @@ export const genders = [
   { label: 'Nữ', key: 2 },
   { label: 'Khác', key: 3 },
 ];
+
+export const logType = [
+  { label: 'Đăng ký tài khoản', key: 1 },
+  { label: 'Quên mật khẩu', key: 2 },
+  { label: 'Thanh toán thành công', key: 3 },
+  { label: 'Hoàn thành khóa học', key: 4 }
+];
+
+export const logStatus = [
+  { label: 'Đang gửi', key: 0, color: 'yellow' },
+  { label: 'Đã gửi', key: 1, color: 'green' },
+  { label: 'Có lỗi', key: 2, color: 'red' }
+];
+
+export const templateType = [
+  { label: 'Đăng ký tài khoản', key: 1 },
+  { label: 'Quên mật khẩu', key: 2 },
+];

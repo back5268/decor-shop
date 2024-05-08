@@ -5,7 +5,7 @@ import AvatarSection from './AvatarSection';
 import NotifySection from './NotifySection';
 
 const TopBar = (props) => {
-  const { showSidebar, setShowSidebar } = props;
+  const { showSidebar, setShowSidebar, onSignOut } = props;
 
   return (
     <div className="fixed top-0 inset-x-0 p-4 z-10">
@@ -16,7 +16,7 @@ const TopBar = (props) => {
           </Buttonz>
           <div className="flex gap-2 justify-between items-center mr-2">
             <NotifySection />
-            <AvatarSection />
+            <AvatarSection onSignOut={onSignOut} />
           </div>
         </div>
       </Cardz>

@@ -18,6 +18,14 @@
   }
 }
 
+.tox-tinymce {
+  border: none !important;
+}
+
+.tox .tox-statusbar {
+  border-top: 1px solid rgb(176 190 197 / 1) !important;
+}
+
 ::-webkit-scrollbar {
   height: 4px;
   width: 4px;

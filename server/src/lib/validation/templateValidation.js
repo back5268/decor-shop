@@ -2,6 +2,7 @@ export const listTemplateValid = {
   page: 'number',
   limit: 'number',
   keySearch: { type: 'string', allowNull: true },
+  type: { type: 'number', allowNull: true },
   status: { type: 'number', allowNull: true }
 };
 
@@ -13,6 +14,7 @@ export const addTemplateValid = {
   subject: 'string',
   code: 'string',
   content: 'string',
+  type: 'number',
   description: { type: 'string', allowNull: true },
   status: { type: 'number', allowNull: true }
 };
@@ -24,5 +26,6 @@ export const updateTemplateValid = {
   content: { type: 'string', allowNull: true },
   description: { type: 'string', allowNull: true },
   status: { type: 'number', allowNull: true },
+  type: { type: 'number', allowNull: true },
   files: { type: 'json', allowNull: true }
 };

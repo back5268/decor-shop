@@ -13,8 +13,8 @@ export const convertParams = (params, html) => {
   return replaceFistText(html);
 };
 
-export const sendMailUse = async ({ code, params, to }) => {
-  const template = await getDetailTemplateMd({ code, status: 1 });
+export const sendMailUse = async ({ type, params, to }) => {
+  const template = await getDetailTemplateMd({ type, status: 1 });
   if (template) {
     const subject = convertParams(params, template.subject);
     const html = convertParams(params, template.content);
@@ -23,9 +23,9 @@ export const sendMailUse = async ({ code, params, to }) => {
 };
 
 export const sendMailSignup = ({ to, username, otp }) => {
-  return sendMailUse({ to, code: 'SIGNUP_OTP', params: { $username: username, $otp: otp } });
+  return sendMailUse({ to, type: 1, params: { $username: username, $otp: otp } });
 };
 
 export const sendMailForgotPassword = ({ to, username, otp }) => {
-  return sendMailUse({ to, code: 'FORGOT_PASSWORD_OTP', params: { $username: username, $otp: otp } });
+  return sendMailUse({ to, type: 2, params: { $username: username, $otp: otp } });
 };

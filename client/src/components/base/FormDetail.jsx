@@ -47,7 +47,7 @@ const FormDetail = (props) => {
     const response = await mutateAsync(data);
     if (response) {
       onSuccess();
-      showToast({title: `${newTitle} thành công!`, severity: 'success'});
+      showToast({ title: `${newTitle} thành công!`, severity: 'success' });
       if (isModal) {
         setOpen(false);
         setParams((pre) => ({ ...pre, render: !pre.render }));
@@ -58,9 +58,11 @@ const FormDetail = (props) => {
   return (
     <Wrapper title={newTitle} isModal={isModal} open={open} setOpen={setOpen}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card relative w-full mt-4">
-          {isPending && <Loading />}
-          {children}
+        <div className={`w-full ${isModal ? 'max-h-[500px] overflow-scroll' : ''}`}>
+          <div className="card relative w-full mt-4">
+            {isPending && <Loading />}
+            {children}
+          </div>
         </div>
         <Hrz className="my-4" />
         <div className="flex gap-4 justify-end">
@@ -73,7 +75,7 @@ const FormDetail = (props) => {
               else navigate(-1);
             }}
           />
-          <Buttonz loading={isPending} type="submit" label="Xác nhận" />
+          {(insertApi || updateApi) && <Buttonz loading={isPending} type="submit" label="Xác nhận" />}
         </div>
       </form>
     </Wrapper>

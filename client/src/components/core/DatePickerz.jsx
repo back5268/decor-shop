@@ -4,21 +4,29 @@ import React from 'react';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import moment from 'moment/moment';
 
-export const InputCalendarz = () => {};
+export const InputCalendarz = (props) => {
+  const { value, onChange = () => {}, className = '', ...prop } = props;
+
+  return (
+    <div className={`w-full md:w-6/12 lg:w-3/12 p-2 ${className}`}>
+      <DatePickerz date={value} setDate={onChange} {...prop} />
+    </div>
+  );
+};
 
 export const InputCalendarForm = (props) => {
   const { id, errors = {}, watch, setValue, className = '', ...prop } = props;
 
   return (
     <div className={`flex flex-col gap-1 w-full lg:w-6/12 p-2 ${className}`}>
-      <DatePickerz id={id} date={watch(id)} setDate={e => setValue(id, e)} error={Boolean(errors[id])} {...prop} />
+      <DatePickerz id={id} date={watch(id)} setDate={(e) => setValue(id, e)} error={Boolean(errors[id])} {...prop} />
       {errors[id] && <small className="w-full ml-2 text-red-600">{errors[id].message}</small>}
     </div>
   );
 };
 
 const DatePickerz = (props) => {
-  const { id, label = 'Chọn ngày', size = 'lg', color = 'cyan', error, date, setDate = () => {}, format = "DD/MM/YYYY", ...prop } = props;
+  const { id, label = 'Chọn ngày', size = 'lg', color = 'cyan', error, date, setDate = () => {}, format = 'DD/MM/YYYY', ...prop } = props;
 
   return (
     <Popover placement="bottom">
