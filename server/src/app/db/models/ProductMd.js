@@ -5,7 +5,9 @@ const ObjectId = Schema.Types.ObjectId;
 
 class ProductMd extends ModelBase {
   category;
+  by;
   name;
+  slug;
   code;
   type;
   price;
@@ -14,12 +16,15 @@ class ProductMd extends ModelBase {
   description;
   status;
   images;
+  avatar;
   deletedAt;
 }
 
 ProductMd.init('Product', {
   category: { type: ObjectId, ref: 'Category' },
+  by: { type: ObjectId, ref:'User'  },
   name: { type: String, required: true },
+  slug: { type: String, required: true },
   code: { type: String, required: true },
   type: { type: String, required: true },
   price: { type: Number, required: true, min: 0 },
@@ -28,6 +33,7 @@ ProductMd.init('Product', {
   description: { type: String },
   status: { type: Number, enum: [0, 1], default: 1, description: '0: Thu hồi, 1: Còn bán' },
   images: [{ type: String }],
+  avatar: { type: String },
   deletedAt: { type: Date }
 });
 

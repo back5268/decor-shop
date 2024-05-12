@@ -9,7 +9,7 @@ const Dialogz = (props) => {
     <div
       className={`fixed inset-x-0 inset-y-0 w-screen h-screen z-40 flex justify-center items-center p-6 ${open ? '' : 'pointer-events-none'}`}
     >
-      <div className={`duration-600 ease-in-out transform absolute w-full h-full bg-black bg-opacity-30 ${open ? "opacity-100" : "opacity-0"}`}></div>
+      <div className={`duration-600 ease-in-out transform absolute w-full h-full bg-black bg-opacity-40 ${open ? "opacity-100" : "opacity-0"}`}></div>
       <div
         className={`relative min-h-40 bg-white shadow-xl rounded-xl transition-all z-50 text-slate-500 p-6 ${className}
           duration-300 ease-in-out transform ${open ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0 pointer-events-none'}`}

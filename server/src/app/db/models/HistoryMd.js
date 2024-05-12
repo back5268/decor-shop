@@ -6,24 +6,26 @@ const ObjectId = Schema.Types.ObjectId;
 class HistoryMd extends ModelBase {
   by;
   byType;
-  productInfo;
+  product;
   price;
   quantity;
   time;
   type;
-  files;
+  note;
+  file;
   deletedAt;
 }
 
 HistoryMd.init('History', {
   by: { type: ObjectId, ref: 'User', required: true },
-  byType: { type: String, default: 'user', enum: ['user', 'customer'] },
-  productInfo: { type: ObjectId, required: true },
+  byType: { type: String, default: 'customer', enum: ['user', 'customer'] },
+  product: { type: ObjectId, required: true },
   price: { type: Number, required: true, min: 0 },
   quantity: { type: Number, required: true, min: 0 },
   time: { type: Date, required: true },
   type: { type: String, enum: ['exp', 'imp'], required: true },
-  files: [{ type: String }],
+  note: { type: String },
+  file: { type: String },
   deletedAt: { type: Date }
 });
 

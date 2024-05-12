@@ -120,7 +120,7 @@ const DataTable = (props) => {
             <table className="min-w-full text-sm">
               <thead>
                 <tr>
-                  <HeaderColumn>#</HeaderColumn>
+                  <HeaderColumn className='min-w-8'>#</HeaderColumn>
                   {columns.map((column, index) => (
                     <HeaderColumn key={index}>{column.label}</HeaderColumn>
                   ))}
@@ -134,7 +134,7 @@ const DataTable = (props) => {
                     const bgColor = index % 2 === 1 ? 'bg-gray-50' : '';
                     return (
                       <tr key={index}>
-                        <BodyColumn>{(params.page - 1) * params.limit + index + 1}</BodyColumn>
+                        <BodyColumn className='text-center'>{(params.page - 1) * params.limit + index + 1}</BodyColumn>
                         {columns.map((column, i) => {
                           const children = column.body && typeof column.body === 'function' ? column.body(item) : item[column.field];
                           return <BodyColumn key={i}>{children}</BodyColumn>;

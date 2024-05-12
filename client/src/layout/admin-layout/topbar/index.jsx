@@ -8,7 +8,7 @@ const TopBar = (props) => {
   const { showSidebar, setShowSidebar, onSignOut } = props;
 
   return (
-    <div className="fixed top-0 inset-x-0 p-4 z-10">
+    <div className="fixed top-0 inset-x-0 p-6 z-10">
       <Cardz className={`h-14 ${showSidebar ? 'lg:ml-64' : ''}`}>
         <div className="flex justify-between items-center h-full">
           <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="black" className="p-1 text-color">

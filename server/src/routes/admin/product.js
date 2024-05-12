@@ -1,0 +1,27 @@
+import { addProduct, addReceipt, detailProduct, getListProduct, updateProduct } from '@controller';
+import { upload } from '@lib/multer';
+import { userMiddleware } from '@middleware';
+import express from 'express';
+
+export const productRouter = express.Router();
+
+productRouter.use(userMiddleware);
+productRouter.get('/getListProduct', getListProduct);
+productRouter.get('/detailProduct', detailProduct);
+productRouter.post(
+  '/addProduct',
+  upload.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'images', maxCount: 10 }
+  ]),
+  addProduct
+);
+productRouter.post(
+  '/updateProduct',
+  upload.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'images', maxCount: 10 }
+  ]),
+  updateProduct
+);
+productRouter.post('/updateProduct', upload.single('file'), addReceipt);

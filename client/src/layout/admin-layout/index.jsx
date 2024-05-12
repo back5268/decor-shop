@@ -41,7 +41,7 @@ const AdminLayout = ({ children }) => {
       )}
       <TopBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} onSignOut={onSignOut} />
       <Sidebar showSidebar={showSidebar} onSignOut={onSignOut} />
-      <div className={`relative transition-all duration-500 ease-in-out p-4 mt-20 ${showSidebar ? 'lg:ml-64' : ''}`}>{children}</div>
+      <div className={`relative transition-all duration-500 ease-in-out p-6 mt-20 ${showSidebar ? 'lg:ml-64' : ''}`}>{children}</div>
     </div>
   );
 };

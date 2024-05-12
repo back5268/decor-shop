@@ -11,7 +11,7 @@ export const Dropdownz = (props) => {
         value={value ? String(value) : ""}
         onChange={onChange}
         size={size}
-        color="light-blue"
+        color="cyan"
         className="rounded-md px-0"
         {...prop}
       >
@@ -46,7 +46,7 @@ export const DropdownForm = (props) => {
         value={watch(id) ? String(watch(id)) : ""}
         onChange={e => setValue(id, e)}
         size={size}
-        color="light-blue"
+        color="cyan"
         error={Boolean(errors[id])}
         className="rounded-md px-0"
         {...prop}
