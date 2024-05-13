@@ -7,12 +7,14 @@ import { useGetParams } from '@hook';
 import { useGetApi } from '@lib/react-query';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CreateReceipt from './CreateReceipt';
 
 const Products = () => {
   const navigate = useNavigate();
   const initParams = useGetParams();
   const [params, setParams] = useState(initParams);
   const [filter, setFilter] = useState({});
+  const [open, setOpen] = useState(false);
   const { isLoading, data } = useGetApi(getListProductApi, params, 'products');
 
   const columns = [
@@ -27,6 +29,7 @@ const Products = () => {
 
   return (
     <FormList title="Danh sách sản phẩm">
+      <CreateReceipt open={open} setOpen={setOpen} setParams={setParams} />
       <DataFilter setParams={setParams} filter={filter} setFilter={setFilter} className="md:w-6/12">
         <Inputz
           value={filter.keySearch}
@@ -47,7 +50,10 @@ const Products = () => {
         baseActions={['create', 'detail', 'delete']}
         actionsInfo={{ onViewDetail: (item) => navigate(`/admin/products/detail/${item._id}`), deleteApi: deleteProductApi }}
         statusInfo={{ changeStatusApi: updateProductApi }}
-        headerInfo={{ onCreate: () => navigate('/admin/products/create') }}
+        headerInfo={{
+          onCreate: () => navigate('/admin/products/create'),
+          moreHeader: [{ children: () => <div>Tạo phiếu nhập / xuất</div>, onClick: () => setOpen(true) }]
+        }}
       />
     </FormList>
   );

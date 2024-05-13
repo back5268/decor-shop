@@ -61,3 +61,17 @@ export const ProductValidation = yup.object({
   type: yup.string().required('Loại sản phẩm không được bỏ trống!'),
   price: yup.number().required('Giá bán ra không được bỏ trống!'),
 });
+
+export const PromotionValidation = yup.object({
+  title: yup.string().required('Tiêu đề không được bỏ trống!'),
+  type: yup.string().required('Loại khuyến mãi không được bỏ trống!'),
+  amount: yup.number().required('Giá trị khuyến mãi không được bỏ trống!'),
+  amountType: yup.number().required('Loại giá trị không được bỏ trống!'),
+  start: yup.date().required('Ngày bắt đầu không được bỏ trống!'),
+  end: yup.date().required('Ngày kết thúc không được bỏ trống!'),
+});
+
+export const ReceiptValidation = yup.object({
+  product: yup.string().required('Sản phẩm không được bỏ trống!'),
+  type: yup.string().required('Loại phiếu không được bỏ trống!'),
+});

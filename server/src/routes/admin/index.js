@@ -6,6 +6,7 @@ import { logRouter } from './log';
 import { categoryRouter } from './category';
 import { productRouter } from './product';
 import { permissionRouter } from './permission';
+import { promotionRouter } from './promotion';
 
 export const adminRouter = express.Router();
 
@@ -16,3 +17,4 @@ adminRouter.use('/logs', logRouter);
 adminRouter.use('/category', categoryRouter);
 adminRouter.use('/products', productRouter);
 adminRouter.use('/permissions', permissionRouter);
+adminRouter.use('/promotions', promotionRouter);

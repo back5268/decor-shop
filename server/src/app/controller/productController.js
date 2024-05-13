@@ -19,6 +19,7 @@ import {
   updateProductMd
 } from '@models';
 import { removeSpecialCharacter, validateData } from '@utils';
+import moment from 'moment';
 
 export const getListProduct = async (req, res) => {
   try {
@@ -32,6 +33,15 @@ export const getListProduct = async (req, res) => {
     const documents = await getListProductMd(where, page, limit);
     const total = await countListProductMd(where);
     res.json({ status: true, data: { documents, total } });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const getListProductInfo = async (req, res) => {
+  try {
+    const data = await getListProductMd();
+    res.json({ status: true, data });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }
@@ -162,8 +172,9 @@ export const addReceipt = async (req, res) => {
   try {
     const { error, value } = validateData(addReceiptValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    const { product, type, price, quantity, time, note } = value;
+    let { product, type, price, quantity, time, note } = value;
 
+    time = time ? time : moment().format('YYYY-MM-DD HH:mm:ss')
     const checkProduct = await getDetailProductMd({ _id: product });
     if (!checkProduct) return res.status(400).json({ status: false, mess: 'Sản phẩm không tồn tại!' });
 

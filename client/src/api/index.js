@@ -5,3 +5,4 @@ export * from './template';
 export * from './log';
 export * from './permission';
 export * from './product';
+export * from './promotion';

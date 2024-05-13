@@ -43,6 +43,6 @@ export const addReceiptValid = {
   type: 'string',
   price: 'number',
   quantity: 'number',
-  time: { type: 'string', allowNull: true },
+  time: { type: 'datetime', allowNull: true },
   note: { type: 'string', allowNull: true }
 };

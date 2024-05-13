@@ -40,3 +40,18 @@ export const productType = [
   { label: 'Đèn ngủ 3D', key: '3d' },
   { label: 'Tranh DIY', key: 't-diy' },
 ];
+
+export const promotionType = [
+  { label: 'Trừ trực tiếp', key: 1, color: 'yellow' },
+  { label: 'Voucher', key: 2, color: 'green' },
+];
+
+export const amountType = [
+  { label: 'VNĐ', key: 1 },
+  { label: '%', key: 2 },
+];
+
+export const receiptType = [
+  { label: 'Phiếu nhập', key: 'imp' },
+  { label: 'Phiếu xuất', key: 'exp' },
+];

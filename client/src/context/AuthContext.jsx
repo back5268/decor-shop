@@ -1,4 +1,4 @@
-import { getInfoApi, getListUserInfoApi } from '@api';
+import { getInfoApi, getListProductInfoApi, getListUserInfoApi } from '@api';
 import { Loading } from '@components/shared';
 import { useDataState } from '@store';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -27,7 +27,7 @@ const INITIAL_STATE = {
 const AuthContext = createContext(INITIAL_STATE);
 
 export function AuthProvider({ children }) {
-  const { setUsers } = useDataState()
+  const { setUsers, setProducts } = useDataState()
   const [userInfo, setUserInfo] = useState(INITIAL_USER_INFO);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,6 +48,8 @@ export function AuthProvider({ children }) {
     try {
       const users = await getListUserInfoApi();
       if (users) setUsers(users);
+      const products = await getListProductInfoApi();
+      if (products) setProducts(products);
     } catch (error) {
       return false;
     } finally {

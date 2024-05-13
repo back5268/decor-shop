@@ -46,7 +46,7 @@ const DataTable = (props) => {
     handleDelete = (item) => ({ _id: item._id }),
     moreActions
   } = actionsInfo;
-  const { onCreate = () => {}, onImport = () => {}, exportApi } = headerInfo;
+  const { onCreate = () => {}, onImport = () => {}, exportApi, moreHeader } = headerInfo;
   const { changeStatusApi = () => {}, handleChangeStatus = (item) => ({ _id: item._id, status: item.status ? 0 : 1 }) } = statusInfo;
 
   const onDeletez = (item) => {
@@ -87,7 +87,7 @@ const DataTable = (props) => {
   };
 
   const isActions = baseActions.includes('detail') || baseActions.includes('delete') || moreActions;
-  const isHeader = baseActions.includes('create') || baseActions.includes('import') || baseActions.includes('export');
+  const isHeader = baseActions.includes('create') || baseActions.includes('import') || baseActions.includes('export') || moreHeader;
   const isStatus = Boolean(statusInfo.changeStatusApi);
 
   useEffect(() => {
@@ -108,15 +108,25 @@ const DataTable = (props) => {
         <div className="flex gap-2 justify-start mb-1">
           {baseActions.includes('create') && <Buttonz onClick={onCreate}>Thêm mới</Buttonz>}
           {baseActions.includes('import') && (
-            <Buttonz severity="info" onClick={onImport}>
+            <Buttonz color="green" onClick={onImport}>
               Import
             </Buttonz>
           )}
           {baseActions.includes('export') && (
-            <Buttonz severity="info" onClick={onExport} loading={loading}>
+            <Buttonz color="green" onClick={onExport} loading={loading}>
               Export
             </Buttonz>
           )}
+          {moreHeader?.length > 0 &&
+            moreHeader.map((header, index) => {
+              const color = header.color || 'green';
+
+              return (
+                <Buttonz key={index} color={color} onClick={() => header.onClick()}>
+                  {header.children() || ""}
+                </Buttonz>
+              );
+            })}
         </div>
       )}
       <div className="flex flex-col overflow-x-auto">
@@ -142,7 +152,11 @@ const DataTable = (props) => {
                         <BodyColumn className="text-center">{(params.page - 1) * params.limit + index + 1}</BodyColumn>
                         {columns.map((column, i) => {
                           const children = column.body && typeof column.body === 'function' ? column.body(item) : item[column.field];
-                          return <BodyColumn key={i} className={column.className}>{children}</BodyColumn>;
+                          return (
+                            <BodyColumn key={i} className={column.className}>
+                              {children}
+                            </BodyColumn>
+                          );
                         })}
                         {isStatus && (
                           <BodyColumn>
@@ -195,7 +209,10 @@ const DataTable = (props) => {
                   })
                 ) : (
                   <tr>
-                    <BodyColumn className="text-center py-4 !text-sm" colSpan={columns.length + 1 + (Number(isActions) || 0) + (Number(isStatus) || 0)}>
+                    <BodyColumn
+                      className="text-center py-4 !text-sm"
+                      colSpan={columns.length + 1 + (Number(isActions) || 0) + (Number(isStatus) || 0)}
+                    >
                       Không có dữ liệu
                     </BodyColumn>
                   </tr>

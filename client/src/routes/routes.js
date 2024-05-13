@@ -2,7 +2,7 @@ import { Dashboard } from '@view/admin';
 import { Logs, Templates } from '@view/admin/configs';
 import { DetailPermission, Permissions } from '@view/admin/permissions';
 import { Customers, Personnel } from '@view/admin/users';
-import { DetailProduct, Products, Promotions } from '@view/admin/warehouse';
+import { DetailProduct, DetailPromotion, Products, Promotions } from '@view/admin/warehouse';
 import { ForgotPassword, SignIn, SignUp } from '@view/auth';
 import { Home } from '@view/web';
 
@@ -25,7 +25,10 @@ const routes = [
   { path: '/admin/products', element: Products, layout: 'admin' },
   { path: '/admin/products/create', element: DetailProduct, layout: 'admin' },
   { path: '/admin/products/detail/:_id', element: DetailProduct, layout: 'admin' },
+
   { path: '/admin/promotions', element: Promotions, layout: 'admin' },
+  { path: '/admin/promotions/create', element: DetailPromotion, layout: 'admin' },
+  { path: '/admin/promotions/detail/:_id', element: DetailPromotion, layout: 'admin' },
 ];
 
 export default routes;

@@ -25,4 +25,4 @@ productRouter.post(
   ]),
   updateProduct
 );
-productRouter.post('/updateProduct', upload.single('file'), addReceipt);
+productRouter.post('/addReceipt', upload.single('file'), addReceipt);

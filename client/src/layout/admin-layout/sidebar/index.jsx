@@ -13,12 +13,12 @@ const Sidebar = (props) => {
   const [open, setOpen] = useState(0);
 
   useEffect(() => {
-    let title
+    let title;
     const currentIndex = items.findIndex((item) => {
-      if (item.type === "item") {
+      if (item.type === 'item') {
         if ('/admin' + item.route === pathname) title = item.label;
       } else {
-        const childIndex = item.items?.findIndex((child) => '/admin' + child.route === pathname);
+        const childIndex = item.items?.findIndex((child) => pathname.includes('/admin' + child.route));
         if (childIndex >= 0) {
           title = item.items[childIndex].label;
           return true;

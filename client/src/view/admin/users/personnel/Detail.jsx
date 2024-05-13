@@ -52,7 +52,7 @@ const DetailUser = (props) => {
     const newData = { ...data };
     if (avatar) newData.formData = { avatar };
     else if (item.avatar) newData.avatar = '';
-    if (newData.birthday && newData.birthday !== new Date(item.birthday)) newData.birthday = databseDate(newData.birthday);
+    if (newData.birthday && newData.birthday !== new Date(item?.birthday)) newData.birthday = databseDate(newData.birthday);
     else newData.birthday = undefined;
     if (isUpdate) return { ...checkEqualProp(newData, item), _id: open };
     else return newData;
