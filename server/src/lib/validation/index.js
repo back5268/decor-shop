@@ -6,3 +6,4 @@ export * from './notifyValidation';
 export * from './templateValidation';
 export * from './categoryValidation';
 export * from './productValidation';
+export * from './permissionValidation';

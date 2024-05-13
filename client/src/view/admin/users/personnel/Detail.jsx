@@ -6,8 +6,8 @@ import { addUserApi, getInfoApi, updateUserApi } from '@api';
 import { FormDetail } from '@components/base';
 import { checkEqualProp, databseDate } from '@lib/helper';
 import { useAuthContext } from '@context/AuthContext';
-import { InputCalendarForm, InputForm, MultiRadioz, TextAreaz } from '@components/core';
-import { UploadImage } from '@components/shared';
+import { InputCalendarForm, InputForm, TextAreaz } from '@components/core';
+import { MultiRadioz, UploadImage } from '@components/shared';
 import { genders } from '@constant';
 
 const defaultValues = {

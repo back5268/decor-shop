@@ -40,7 +40,7 @@ const Templates = () => {
       <DataTable
         isLoading={isLoading}
         data={data?.documents}
-        totalRecord={data?.total}
+        total={data?.total}
         columns={columns}
         params={params}
         setParams={setParams}

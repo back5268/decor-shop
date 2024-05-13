@@ -22,7 +22,6 @@ ToolMd.init('Tool', {
       name: { type: String, require: true },
       route: { type: String, require: true },
       sort: { type: Number, require: true },
-      status: { type: Number, enum: [0, 1], default: 1 },
       actions: [{ type: String, require: true }]
     }
   ],

@@ -15,3 +15,4 @@ export * from './TransactionMd';
 export * from './UserMd';
 export * from './UserVerifyMd';
 export * from './ToolMd';
+export * from './PermissionMd';

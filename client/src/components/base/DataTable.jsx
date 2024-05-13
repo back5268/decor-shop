@@ -7,7 +7,7 @@ import { Buttonz, Paginationz, Switchz } from '@components/core';
 import { Loading } from '@components/shared';
 
 const HeaderColumn = ({ children, className = '', ...prop }) => (
-  <th className={`px-2 py-4 border-[1px] border-blue-gray-200 font-medium text-center ${className}`} {...prop}>
+  <th className={`px-2 py-4 border-[1px] border-blue-gray-200 bg-blue-gray-50 font-medium text-center ${className}`} {...prop}>
     {children}
   </th>
 );
@@ -39,11 +39,17 @@ const DataTable = (props) => {
     onSuccess = () => {},
     hideParams
   } = props;
-  const { onViewDetail = () => {}, deleteApi = () => {}, handleDelete = (item) => ({ _id: item._id }), moreActions } = actionsInfo;
+  const {
+    onViewDetail = () => {},
+    onDelete,
+    deleteApi = () => {},
+    handleDelete = (item) => ({ _id: item._id }),
+    moreActions
+  } = actionsInfo;
   const { onInsert = () => {}, onImport = () => {}, exportApi } = headerInfo;
   const { changeStatusApi = () => {}, handleChangeStatus = (item) => ({ _id: item._id, status: item.status ? 0 : 1 }) } = statusInfo;
 
-  const onDelete = (item) => {
+  const onDeletez = (item) => {
     showConfirm({
       title: 'Bạn có chắc chắn muốn xóa dữ liệu này!',
       action: async () => {
@@ -120,7 +126,7 @@ const DataTable = (props) => {
             <table className="min-w-full text-sm">
               <thead>
                 <tr>
-                  <HeaderColumn className='min-w-8'>#</HeaderColumn>
+                  <HeaderColumn className="min-w-8">#</HeaderColumn>
                   {columns.map((column, index) => (
                     <HeaderColumn key={index}>{column.label}</HeaderColumn>
                   ))}
@@ -131,13 +137,12 @@ const DataTable = (props) => {
               <tbody>
                 {data && data.length > 0 ? (
                   data.map((item, index) => {
-                    const bgColor = index % 2 === 1 ? 'bg-gray-50' : '';
                     return (
                       <tr key={index}>
-                        <BodyColumn className='text-center'>{(params.page - 1) * params.limit + index + 1}</BodyColumn>
+                        <BodyColumn className="text-center">{(params.page - 1) * params.limit + index + 1}</BodyColumn>
                         {columns.map((column, i) => {
                           const children = column.body && typeof column.body === 'function' ? column.body(item) : item[column.field];
-                          return <BodyColumn key={i}>{children}</BodyColumn>;
+                          return <BodyColumn key={i} className={column.className}>{children}</BodyColumn>;
                         })}
                         {isStatus && (
                           <BodyColumn>
@@ -155,7 +160,12 @@ const DataTable = (props) => {
                                 </Buttonz>
                               )}
                               {baseActions.includes('delete') && (
-                                <Buttonz color="red" onClick={() => onDelete(item)} variant="outlined" className="rounded-full p-2">
+                                <Buttonz
+                                  color="red"
+                                  onClick={() => (onDelete ? onDelete(item) : onDeletez(item))}
+                                  variant="outlined"
+                                  className="rounded-full p-2"
+                                >
                                   <TrashIcon className="w-5" />
                                 </Buttonz>
                               )}
@@ -185,7 +195,7 @@ const DataTable = (props) => {
                   })
                 ) : (
                   <tr>
-                    <BodyColumn className="text-center" colSpan={columns.length + 1 + Number(isActions) + Number(isStatus)}>
+                    <BodyColumn className="text-center py-4 !text-sm" colSpan={columns.length + 1 + (Number(isActions) || 0) + (Number(isStatus) || 0)}>
                       Không có dữ liệu
                     </BodyColumn>
                   </tr>

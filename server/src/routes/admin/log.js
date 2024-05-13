@@ -1,8 +1,8 @@
 import { getListLog } from '@controller';
-import { userMiddleware } from '@middleware';
+import { authMiddleware } from '@middleware';
 import express from 'express';
 
 export const logRouter = express.Router();
 
-logRouter.use(userMiddleware);
+logRouter.use(authMiddleware);
 logRouter.get('/getListLog', getListLog);

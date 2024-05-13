@@ -1,5 +1,6 @@
-import { getInfoApi } from '@api';
+import { getInfoApi, getListUserInfoApi } from '@api';
 import { Loading } from '@components/shared';
+import { useDataState } from '@store';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 export const INITIAL_USER_INFO = {
@@ -26,6 +27,7 @@ const INITIAL_STATE = {
 const AuthContext = createContext(INITIAL_STATE);
 
 export function AuthProvider({ children }) {
+  const { setUsers } = useDataState()
   const [userInfo, setUserInfo] = useState(INITIAL_USER_INFO);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,24 +44,23 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // const getData = async () => {
-  //   try {
-  //     const courses = await getListCourseInfoApi();
-  //     if (courses) setCourses(courses);
-  //     const lessons = await getListLessonInfoApi();
-  //     if (lessons) setLessons(lessons);
-  //   } catch (error) {
-  //     return false;
-  //   } finally {
-  //     setTimeout(() => {
-  //       setIsLoading(false);
-  //     }, 1000);
-  //   }
-  // };
+  const getData = async () => {
+    try {
+      const users = await getListUserInfoApi();
+      if (users) setUsers(users);
+    } catch (error) {
+      return false;
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) checkAuth();
+    getData();
   }, []);
 
   const value = {

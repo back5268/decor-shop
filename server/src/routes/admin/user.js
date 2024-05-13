@@ -1,11 +1,11 @@
 import { addUser, deleteUser, detailUser, getListUser, resetPassword, updateUser } from '@controller';
 import express from 'express';
 import { upload } from '@lib/multer';
-import { userMiddleware } from '@middleware';
+import { authMiddleware } from '@middleware';
 
 export const userRouter = express.Router();
 
-userRouter.use(userMiddleware);
+userRouter.use(authMiddleware);
 userRouter.get('/getListUser', getListUser);
 userRouter.get('/detailUser', detailUser);
 userRouter.post('/deleteUser', deleteUser);

@@ -1,11 +1,11 @@
 import { addProduct, addReceipt, detailProduct, getListProduct, updateProduct } from '@controller';
 import { upload } from '@lib/multer';
-import { userMiddleware } from '@middleware';
+import { authMiddleware } from '@middleware';
 import express from 'express';
 
 export const productRouter = express.Router();
 
-productRouter.use(userMiddleware);
+productRouter.use(authMiddleware);
 productRouter.get('/getListProduct', getListProduct);
 productRouter.get('/detailProduct', detailProduct);
 productRouter.post(

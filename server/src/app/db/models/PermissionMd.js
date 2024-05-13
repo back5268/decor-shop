@@ -7,9 +7,10 @@ class PermissionMd extends ModelBase {
   by;
   updateBy;
   name;
-  code;
   description;
   status;
+  users;
+  tools;
   deletedAt;
 }
 
@@ -20,7 +21,7 @@ PermissionMd.init('Permission', {
   description: { type: String },
   status: { type: Number, enum: [0, 1], default: 1 },
   users: [{ type: String, required: true }],
-  tools: [{  }],
+  tools: [{ type: Object, required: true, description: '{ route, actions }' }],
   deletedAt: { type: Date }
 });
 

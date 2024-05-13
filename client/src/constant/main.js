@@ -27,3 +27,10 @@ export const templateType = [
   { label: 'Đăng ký tài khoản', key: 1 },
   { label: 'Quên mật khẩu', key: 2 },
 ];
+
+export const toolActions = [
+  { label: 'Thêm mới', key: 'create' },
+  { label: 'Xem', key: 'read' },
+  { label: 'Cập nhật', key: 'update' },
+  { label: 'Xóa', key: 'delete' },
+];

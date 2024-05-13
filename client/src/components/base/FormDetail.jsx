@@ -2,7 +2,7 @@ import React from 'react';
 import { usePostApi } from '@lib/react-query';
 import { useToastState } from '@store';
 import { useNavigate } from 'react-router-dom';
-import { Buttonz, Dialogz, Hrz } from '@components/core';
+import { Buttonz, Cardz, Dialogz, Hrz } from '@components/core';
 import { Loading } from '@components/shared';
 
 const Wrapper = ({ isModal, children, title, open, setOpen }) => {
@@ -14,10 +14,11 @@ const Wrapper = ({ isModal, children, title, open, setOpen }) => {
     );
   else
     return (
-      <div className="bg-white rounded-lg shadow-xl">
-        {title && <h2 className="font-semibold uppercase leading-normal pt-6 px-6 text-neutral-800 dark:text-neutral-200">{title}</h2>}
+      <Cardz className="p-4">
+        <h2 className="font-semibold uppercase leading-normal mb-2">{title}</h2>
+        <Hrz />
         {children}
-      </div>
+      </Cardz>
     );
 };
 
@@ -59,7 +60,7 @@ const FormDetail = (props) => {
     <Wrapper title={newTitle} isModal={isModal} open={open} setOpen={setOpen}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={`w-full ${isModal ? 'max-h-[500px] overflow-scroll' : ''}`}>
-          <div className="card relative w-full mt-4">
+          <div className="relative w-full mt-4">
             {isPending && <Loading />}
             {children}
           </div>

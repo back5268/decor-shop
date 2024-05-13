@@ -1,6 +1,6 @@
+import { Radioz } from '@components/core';
 import { List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 import React from 'react';
-import { Radioz } from '.';
 
 const MultiRadioz = (props) => {
   const {

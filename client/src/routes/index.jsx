@@ -7,7 +7,6 @@ import { AccessDenied, ErrorPage } from '@view/auth';
 
 const Router = () => {
   const { userInfo } = useAuthContext();
-  console.log(userInfo);
 
   return (
     <Routes>
