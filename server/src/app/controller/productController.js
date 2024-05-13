@@ -12,6 +12,7 @@ import {
   addProductMd,
   countListHistoryMd,
   countListProductMd,
+  deleteProductMd,
   getDetailProductMd,
   getListHistoryMd,
   getListProductMd,
@@ -23,11 +24,10 @@ export const getListProduct = async (req, res) => {
   try {
     const { error, value } = validateData(listProductValid, req.query);
     if (error) return res.status(400).json({ status: false, mess: error });
-    const { page, limit, keySearch, category, type, status } = value;
+    const { page, limit, keySearch, type, status } = value;
     const where = {};
     if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }, { code: { $regex: keySearch, $options: 'i' } }];
     if (status || status === 0) where.status = status;
-    if (category) where.category = category;
     if (type) where.type = type;
     const documents = await getListProductMd(where, page, limit);
     const total = await countListProductMd(where);
@@ -45,6 +45,19 @@ export const detailProduct = async (req, res) => {
     const data = await getDetailProductMd({ _id });
     if (!data) return res.status(400).json({ status: false, mess: 'Sản phẩm không tồn tại!' });
     res.json({ status: true, data });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const { error, value } = validateData(detailProductValid, req.body);
+    if (error) return res.status(400).json({ status: false, mess: error });
+    const { _id } = value;
+    const data = await deleteProductMd({ _id });
+    if (!data) return res.status(400).json({ status: false, mess: 'Sản phẩm không tồn tại!' });
+    res.status(201).json({ status: true, data });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }
@@ -83,7 +96,7 @@ export const addProduct = async (req, res) => {
       avatar = await uploadFileToFirebase(req.files['avatar'][0]);
     }
     if (req.files?.['images']?.[0]) {
-      for (let file of req.files['files']) {
+      for (let file of req.files['images']) {
         images.push(await uploadFileToFirebase(file));
       }
     }
@@ -98,7 +111,9 @@ export const addProduct = async (req, res) => {
       slug,
       description,
       avatar,
-      images
+      images,
+      quantity: 0,
+      vote: 5
     });
     res.status(201).json({ status: true, data });
   } catch (error) {

@@ -34,7 +34,7 @@ export const detailTemplate = async (req, res) => {
 
 export const deleteTemplate = async (req, res) => {
   try {
-    const { error, value } = validateData(detailTemplateValid, req.query);
+    const { error, value } = validateData(detailTemplateValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
     const { _id } = value;
     const data = await deleteTemplateMd({ _id });

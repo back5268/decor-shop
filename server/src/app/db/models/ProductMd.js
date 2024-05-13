@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 class ProductMd extends ModelBase {
-  category;
   by;
   name;
   slug;
@@ -21,7 +20,6 @@ class ProductMd extends ModelBase {
 }
 
 ProductMd.init('Product', {
-  category: { type: ObjectId, ref: 'Category' },
   by: { type: ObjectId, ref:'User'  },
   name: { type: String, required: true },
   slug: { type: String, required: true },

@@ -1,4 +1,4 @@
-import { addProduct, addReceipt, detailProduct, getListProduct, updateProduct } from '@controller';
+import { addProduct, addReceipt, deleteProduct, detailProduct, getListProduct, updateProduct } from '@controller';
 import { upload } from '@lib/multer';
 import { authMiddleware } from '@middleware';
 import express from 'express';
@@ -8,6 +8,7 @@ export const productRouter = express.Router();
 productRouter.use(authMiddleware);
 productRouter.get('/getListProduct', getListProduct);
 productRouter.get('/detailProduct', detailProduct);
+productRouter.post('/deleteProduct', deleteProduct);
 productRouter.post(
   '/addProduct',
   upload.fields([

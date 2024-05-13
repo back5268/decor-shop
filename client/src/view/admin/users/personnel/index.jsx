@@ -86,7 +86,7 @@ const Personnel = () => {
         columns={columns}
         params={params}
         setParams={setParams}
-        baseActions={['insert', 'detail', 'delete']}
+        baseActions={['create', 'detail', 'delete']}
         setShow={setOpen}
         actionsInfo={{
           onViewDetail: (item) => setOpen(item._id),
@@ -99,7 +99,7 @@ const Personnel = () => {
           ]
         }}
         statusInfo={{ changeStatusApi: updateUserApi }}
-        headerInfo={{ onInsert: () => setOpen(true) }}
+        headerInfo={{ onCreate: () => setOpen(true) }}
         onSuccess={onSuccess}
       />
     </FormList>

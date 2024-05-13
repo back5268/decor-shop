@@ -46,7 +46,7 @@ const DataTable = (props) => {
     handleDelete = (item) => ({ _id: item._id }),
     moreActions
   } = actionsInfo;
-  const { onInsert = () => {}, onImport = () => {}, exportApi } = headerInfo;
+  const { onCreate = () => {}, onImport = () => {}, exportApi } = headerInfo;
   const { changeStatusApi = () => {}, handleChangeStatus = (item) => ({ _id: item._id, status: item.status ? 0 : 1 }) } = statusInfo;
 
   const onDeletez = (item) => {
@@ -87,7 +87,7 @@ const DataTable = (props) => {
   };
 
   const isActions = baseActions.includes('detail') || baseActions.includes('delete') || moreActions;
-  const isHeader = baseActions.includes('insert') || baseActions.includes('import') || baseActions.includes('export');
+  const isHeader = baseActions.includes('create') || baseActions.includes('import') || baseActions.includes('export');
   const isStatus = Boolean(statusInfo.changeStatusApi);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const DataTable = (props) => {
     <div className="card mt-4 text-color">
       {isHeader && (
         <div className="flex gap-2 justify-start mb-1">
-          {baseActions.includes('insert') && <Buttonz onClick={onInsert}>Thêm mới</Buttonz>}
+          {baseActions.includes('create') && <Buttonz onClick={onCreate}>Thêm mới</Buttonz>}
           {baseActions.includes('import') && (
             <Buttonz severity="info" onClick={onImport}>
               Import

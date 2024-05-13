@@ -39,7 +39,6 @@ export const tools = [
     name: 'Quản lý kho',
     icon: 'CircleStackIcon',
     children: [
-      { name: 'Danh mục sản phẩm', route: '/categories', actions: ['create', 'update', 'delete', 'read'] },
       { name: 'Quản lý sản phẩm', route: '/products', actions: ['create', 'update', 'delete', 'read'] },
       { name: 'Quản lý khuyến mãi', route: '/promotions', actions: ['create', 'update', 'delete', 'read'] }
     ]

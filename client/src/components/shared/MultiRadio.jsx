@@ -2,7 +2,7 @@ import { Radioz } from '@components/core';
 import { List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 import React from 'react';
 
-const MultiRadioz = (props) => {
+const MultiRadio = (props) => {
   const {
     label,
     id,
@@ -51,4 +51,4 @@ const MultiRadioz = (props) => {
   );
 };
 
-export default MultiRadioz;
+export default MultiRadio;

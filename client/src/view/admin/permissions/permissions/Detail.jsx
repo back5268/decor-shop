@@ -129,7 +129,7 @@ const DetailPermission = () => {
       type="nomal"
       title="nhóm quyền"
       isUpdate={isUpdate}
-      insertApi={addPermissionApi}
+      createApi={addPermissionApi}
       updateApi={updatePermissionApi}
       handleData={handleData}
       handleSubmit={handleSubmit}

@@ -10,9 +10,9 @@ import { permissionRouter } from './permission';
 export const adminRouter = express.Router();
 
 adminRouter.use(authMiddleware);
-adminRouter.use('/user', userRouter);
-adminRouter.use('/template', templateRouter);
-adminRouter.use('/log', logRouter);
+adminRouter.use('/users', userRouter);
+adminRouter.use('/templates', templateRouter);
+adminRouter.use('/logs', logRouter);
 adminRouter.use('/category', categoryRouter);
-adminRouter.use('/product', productRouter);
-adminRouter.use('/permission', permissionRouter);
+adminRouter.use('/products', productRouter);
+adminRouter.use('/permissions', permissionRouter);

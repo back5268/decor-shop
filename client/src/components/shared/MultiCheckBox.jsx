@@ -2,7 +2,7 @@ import { CheckBoxz } from '@components/core';
 import { List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 import React, { useState } from 'react';
 
-const MultiCheckBoxz = (props) => {
+const MultiCheckBox = (props) => {
   const {
     label,
     id,
@@ -101,4 +101,4 @@ const MultiCheckBoxz = (props) => {
   );
 };
 
-export default MultiCheckBoxz;
+export default MultiCheckBox;

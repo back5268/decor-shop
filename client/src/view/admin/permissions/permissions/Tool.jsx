@@ -1,4 +1,4 @@
-import { MultiCheckBoxz } from '@components/shared';
+import { MultiCheckBox } from '@components/shared';
 import { toolActions } from '@constant';
 import React from 'react';
 
@@ -10,7 +10,7 @@ const Tool = (props) => {
     <div>
       {children?.map((child, index) => {
         return (
-          <MultiCheckBoxz
+          <MultiCheckBox
             key={index}
             id={child.route}
             label={child?.name}

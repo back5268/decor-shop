@@ -44,13 +44,13 @@ const Templates = () => {
         columns={columns}
         params={params}
         setParams={setParams}
-        baseActions={['insert', 'detail']}
+        baseActions={['create', 'detail']}
         setShow={setOpen}
         actionsInfo={{
           onViewDetail: (item) => setOpen(item._id)
         }}
         statusInfo={{ changeStatusApi: updateTemplateApi }}
-        headerInfo={{ onInsert: () => setOpen(true) }}
+        headerInfo={{ onCreate: () => setOpen(true) }}
       />
     </FormList>
   );

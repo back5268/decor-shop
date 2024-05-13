@@ -2,7 +2,6 @@ export const listProductValid = {
   page: 'number',
   limit: 'number',
   keySearch: { type: 'string', allowNull: true },
-  category: { type: 'string', allowNull: true },
   type: { type: 'string', allowNull: true },
   status: { type: 'number', allowNull: true }
 };
@@ -18,8 +17,8 @@ export const detailHistoryProductValid = {
 };
 
 export const addProductValid = {
-  name: 'number',
-  code: 'number',
+  name: 'string',
+  code: 'string',
   type: 'string',
   price: 'number',
   description: { type: 'string', allowNull: true },

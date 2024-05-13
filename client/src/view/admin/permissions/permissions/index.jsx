@@ -58,10 +58,10 @@ const Permissions = () => {
         columns={columns}
         params={params}
         setParams={setParams}
-        baseActions={['insert', 'detail', 'delete']}
+        baseActions={['create', 'detail', 'delete']}
         actionsInfo={{ onViewDetail: (item) => navigate(`/admin/permissions/detail/${item._id}`), deleteApi: deletePermissionApi }}
         statusInfo={{ changeStatusApi: updatePermissionApi }}
-        headerInfo={{ onInsert: () => navigate('/admin/permissions/insert') }}
+        headerInfo={{ onCreate: () => navigate('/admin/permissions/create') }}
       />
     </FormList>
   );

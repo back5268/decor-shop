@@ -57,7 +57,7 @@ const DetailTemplate = (props) => {
         reset();
       }}
       isUpdate={isUpdate}
-      insertApi={addTemplateApi}
+      createApi={addTemplateApi}
       updateApi={updateTemplateApi}
       handleData={handleData}
       handleSubmit={handleSubmit}

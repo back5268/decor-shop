@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { convertFileToUrl } from '@lib/helper';
 import { Buttonz, Hrz, Imagez } from '@components/core';
 
-const UploadImage = ({ data, setData, label }) => {
+const UploadImage = ({ data, setData, label, className = "" }) => {
   const [file, setFile] = useState([]);
   const [fileUrl, setFileUrl] = useState(data);
 
@@ -25,7 +25,7 @@ const UploadImage = ({ data, setData, label }) => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <div className="card flex flex-col cursor-pointer m-2">
+    <div className={`card flex flex-col cursor-pointer m-2 ${className}`}>
       <div className="mb-4">
         {label && <label className="inline-block font-medium text-left">{label}</label>}
         <Hrz />
@@ -47,9 +47,9 @@ const UploadImage = ({ data, setData, label }) => {
       ) : (
         <div {...getRootProps()} className="flex justify-center flex-col gap-4 text-center items-center p-2 h-72">
           <CloudArrowUpIcon className="w-32" />
-          <span className="font-medium">Drag and Drop file</span>
+          <span className="font-medium">Kéo và thả ảnh tại đây</span>
           <span className="text-center font-semibold dark:text-neutral-200">OR</span>
-          <Buttonz label="Browse" />
+          <Buttonz label="Chọn file" />
         </div>
       )}
     </div>

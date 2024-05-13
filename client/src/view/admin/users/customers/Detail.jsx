@@ -7,7 +7,7 @@ import { FormDetail } from '@components/base';
 import { checkEqualProp, databseDate } from '@lib/helper';
 import { useAuthContext } from '@context/AuthContext';
 import { InputCalendarForm, InputForm, TextAreaz } from '@components/core';
-import { MultiRadioz, UploadImage } from '@components/shared';
+import { MultiRadio, UploadImage } from '@components/shared';
 import { genders } from '@constant';
 
 const defaultValues = {
@@ -77,7 +77,7 @@ const DetailCustomer = (props) => {
         reset();
       }}
       isUpdate={isUpdate}
-      insertApi={addUserApi}
+      createApi={addUserApi}
       updateApi={updateUserApi}
       handleData={handleData}
       handleSubmit={handleSubmit}
@@ -95,7 +95,7 @@ const DetailCustomer = (props) => {
             <InputForm id="email" label="Email (*)" errors={errors} register={register} />
             <InputForm id="username" label="Tài khoản (*)" errors={errors} register={register} />
             <InputCalendarForm id="birthday" label="Ngày sinh" errors={errors} setValue={setValue} watch={watch} />
-            <MultiRadioz
+            <MultiRadio
               id="gender"
               label="Giới tính:"
               options={genders}

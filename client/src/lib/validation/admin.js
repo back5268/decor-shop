@@ -54,3 +54,10 @@ export const TemplateValidation = yup.object({
   content: yup.string().required('Nội dung không được bỏ trống!'),
   type: yup.number().required('Loại thông báo không được bỏ trống!'),
 });
+
+export const ProductValidation = yup.object({
+  name: yup.string().required('Tên sản phẩm được bỏ trống!'),
+  code: yup.string().required('Mã sản phẩm không được bỏ trống!'),
+  type: yup.string().required('Loại sản phẩm không được bỏ trống!'),
+  price: yup.number().required('Giá bán ra không được bỏ trống!'),
+});

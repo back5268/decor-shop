@@ -34,3 +34,9 @@ export const toolActions = [
   { label: 'Cập nhật', key: 'update' },
   { label: 'Xóa', key: 'delete' },
 ];
+
+export const productType = [
+  { label: 'Đèn ngủ DIY', key: 'diy' },
+  { label: 'Đèn ngủ 3D', key: '3d' },
+  { label: 'Tranh DIY', key: 't-diy' },
+];

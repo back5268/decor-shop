@@ -4,3 +4,4 @@ export * from './user';
 export * from './template';
 export * from './log';
 export * from './permission';
+export * from './product';

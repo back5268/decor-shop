@@ -32,7 +32,7 @@ const FormDetail = (props) => {
     open,
     setOpen = () => {},
     isUpdate,
-    insertApi,
+    createApi,
     updateApi,
     handleData = () => {},
     handleSubmit = () => {},
@@ -40,7 +40,7 @@ const FormDetail = (props) => {
     onSuccess = () => {}
   } = props;
   const isModal = type === 'modal';
-  const { mutateAsync, isPending } = usePostApi(isUpdate ? updateApi : insertApi);
+  const { mutateAsync, isPending } = usePostApi(isUpdate ? updateApi : createApi);
   const newTitle = `${isUpdate ? 'Cập nhật' : 'Thêm mới'} ${title && String(title).toLocaleLowerCase()}`;
 
   const onSubmit = async (e) => {
@@ -76,7 +76,7 @@ const FormDetail = (props) => {
               else navigate(-1);
             }}
           />
-          {(insertApi || updateApi) && <Buttonz loading={isPending} type="submit" label="Xác nhận" />}
+          {(createApi || updateApi) && <Buttonz loading={isPending} type="submit" label="Xác nhận" />}
         </div>
       </form>
     </Wrapper>

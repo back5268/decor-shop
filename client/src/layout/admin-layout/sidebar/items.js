@@ -27,7 +27,6 @@ export const items = [
     icon: icons.CircleStackIcon,
     type: 'group',
     items: [
-      { label: 'Danh mục sản phẩm', type: 'item', route: '/categories' },
       { label: 'Quản lý sản phẩm', type: 'item', route: '/products' },
       { label: 'Quản lý khuyến mãi', type: 'item', route: '/promotions' }
     ]
