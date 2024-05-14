@@ -20,10 +20,7 @@ const FormAuth = (props) => {
       <div className="relative flex justify-center items-center">
         <Cardz className="w-[420px] py-4">
           <div className="text-center">
-            <div className="flex gap-4 items-center justify-center my-2">
-              <Logo />
-              <h3 className="mt-1 pb-1 text-2xl font-bold">Decor Day</h3>
-            </div>
+            <Logo className="m-4" />
             <p className="mb-8 text-md">{title}</p>
           </div>
           {children}

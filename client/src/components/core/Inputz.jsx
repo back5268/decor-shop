@@ -2,17 +2,17 @@ import { Input } from '@material-tailwind/react';
 import React from 'react';
 
 export const Inputz = (props) => {
-  const { id, value = '', onChange = () => {}, size = 'lg', color = 'cyan', className = "", ...prop } = props;
+  const { id, value = '', onChange = () => {}, size = 'lg', color = 'cyan', classInput = '', className = '', ...prop } = props;
 
   return (
     <div className={`w-full md:w-6/12 lg:w-3/12 p-2 ${className}`}>
-      <Input color={color} autoComplete={id} size={size} id={id} value={value} onChange={onChange} {...prop} />
+      <Input color={color} autoComplete={id} size={size} id={id} value={value} onChange={onChange} className={classInput} {...prop} />
     </div>
   );
 };
 
 export const InputForm = (props) => {
-  const { id, size = 'lg', color = 'cyan', errors = {}, register = () => {}, className = "", ...prop } = props;
+  const { id, size = 'lg', color = 'cyan', errors = {}, register = () => {}, className = '', ...prop } = props;
 
   return (
     <div className={`flex flex-col gap-1 w-full lg:w-6/12 p-2 ${className}`}>
@@ -21,4 +21,3 @@ export const InputForm = (props) => {
     </div>
   );
 };
-

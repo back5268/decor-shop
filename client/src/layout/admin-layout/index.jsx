@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Sidebar from './sidebar';
-import TopBar from './topbar';
 import { INITIAL_USER_INFO, useAuthContext } from '@context/AuthContext';
 import { useToastState } from '@store';
 import { useNavigate } from 'react-router-dom';
+import TopBar from './Topbar';
+import Sidebar from './SideBar';
 
 const AdminLayout = ({ children }) => {
   const navigate = useNavigate()

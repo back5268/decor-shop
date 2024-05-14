@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { Logo } from '@components/base';
-import NavGroup from './NavGroup';
 import { Buttonz, Inputz } from '@components/core';
 import { items } from './items';
-import NavItem from './NavItem';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { NavGroup, NavItem } from '@layout/shared';
 
 const Sidebar = (props) => {
   const { showSidebar, onSignOut } = props;
+  const navigate = useNavigate()
   const { pathname } = useLocation();
   const [open, setOpen] = useState(0);
 
@@ -54,7 +54,7 @@ const Sidebar = (props) => {
       </nav>
       <hr className="my-3 border-on-sidebar" />
       <div className="flex flex-col gap-2">
-        <Buttonz className="w-full">Chuyển đến trang chủ</Buttonz>
+        <Buttonz className="w-full" onClick={() => navigate('/')}>Chuyển đến trang chủ</Buttonz>
         <Buttonz onClick={onSignOut} variant="outlined" className="w-full">
           Đăng xuất
         </Buttonz>

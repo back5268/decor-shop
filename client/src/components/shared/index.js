@@ -5,3 +5,4 @@ export { default as UploadFiles } from './UploadFiles';
 export { default as Loading } from './Loading';
 export { default as MultiCheckBox } from './MultiCheckBox';
 export { default as MultiRadio } from './MultiRadio';
+export { default as Carousel } from './Carousel';

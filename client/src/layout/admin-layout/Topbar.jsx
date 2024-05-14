@@ -1,8 +1,7 @@
 import { Buttonz, Cardz } from '@components/core';
 import { Bars3Icon } from '@heroicons/react/24/outline';
+import { AvatarSection, NotifySection } from '@layout/shared';
 import React from 'react';
-import AvatarSection from './AvatarSection';
-import NotifySection from './NotifySection';
 
 const TopBar = (props) => {
   const { showSidebar, setShowSidebar, onSignOut } = props;

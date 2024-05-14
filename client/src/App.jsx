@@ -1,6 +1,7 @@
 import { AuthProvider } from '@context/AuthContext';
-import { ConfirmDialog, LazyLoading, NavigationScroll, ScrollToTop, Toastify } from './components/base';
+import { ConfirmDialog, LazyLoading, NavigationScroll, Toastify } from './components/base';
 import Routes from './routes';
+import { ScrollToTop } from '@layout/shared';
 
 const App = () => {
   return (

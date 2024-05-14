@@ -41,6 +41,13 @@ export const productType = [
   { label: 'Tranh DIY', key: 't-diy' },
 ];
 
+export const policies = [
+  { label: 'Chính sách bảo hành', key: 1 },
+  { label: 'Chính sách đổi trả', key: 2 },
+  { label: 'Chính sách vận chuyển', key: 3 },
+];
+
+
 export const promotionType = [
   { label: 'Trừ trực tiếp', key: 1, color: 'yellow' },
   { label: 'Voucher', key: 2, color: 'green' },
