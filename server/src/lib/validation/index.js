@@ -8,3 +8,5 @@ export * from './categoryValidation';
 export * from './productValidation';
 export * from './permissionValidation';
 export * from './promotionValidation';
+export * from './cartValidation';
+export * from './orderValidation';

@@ -8,3 +8,9 @@ export const VALIDATE_TYPE = {
   DATE: 'date',
   DATETIME: 'datetime'
 };
+
+export const productType = [
+  { label: 'Đèn ngủ DIY', key: 'diy' },
+  { label: 'Đèn ngủ 3D', key: '3d' },
+  { label: 'Tranh DIY', key: 't-diy' },
+];

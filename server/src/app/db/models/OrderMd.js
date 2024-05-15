@@ -5,12 +5,14 @@ const ObjectId = Schema.Types.ObjectId;
 
 class OrderMd extends ModelBase {
   by;
-  ProductInfo;
-  CustomerInfo;
+  code;
+  productInfo;
+  customerInfo;
   total;
-  sale;
+  promotion;
   qrCode;
   note;
+  reason;
   status;
   time;
   deletedAt;
@@ -18,16 +20,18 @@ class OrderMd extends ModelBase {
 
 OrderMd.init('Order', {
   by: { type: ObjectId, ref: 'User', required: true },
-  ProductInfo: { type: Object, required: true },
-  CustomerInfo: { type: Object, required: true },
+  code: { type: String, required: true },
+  productInfo: { type: Array, required: true },
+  customerInfo: { type: Object, required: true },
   total: { type: Number, required: true, min: 0 },
-  sale: { type: Number, required: true, min: 0 },
+  promotion: { type: Number, required: true, min: 0 },
   qrCode: { type: String, required: true },
   note: { type: String },
+  reason: { type: String },
   status: {
     type: Number,
-    enum: [0, 1, 2, 3, 4],
-    description: '0: Chờ thanh toán, 1: Đã thanh toán, 2: Đang giao hàng, 3: Đã nhận hàng, 4: Hủy đơn hàng'
+    enum: [1, 2, 3, 4, 5],
+    description: '1: Chờ thanh toán, 2: Đã thanh toán, 3: Đang giao hàng, 4: Đã nhận hàng, 5: Hủy đơn hàng'
   },
   time: { type: Date, require: true },
   deletedAt: { type: Date }

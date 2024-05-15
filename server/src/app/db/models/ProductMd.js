@@ -11,6 +11,7 @@ class ProductMd extends ModelBase {
   type;
   price;
   quantity;
+  saleNumber;
   vote;
   description;
   status;
@@ -20,13 +21,14 @@ class ProductMd extends ModelBase {
 }
 
 ProductMd.init('Product', {
-  by: { type: ObjectId, ref:'User'  },
+  by: { type: ObjectId, ref: 'User' },
   name: { type: String, required: true },
   slug: { type: String, required: true },
   code: { type: String, required: true },
   type: { type: String, required: true },
   price: { type: Number, required: true, min: 0 },
   quantity: { type: Number, required: true, min: 0 },
+  saleNumber: { type: Number, default: 0 },
   vote: { type: Number, required: true, min: 0 },
   description: { type: String },
   status: { type: Number, enum: [0, 1], default: 1, description: '0: Thu hồi, 1: Còn bán' },

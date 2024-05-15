@@ -6,16 +6,12 @@ const ObjectId = Schema.Types.ObjectId;
 class CartMd extends ModelBase {
   by;
   product;
-  time;
-  quantity;
   deletedAt;
 }
 
 CartMd.init('Cart', {
   by: { type: ObjectId, ref: 'User', required: true },
   product: { type: ObjectId, ref: 'Product', required: true },
-  time: { type: Date, required: true },
-  quantity: { type: Number, required: true, min: 0 },
   deletedAt: { type: Date }
 });
 

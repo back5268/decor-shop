@@ -6,3 +6,5 @@ export * from './categoryController';
 export * from './productController';
 export * from './permissionController';
 export * from './promotionController';
+export * from './cartController';
+export * from './orderController';

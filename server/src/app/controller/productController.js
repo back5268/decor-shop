@@ -38,9 +38,22 @@ export const getListProduct = async (req, res) => {
   }
 };
 
+export const getListProductApp = async (req, res) => {
+  try {
+    const { page, limit, keySearch, type, sort } = req.query;
+    const where = { status: 1 };
+    if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }];
+    if (type) where.type = type;
+    const data = await getListProductMd(where, page, limit, false, sort, "_id name price quantity saleNumber avatar images");
+    res.json({ status: true, data });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
 export const getListProductInfo = async (req, res) => {
   try {
-    const data = await getListProductMd();
+    const data = await getListProductMd(false, false, false, false, false, "_id name code");
     res.json({ status: true, data });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
