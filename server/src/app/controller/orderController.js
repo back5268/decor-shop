@@ -43,7 +43,7 @@ export const orderProduct = async (req, res) => {
       total -= amount;
     }
 
-    const code = uuidv4();
+    const code = uuidv4()?.toUpperCase();
     const qrCode = generateVietQrLink(total, code);
     res.json({
       status: true,
