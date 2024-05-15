@@ -5,8 +5,8 @@ const Popoverz = (props) => {
     header,
     children,
     animate = {
-      mount: { scale: 1, x: 0, y: 20 },
-      unmount: { scale: 0, x: 105, y: -105 }
+      mount: { scale: 1, x: 0, y: 10 },
+      unmount: { scale: 0, x: 105, y: -120 }
     },
     placement = 'top-start',
     className,

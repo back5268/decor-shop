@@ -16,6 +16,7 @@ module.exports = withMT({
       height: {
         'body-sidebar': 'calc(100vh - 18rem)',
         'body-product': 'calc(100vh - 4rem)',
+        'body-payment': 'calc(100vh - 24rem)',
       },
       minWidth: {
         '[200px]': '0px'

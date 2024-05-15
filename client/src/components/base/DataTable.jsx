@@ -103,7 +103,7 @@ const DataTable = (props) => {
   }, [JSON.stringify(params)]);
 
   return (
-    <div className="card mt-4 text-color">
+    <div className="card mt-4 text-color w-full">
       {isHeader && (
         <div className="flex gap-2 justify-start mb-1">
           {baseActions.includes('create') && <Buttonz onClick={onCreate}>Thêm mới</Buttonz>}

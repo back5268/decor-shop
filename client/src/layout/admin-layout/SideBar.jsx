@@ -8,7 +8,7 @@ import { NavGroup, NavItem } from '@layout/shared';
 
 const Sidebar = (props) => {
   const { showSidebar, onSignOut } = props;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(0);
 
@@ -35,10 +35,7 @@ const Sidebar = (props) => {
       bg-sidebar text-on-sidebar transition-all duration-500 ease-in-out ${showSidebar ? '' : '-translate-x-full'}`}
     >
       <div className="mb-2 flex items-center gap-4 p-4">
-        <div className="flex gap-4 items-center justify-center mb-2">
-          <Logo />
-          <h3 className="mt-1 pb-1 text-xl font-bold">Decor Day</h3>
-        </div>
+        <Logo />
       </div>
       <Inputz
         size="md"
@@ -54,7 +51,9 @@ const Sidebar = (props) => {
       </nav>
       <hr className="my-3 border-on-sidebar" />
       <div className="flex flex-col gap-2">
-        <Buttonz className="w-full" onClick={() => navigate('/')}>Chuyển đến trang chủ</Buttonz>
+        <Buttonz className="w-full" onClick={() => navigate('/')}>
+          Chuyển đến trang chủ
+        </Buttonz>
         <Buttonz onClick={onSignOut} variant="outlined" className="w-full">
           Đăng xuất
         </Buttonz>

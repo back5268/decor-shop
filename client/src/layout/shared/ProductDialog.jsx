@@ -138,10 +138,10 @@ const ProductDialog = () => {
     >
       <div
         onClick={() => setProduct(null)}
-        className={`duration-600 ease-in-out transform absolute w-full h-full bg-black bg-opacity-40 ${Boolean(product) ? 'opacity-100' : 'opacity-0'}`}
+        className={`duration-600 ease-in-out transform absolute w-full h-full bg-black bg-opacity-50 ${Boolean(product) ? 'opacity-100' : 'opacity-0'}`}
       ></div>
       <div
-        className={`fixed right-0 inset-y-0 h-screen w-[500px] bg-white shadow-xl rounded-xl transition-all text-slate-500 py-4
+        className={`fixed right-0 inset-y-0 h-screen w-[600px] bg-white shadow-xl rounded-xl transition-all text-slate-500 py-4
           transform duration-500 ease-in-out z-[52] ${Boolean(product) ? '' : 'translate-x-full'}`}
       >
         <div className="px-4">
