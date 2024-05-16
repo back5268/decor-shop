@@ -1,10 +1,11 @@
-import { Buttonz, CheckBoxz, Dialogz, DropdownForm, Hrz, InputForm, Inputz, TextAreaz } from '@components/core';
+import { Buttonz, CheckBoxz, Dialogz, DropdownForm, Hrz, Imagez, InputForm, Inputz, TextAreaz } from '@components/core';
 import React, { useState } from 'react';
-import { MinusIcon, PlusIcon, ShoppingCartIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Stepper, Step } from '@material-tailwind/react';
-import { HomeIcon, CogIcon, UserIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon, MapPinIcon, TrophyIcon } from '@heroicons/react/24/outline';
 import { useForm } from 'react-hook-form';
 import { templateType } from '@constant';
+import { usePostApi } from '@lib/react-query';
+import { checkPromotionApi } from '@api';
 
 const HeaderColumn = ({ children, className = '', ...prop }) => (
   <th className={`px-2 py-4 bg-blue-gray-50 font-medium text-center ${className}`} {...prop}>
@@ -18,7 +19,15 @@ const BodyColumn = ({ children, className = '', ...prop }) => (
 );
 
 const StepOne = (props) => {
-  const { products, setProducts } = props;
+  const { products } = props;
+  const { mutateAsync, isPending } = usePostApi(checkPromotionApi);
+  const { code, setCode } = useState();
+
+  const onCheckPromotion = async () => {
+    const response = await mutateAsync({ code });
+    if (response) {
+    }
+  };
 
   return (
     <div className="flex flex-col overflow-x-auto w-10/12">
@@ -35,7 +44,6 @@ const StepOne = (props) => {
                 <HeaderColumn>Số lượng</HeaderColumn>
                 <HeaderColumn>Đơn giá</HeaderColumn>
                 <HeaderColumn>Thành tiền</HeaderColumn>
-                <HeaderColumn></HeaderColumn>
               </tr>
             </thead>
             <tbody>
@@ -48,39 +56,15 @@ const StepOne = (props) => {
                       </BodyColumn>
                       <BodyColumn>1</BodyColumn>
                       <BodyColumn>2</BodyColumn>
-                      <BodyColumn className="flex justify-center">
-                        <div className="flex border-border">
-                          <div className="border-border w-[64px]">
-                            <Buttonz
-                              disabled={item.quantity === 1}
-                              onClick={() => setProducts(item.quantity - 1)}
-                              variant="text"
-                              color="gray"
-                            >
-                              <MinusIcon className="w-4" />
-                            </Buttonz>
-                          </div>
-                          <div className="w-[96px] text-lg flex justify-center items-center">{item.quantity}</div>
-                          <div className="border-border w-[64px]">
-                            <Buttonz onClick={() => setProducts(item.quantity + 1)} variant="text" color="gray">
-                              <PlusIcon className="w-4" />
-                            </Buttonz>
-                          </div>
-                        </div>
-                      </BodyColumn>
+                      <BodyColumn className="flex justify-center"></BodyColumn>
                       <BodyColumn>2</BodyColumn>
                       <BodyColumn>2</BodyColumn>
-                      <BodyColumn>
-                        <Buttonz color="red" variant="text" className="p-2">
-                          <TrashIcon className="w-5" />
-                        </Buttonz>
-                      </BodyColumn>
                     </tr>
                   );
                 })
               ) : (
                 <tr>
-                  <BodyColumn className="text-center py-4 !text-sm" colspan={5}>
+                  <BodyColumn className="text-center py-4 !text-sm" colSpan={5}>
                     Không có dữ liệu
                   </BodyColumn>
                 </tr>
@@ -89,25 +73,28 @@ const StepOne = (props) => {
           </table>
         </div>
       </div>
+      <Hrz className="w-full" />
       <div className="w-full flex items-start">
         <div className="flex items-center w-full">
-          <Inputz id="subject" label="Mã khuyến mãi" />
-          <Buttonz label="Áp dụng" />
+          <Inputz id="subject" value={code} onChange={(e) => setCode(e.target.value)} label="Mã khuyến mãi" />
+          <Buttonz disabled={!code} onClick={() => onCheckPromotion()} label="Áp dụng" />
         </div>
-        <div className='flex flex-col gap-2 w-6/12'>
+        <div className="flex flex-col gap-2 w-6/12">
           <table>
-            <tr>
-              <td>Tổng tiền</td>
-              <td>100000</td>
-            </tr>
-            <tr>
-              <td>Khuyến mãi</td>
-              <td>100000</td>
-            </tr>
-            <tr>
-              <td>Thành tiền</td>
-              <td>100000</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>Tổng tiền</td>
+                <td>100000</td>
+              </tr>
+              <tr>
+                <td>Khuyến mãi</td>
+                <td>100000</td>
+              </tr>
+              <tr>
+                <td>Thành tiền</td>
+                <td>100000</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -129,6 +116,7 @@ const StepTwo = () => {
 
   return (
     <div className="w-10/12 flex flex-wrap">
+      <DropdownForm id="type" label="Hình thức thanh toán (*)" options={templateType} errors={errors} watch={watch} setValue={setValue} />
       <InputForm id="subject" label="Họ tên người nhận (*)" errors={errors} register={register} />
       <InputForm id="subject" label="Số điện thoại (*)" errors={errors} register={register} />
       <DropdownForm id="type" label="Tỉnh / Thành phố (*)" options={templateType} errors={errors} watch={watch} setValue={setValue} />
@@ -136,6 +124,31 @@ const StepTwo = () => {
       <DropdownForm id="type" label="Phường / Xã (*)" options={templateType} errors={errors} watch={watch} setValue={setValue} />
       <InputForm id="subject" label="Địa chỉ cụ thể (*)" errors={errors} register={register} />
       <TextAreaz id="description" label="Ghi chú" value={watch('description')} setValue={(e) => setValue('description', e)} />
+    </div>
+  );
+};
+
+const StepThree = () => {
+  return (
+    <div className="w-10/12 mt-8">
+      <div className="flex items-center justify-center">
+        <div className="flex flex-col w-6/12 items-center">
+          <Imagez
+            className="w-80"
+            src="https://img.vietqr.io/image/MB-606606868-compact2.png?amount=50000&addInfo=123456&accountName=Bachz"
+          />
+          <i className="text-red-600 text-sm">*Vui lòng thanh toán đơn hàng trước 16/05/2024</i>
+        </div>
+        <div className="flex flex-col w-6/12">
+          <h3>Cảm ơn bạn đã đặt mua sản phẩm của Decor Day</h3>
+          <h3>Đơn hàng của bạn đã được giao cho đơn vị vận chuyển, vui lòng để ý điện thoại.</h3>
+          <h3>
+            Nếu có bất kỳ thắc mắc nào về sản phẩm và dịch vụ hãy liên hệ với bộ phận CSKH của Decor Day để chúng tôi được phục vụ bạn tốt
+            hơn
+          </h3>
+          <h3>Decor Day xin được cảm ơn bạn rất nhiều và chúc bạn có một ngày may mắn và an lành ạ!</h3>
+        </div>
+      </div>
     </div>
   );
 };
@@ -153,7 +166,7 @@ const Stepperz = ({ activeStep, setActiveStep }) => {
             completedClassName="bg-primary"
             onClick={() => setActiveStep(0)}
           >
-            <HomeIcon className="h-5 w-5" />
+            <ShoppingBagIcon className="h-5 w-5" />
           </Step>
           <Step
             color="cyan"
@@ -162,42 +175,41 @@ const Stepperz = ({ activeStep, setActiveStep }) => {
             completedClassName="bg-primary"
             onClick={() => setActiveStep(1)}
           >
-            <UserIcon className="h-5 w-5" />
+            <MapPinIcon className="h-5 w-5" />
+          </Step>
+          <Step
+            color="cyan"
+            className="cursor-pointer"
+            activeClassName="bg-primary"
+            completedClassName="bg-primary"
+            onClick={() => setActiveStep(2)}
+          >
+            <TrophyIcon className="h-5 w-5" />
           </Step>
         </Stepper>
       </div>
-      <Buttonz onClick={() => setActiveStep((pre) => pre + 1)} disabled={activeStep === 1} label="Tiếp theo" />
+      <Buttonz onClick={() => setActiveStep((pre) => pre + 1)} disabled={activeStep === 2} label="Tiếp theo" />
     </div>
   );
 };
 
-const CartSection = () => {
+const PaymentSection = ({ products, open, setOpen }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [products, setProducts] = useState([{}, {}]);
-  const [open, setOpen] = useState(false);
-  const title = activeStep === 0 ? 'Chọn sản phẩm' : 'Thông tin nhận hàng';
+  const [promotions, setPromotions] = useState([]);
+  const title = activeStep === 0 ? 'Chọn sản phẩm' : activeStep === 1 ? 'Thông tin nhận hàng' : '';
 
   return (
-    <>
-      <Buttonz onClick={() => setOpen(true)} color="gray" variant="text" className="!p-0 hover:bg-hover-sidebar">
-        <ShoppingCartIcon className="w-6 m-2 text-on-sidebar" />
-      </Buttonz>
-      <Dialogz className="w-[1200px]" position="start" title="Giỏ hàng" open={open} setOpen={setOpen}>
-        <div className="flex flex-col justify-center items-center w-full">
-          <Stepperz activeStep={activeStep} setActiveStep={setActiveStep} />
-          <Hrz className="w-full" />
-          <h2 className="my-6 uppercase font-semibold">{title}</h2>
-          <div className="flex flex-col items-center w-full h-body-payment overflow-scroll">
-            {activeStep === 0 ? (
-              <StepOne products={products} setProducts={setProducts} />
-            ) : (
-              <StepTwo products={products} setProducts={setProducts} />
-            )}
-          </div>
+    <Dialogz className="w-[1200px]" position="start" title="Giỏ hàng" open={open} setOpen={setOpen}>
+      <div className="flex flex-col justify-center items-center w-full">
+        <Stepperz activeStep={activeStep} setActiveStep={setActiveStep} />
+        <Hrz className="w-full" />
+        {title && <h2 className="my-6 uppercase font-semibold">{title}</h2>}
+        <div className="flex flex-col items-center w-full h-body-payment overflow-scroll">
+          {activeStep === 0 ? <StepOne products={products} /> : activeStep === 1 ? <StepTwo /> : <StepThree />}
         </div>
-      </Dialogz>
-    </>
+      </div>
+    </Dialogz>
   );
 };
 
-export default CartSection;
+export default PaymentSection;

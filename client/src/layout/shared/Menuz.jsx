@@ -5,7 +5,7 @@ import { ListItem } from '@material-tailwind/react';
 
 const Menuz = ({ label, items, select }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const active = items.find(item => item.route === select) || isHovered
+  const active = items.find((item) => item.route === select) || isHovered;
 
   return (
     <div className="relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -17,16 +17,19 @@ const Menuz = ({ label, items, select }) => {
       >
         <div className="flex items-center gap-2">
           <span>{label}</span>
-          <ChevronUpIcon className={`h-5 stroke-4 duration-300 ease-in-out transform ${isHovered ? "rotate-180" : ""}`} />
+          <ChevronUpIcon className={`h-5 stroke-4 duration-300 ease-in-out transform ${isHovered ? 'rotate-180' : ''}`} />
         </div>
       </Buttonz>
       <div
         className={`absolute duration-300 ease-in-out transform ${isHovered ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'}`}
       >
-        <div className="bg-sidebar mt-4 rounded-lg py-2 min-w-48">
+        <div className="!bg-sidebar mt-4 rounded-lg py-2 min-w-48">
           {items?.map((item, index) => (
             <Linkz key={index} to={item.route}>
-              <ListItem className="p-3 transition-all duration-300 ease-in-out !text-border font-medium text-base text-nowrap hover:bg-hover-sidebar">
+              <ListItem
+                className={`p-3 transition-all duration-300 ease-in-out !text-border font-medium 
+                text-base text-nowrap hover:!bg-hover-sidebar ${select === item.route ? '!bg-hover-sidebar' : ''}`}
+              >
                 {item.label}
               </ListItem>
             </Linkz>

@@ -16,6 +16,7 @@ const defaultValues = {
   code: '',
   type: '',
   price: 0,
+  sale: 0,
   description: ''
 };
 
@@ -109,6 +110,7 @@ const DetailProduct = () => {
         <InputForm id="name" label="Tên sản phẩm (*)" errors={errors} register={register} />
         <InputForm id="code" label="Mã sản phẩm (*)" errors={errors} register={register} />
         <InputForm id="price" label="Giá bán ra (*)" type="number" errors={errors} register={register} />
+        <InputForm id="sale" label="Khuyến mãi (*)" type="number" errors={errors} register={register} />
         <TextAreaz id="description" label="Mô tả" value={watch('description')} setValue={(e) => setValue('description', e)} />
         <div className="flex flex-col gap-2 card m-2 w-full">
           <Tabz data={data} activeTab={activeTab} setActiveTab={setActiveTab} />

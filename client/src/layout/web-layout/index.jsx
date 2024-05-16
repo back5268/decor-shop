@@ -6,16 +6,8 @@ import { Buttonz, Linkz } from '@components/core';
 import { Logo } from '@components/base';
 import { useToastState } from '@store';
 import { INITIAL_USER_INFO, useAuthContext } from '@context/AuthContext';
-import {
-  AvatarSection,
-  CartSection,
-  ContactSection,
-  Menuz,
-  NewsSection,
-  NotifySection,
-  ProductDialog,
-  SearchSection
-} from '@layout/shared';
+import { AvatarSection, ContactSection, Menuz, NewsSection, NotifySection, ProductDialog, SearchSection } from '@layout/shared';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 const WebLayout = ({ children }) => {
   const { isAuthenticated, setUserInfo, setIsAuthenticated } = useAuthContext();
@@ -23,6 +15,7 @@ const WebLayout = ({ children }) => {
   const { showToast } = useToastState();
   const { pathname } = useLocation();
   const [select, setSelect] = useState(null);
+  const isCart = pathname === '/payment';
 
   const onSignOut = () => {
     setUserInfo(INITIAL_USER_INFO);
@@ -32,7 +25,14 @@ const WebLayout = ({ children }) => {
   };
 
   useEffect(() => {
-    const item = pathname !== '/' ? items.find((i) => i.route !== '/' && pathname.includes(i.route)) : { route: '/', label: 'Trang chủ' };
+    let item;
+    if (pathname === '/') item = { label: 'Trang chủ', route: '/' };
+    else {
+      items.forEach((i) => {
+        if (i.route && i.route === pathname) item = i;
+        else item = i.children?.find((c) => c.route === pathname);
+      });
+    }
     if (item) {
       setSelect(item.route);
       document.title = item.label;
@@ -63,15 +63,22 @@ const WebLayout = ({ children }) => {
                       </Buttonz>
                     </Linkz>
                   );
-                else if (item.children.length) return <Menuz label={item.label} items={item.children} select={select} />;
+                else if (item.children.length) return <Menuz key={index} label={item.label} items={item.children} select={select} />;
               })}
             </div>
           </div>
           <SearchSection />
           {isAuthenticated ? (
             <div className="flex gap-4 items-center">
-              <CartSection />
-              <NotifySection />
+              <Buttonz
+                onClick={() => navigate('/payment')}
+                color="gray"
+                variant="text"
+                className={`!p-0 hover:bg-hover-sidebar ${isCart ? 'bg-hover-sidebar' : ''}`}
+              >
+                <ShoppingCartIcon className="w-6 m-2 text-on-sidebar" />
+              </Buttonz>
+              <NotifySection mode="web" />
               <AvatarSection mode="web" onSignOut={onSignOut} />
             </div>
           ) : (

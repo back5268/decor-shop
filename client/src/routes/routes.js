@@ -3,7 +3,7 @@ import { Logs, Templates } from '@view/admin/configs';
 import { Customers, Personnel } from '@view/admin/users';
 import { DetailProduct, DetailPromotion, Products, Promotions } from '@view/admin/warehouse';
 import { ForgotPassword, SignIn, SignUp } from '@view/auth';
-import { About, Home } from '@view/web';
+import { About, Home, Payment, WebProducts } from '@view/web';
 
 const routes = [
   { path: '/auth/signin', element: SignIn, public: true },
@@ -12,7 +12,9 @@ const routes = [
 
   { path: '/', element: Home, public: true, layout: 'web' },
   { path: '/about', element: About, public: true, layout: 'web' },
-  
+  { path: '/products/:slug', element: WebProducts, public: true, layout: 'web' },
+  { path: '/payment', element: Payment, public: true, layout: 'web' },
+
   { path: '/admin', element: Dashboard, layout: 'admin' },
   { path: '/admin/personnel', element: Personnel, layout: 'admin' },
   { path: '/admin/customers', element: Customers, layout: 'admin' },
@@ -29,7 +31,7 @@ const routes = [
 
   { path: '/admin/promotions', element: Promotions, layout: 'admin' },
   { path: '/admin/promotions/create', element: DetailPromotion, layout: 'admin' },
-  { path: '/admin/promotions/detail/:_id', element: DetailPromotion, layout: 'admin' },
+  { path: '/admin/promotions/detail/:_id', element: DetailPromotion, layout: 'admin' }
 ];
 
 export default routes;

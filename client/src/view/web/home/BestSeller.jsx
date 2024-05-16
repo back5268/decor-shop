@@ -2,8 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import { CardProduct, Title } from '../shared';
 
-function MultipleItems() {
-  const items = ['', '', '', '', '', ''];
+const BestSeller = ({ data }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -45,7 +44,7 @@ function MultipleItems() {
       <div className="card">
         <div className="slider-container mt-4">
           <Slider {...settings}>
-            {items.map((item, index) => {
+            {data?.map((item, index) => {
               return <CardProduct item={item} key={index} />;
             })}
           </Slider>
@@ -55,4 +54,4 @@ function MultipleItems() {
   );
 }
 
-export default MultipleItems;
+export default BestSeller;

@@ -1,17 +1,20 @@
 import React from 'react';
 import { CardProduct, Title } from '../shared';
 import { Buttonz } from '@components/core';
+import { useNavigate } from 'react-router-dom';
 
-const ListProduct = () => {
-  const items = ['', '', '', ''];
+const ListProduct = (props) => {
+  const { label, data = [], route } = props
+  const navigate = useNavigate()
+
   return (
-    <div className="">
-      <Title label="Sản phẩm bán chạy" />
+    <div>
+      <Title label={label} />
       <div className="card w-full mb-4">
         <div className="mt-4 flex">
-          {items.map((item, index) => {
+          {data?.map((item, index) => {
             return (
-              <div key={index} className="w-full lg:w-3/12">
+              <div key={index} className="w-full md:w-6/12 lg:w-3/12">
                 <CardProduct item={item} />
               </div>
             );
@@ -19,7 +22,7 @@ const ListProduct = () => {
         </div>
       </div>
       <div className="flex w-full justify-center">
-        <Buttonz label="Xem thêm" color="red" />
+        <Buttonz onClick={() => navigate(`/products${route}`)} label="Xem thêm" color="red" />
       </div>
     </div>
   );

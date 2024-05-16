@@ -1,5 +1,4 @@
 export { default as AvatarSection } from './AvatarSection'
-export { default as CartSection } from './CartSection'
 export { default as NotifySection } from './NotifySection'
 export { default as SearchSection } from './SearchSection'
 export { default as NavGroup } from './NavGroup'

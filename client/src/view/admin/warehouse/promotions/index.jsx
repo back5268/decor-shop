@@ -1,8 +1,8 @@
 import { deletePromotionApi, getListPromotionApi, updatePromotionApi } from '@api';
-import { Body, DataTable, FormList, TimeBody } from '@components/base';
+import { DataTable, FormList, TimeBody } from '@components/base';
 import DataFilter from '@components/base/DataFilter';
 import { Dropdownz, Hrz, Inputz } from '@components/core';
-import { statuses, promotionType, amountType } from '@constant';
+import { statuses, amountType } from '@constant';
 import { useGetParams } from '@hook';
 import { formatNumber } from '@lib/helper';
 import { useGetApi } from '@lib/react-query';
@@ -17,7 +17,6 @@ const Promotions = () => {
   const { isLoading, data } = useGetApi(getListPromotionApi, params, 'promotions');
 
   const columns = [
-    { label: 'Loại khuyến mãi', body: (item) => Body(promotionType, item.type) },
     { label: 'Tiêu đề', field: 'title' },
     { label: 'Mã khuyến mãi', field: 'code' },
     {
@@ -50,13 +49,7 @@ const Promotions = () => {
         <Inputz
           value={filter.keySearch}
           onChange={(e) => setFilter({ ...filter, keySearch: e.target.value })}
-          label="Tìm kiếm theo tiêu đề"
-        />
-        <Dropdownz
-          value={filter.type}
-          onChange={(e) => setFilter({ ...filter, type: e })}
-          options={promotionType}
-          label="Loại khuyến mãi"
+          label="Tìm kiếm theo tiêu đề, mã"
         />
         <Dropdownz value={filter.status} onChange={(e) => setFilter({ ...filter, status: e })} options={statuses} label="Trạng thái" />
       </DataFilter>

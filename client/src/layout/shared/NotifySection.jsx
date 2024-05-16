@@ -2,7 +2,7 @@ import { Hrz, Linkz, Popoverz } from '@components/core';
 import React from 'react';
 import { BellAlertIcon } from '@heroicons/react/24/outline';
 
-const NotifySection = () => {
+const NotifySection = ({  mode = 'admin' }) => {
   return (
     <Popoverz
       animate={{
@@ -11,9 +11,9 @@ const NotifySection = () => {
       }}
       className="p-0"
       header={
-        <div className="bg-sidebar">
+        <div className={mode === "admin" ? "bg-white" : "bg-sidebar"}>
           <div className="p-2 hover:bg-hover-sidebar">
-            <BellAlertIcon className="w-6 text-on-sidebar" />
+            <BellAlertIcon className={`w-6 ${mode === "admin" ? "text-color" : "text-on-sidebar"}`} />
           </div>
         </div>
       }

@@ -4,9 +4,9 @@ export const items = [
   {
     label: 'Sản phẩm',
     children: [
-      { label: 'Đèn ngủ DIY', route: '/diy-night-light' },
-      { label: 'Đèn ngủ 3D', route: '/3d-night-light' },
-      { label: 'Tranh DIY', route: '/diy-painting' }
+      { label: 'Đèn ngủ DIY', route: '/products/diy-night-light' },
+      { label: 'Đèn ngủ 3D', route: '/products/3d-night-light' },
+      { label: 'Tranh DIY', route: '/products/diy-painting' }
     ]
   }
 ];

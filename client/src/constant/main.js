@@ -47,12 +47,6 @@ export const policies = [
   { label: 'Chính sách vận chuyển', key: 3 },
 ];
 
-
-export const promotionType = [
-  { label: 'Trừ trực tiếp', key: 1, color: 'yellow' },
-  { label: 'Voucher', key: 2, color: 'green' },
-];
-
 export const amountType = [
   { label: 'VNĐ', key: 1 },
   { label: '%', key: 2 },
@@ -61,4 +55,22 @@ export const amountType = [
 export const receiptType = [
   { label: 'Phiếu nhập', key: 'imp' },
   { label: 'Phiếu xuất', key: 'exp' },
+];
+
+export const orderBy = [
+  { label: 'Lượt bán ra', key: 'saleNumber' },
+  { label: 'Thời gian thêm', key: 'createdAt' },
+];
+
+export const orderType = [
+  { label: 'Tăng dần', key: '1' },
+  { label: 'Giảm dần', key: '-1' },
+];
+
+export const rates = [
+  { label: 'Từ 5*', key: '1' },
+  { label: 'Từ 4* trở lên', key: '2' },
+  { label: 'Từ 3* trở lên', key: '3' },
+  { label: 'Từ 2* trở lên', key: '4' },
+  { label: 'Từ 1* trở lên', key: '5' },
 ];

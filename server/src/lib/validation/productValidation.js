@@ -22,7 +22,8 @@ export const addProductValid = {
   type: 'string',
   price: 'number',
   description: { type: 'string', allowNull: true },
-  hastag: { type: 'json', allowNull: true }
+  hastag: { type: 'json', allowNull: true },
+  sale: { type: 'number', allowNull: true }
 };
 
 export const updateProductValid = {
@@ -35,7 +36,8 @@ export const updateProductValid = {
   status: { type: 'number', allowNull: true },
   avatar: { type: 'string', allowNull: true },
   images: { type: 'json', allowNull: true },
-  hastag: { type: 'json', allowNull: true }
+  hastag: { type: 'json', allowNull: true },
+  sale: { type: 'number', allowNull: true }
 };
 
 export const addReceiptValid = {

@@ -1,7 +1,7 @@
-import { detailProduct, getListProductApp } from '@controller';
+import { detailProduct, getListProductWeb } from '@controller';
 import express from 'express';
 
 export const productRouter = express.Router();
 
-productRouter.get('/getListProduct', getListProductApp);
+productRouter.get('/getListProduct', getListProductWeb);
 productRouter.get('/detailProduct', detailProduct);

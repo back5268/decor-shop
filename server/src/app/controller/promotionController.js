@@ -1,4 +1,4 @@
-import { addPromotionValid, detailPromotionValid, listPromotionValid, updatePromotionValid } from '@lib/validation';
+import { addPromotionValid, checkPromotionValid, detailPromotionValid, listPromotionValid, updatePromotionValid } from '@lib/validation';
 import {
   addPromotionMd,
   countListPromotionMd,
@@ -13,11 +13,10 @@ export const getListPromotion = async (req, res) => {
   try {
     const { error, value } = validateData(listPromotionValid, req.query);
     if (error) return res.status(400).json({ status: false, mess: error });
-    const { page, limit, keySearch, status, type } = value;
+    const { page, limit, keySearch, status } = value;
     const where = {};
-    if (keySearch) where.$or = [{ title: { $regex: keySearch, $options: 'i' } }];
+    if (keySearch) where.$or = [{ title: { $regex: keySearch, $options: 'i' } }, { code: { $regex: keySearch, $options: 'i' } }];
     if (status || status === 0) where.status = status;
-    if (type) where.type = type;
     const documents = await getListPromotionMd(where, page, limit);
     const total = await countListPromotionMd(where);
     res.json({ status: true, data: { documents, total } });
@@ -56,21 +55,16 @@ export const addPromotion = async (req, res) => {
   try {
     const { error, value } = validateData(addPromotionValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    let { type, title, start, end, amountType, amount, code, max, description, products } = value;
+    let { title, start, end, amountType, amount, code, max, description, amountMax } = value;
 
     const checkTitle = await getDetailPromotionMd({ title });
     if (checkTitle) return res.status(400).json({ status: false, mess: 'Tiêu đề đã tồn tại!' });
 
-    if (type === 2) {
-      if (!code) return res.status(400).json({ status: false, mess: 'Vui lòng nhập mã khuyến mãi!' });
-      if (!max) return res.status(400).json({ status: false, mess: 'Vui lòng nhập giới hạn khuyến mãi!' });
-      const checkCode = await getDetailPromotionMd({ code });
-      if (checkCode) return res.status(400).json({ status: false, mess: 'Mã khuyến mãi đã tồn tại!' });
-    }
+    const checkCode = await getDetailPromotionMd({ code });
+    if (checkCode) return res.status(400).json({ status: false, mess: 'Mã khuyến mãi đã tồn tại!' });
 
     const data = await addPromotionMd({
       by: req.userInfo._id,
-      type,
       title,
       start,
       end,
@@ -79,7 +73,7 @@ export const addPromotion = async (req, res) => {
       code,
       max,
       description,
-      products
+      amountMax
     });
     res.status(201).json({ status: true, data });
   } catch (error) {
@@ -91,7 +85,7 @@ export const updatePromotion = async (req, res) => {
   try {
     const { error, value } = validateData(updatePromotionValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    const { _id, amountType, amount, start, end, title, description, code, max, status, products } = value;
+    const { _id, amountType, amount, start, end, title, description, code, max, status, amountMax } = value;
 
     const promotion = await getDetailPromotionMd({ _id });
     if (!promotion) return res.status(400).json({ status: false, mess: 'Mẫu thông báo không tồn tại!' });
@@ -108,9 +102,24 @@ export const updatePromotion = async (req, res) => {
 
     const data = await updatePromotionMd(
       { _id },
-      { updateBy: req.userInfo._id, amountType, amount, start, end, title, description, code, max, status, products }
+      { updateBy: req.userInfo._id, amountType, amount, start, end, title, description, code, max, status, amountMax }
     );
     res.status(201).json({ status: true, data });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const checkPromotion = async (req, res) => {
+  try {
+    const { error, value } = validateData(checkPromotionValid, req.body);
+    if (error) return res.status(400).json({ status: false, mess: error });
+    const { code } = value;
+
+    const promotion = await getDetailPromotionMd({ code, status: 1, start: { $gt: new Date() }, end: { $lt: new Date() } });
+    if (!promotion) return res.status(400).json({ status: false, mess: 'Mã khuyến mãi không tồn tại hoặc đã hết hạn sử dụng!' });
+
+    res.status(201).json({ status: true, data: promotion });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }

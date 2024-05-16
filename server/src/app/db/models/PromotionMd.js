@@ -6,16 +6,15 @@ const ObjectId = Schema.Types.ObjectId;
 class PromotionMd extends ModelBase {
   by;
   updateBy;
-  type;
   title;
   code;
   description;
   start;
   end;
-  products;
   max;
   amountType;
   amount;
+  amountMax;
   status;
   deletedAt;
 }
@@ -23,16 +22,15 @@ class PromotionMd extends ModelBase {
 PromotionMd.init('Promotion', {
   by: { type: ObjectId, ref: 'User', required: true },
   updateBy: { type: ObjectId, ref: 'User' },
-  type: { type: Number, required: true, description: '1: trừ trực tiếp, 2: voucher' },
   title: { type: String, required: true },
   code: { type: String },
   description: { type: String },
   start: { type: Date },
   end: { type: Date },
-  products: [{ type: String, required: true }],
   max: { type: Number, min: 0 },
   amountType: { type: Number, enum: [0, 1], require: true, description: '1: VND, 2: %' },
   amount: { type: Number, min: 0 },
+  amountMax: { type: Number, min: 0 },
   status: { type: Number, enum: [0, 1], default: 1 },
   deletedAt: { type: Date }
 });

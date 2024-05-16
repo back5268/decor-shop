@@ -3,7 +3,7 @@ import { addCartMd, deleteCartMd, getListCartMd } from '@models';
 
 export const getListCartByUser = async (req, res) => {
   try {
-    res.json({ status: true, data: await getListCartMd({ by: req.userInfo._id }) });
+    res.json({ status: true, data: await getListCartMd({ by: req.userInfo?._id }, false, false, [{ path: 'product', select: '_id name code price sale avatar quantity' }]) });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }

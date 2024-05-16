@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
 const useProductState = create((set, get) => ({
-  product: null,
-  setProduct: (product) => set({ product }),
+  productId: null,
+  setProductId: (productId) => set({ productId }),
 }));
 
 const getProductState = () => useProductState.getState();

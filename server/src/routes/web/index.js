@@ -5,6 +5,6 @@ import { orderRouter } from './order';
 
 export const webRouter = express.Router();
 
-webRouter.use('/card', cartRouter);
-webRouter.use('/order', orderRouter);
-webRouter.use('/product', productRouter);
+webRouter.use('/carts', cartRouter);
+webRouter.use('/orders', orderRouter);
+webRouter.use('/products', productRouter);
