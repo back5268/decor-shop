@@ -5,7 +5,6 @@ import {
   deletePermissionMd,
   getDetailPermissionMd,
   getListPermissionMd,
-  getListToolMd,
   updatePermissionMd
 } from '@models';
 import { validateData } from '@utils';

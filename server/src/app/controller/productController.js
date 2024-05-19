@@ -12,10 +12,12 @@ import {
   addProductMd,
   countListHistoryMd,
   countListProductMd,
+  countListProductReviewMd,
   deleteProductMd,
   getDetailProductMd,
   getListHistoryMd,
   getListProductMd,
+  getListProductReviewMd,
   updateProductMd
 } from '@models';
 import { removeSpecialCharacter, validateData } from '@utils';
@@ -44,8 +46,22 @@ export const getListProductWeb = async (req, res) => {
     const where = { status: 1 };
     if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }];
     if (type) where.type = type;
-    const data = await getListProductMd(where, page, limit, false, sort, "_id name price quantity saleNumber avatar images");
-    res.json({ status: true, data });
+    const data = await getListProductMd(where, page || 1, limit, false, sort, "_id name price sale quantity saleNumber avatar images vote");
+    if (page && limit && type) {
+      const total = await countListProductMd(where)
+      res.json({ status: true, data: { data, total } });
+    } else res.json({ status: true, data });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const getListProductReviewWeb = async (req, res) => {
+  try {
+    const { page, limit, product } = req.query;
+    const data = await getListProductReviewMd({ product }, page, limit);
+    const total = await countListProductReviewMd({ product }, page, limit);
+    res.json({ status: true, data: { data, total } });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }
@@ -166,9 +182,9 @@ export const updateProduct = async (req, res) => {
       if (checkCode) return res.status(400).json({ status: false, mess: 'Mã sản phẩm đã tồn tại!' });
     }
 
-    if (req.files?.['files']?.[0]) {
-      images = typeof images === 'object' ? images : [];
-      for (let file of req.files['files'][0]) {
+    if (req.files?.['images']?.[0]) {
+      images = images ? typeof images === 'object' ? images : [images] : []
+      for (let file of req.files['images']) {
         images.push(await uploadFileToFirebase(file));
       }
     }

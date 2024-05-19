@@ -13,7 +13,10 @@ export const getListUser = async (req, res) => {
     const where = {};
     if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }, { code: { $regex: keySearch, $options: 'i' } }];
     if (email) where.$or = [{ email: { $regex: email, $options: 'i' } }, { username: { $regex: email, $options: 'i' } }];
-    if (type) where.type = type;
+    if (type) {
+      if (type === "customer") where.type = "customer"
+      else where.type = { $in: ["user", "admin"] }
+    }
     if (status || status === 0) where.status = status;
     const documents = await getListUserMd(where, page, limit);
     const total = await countListUserMd(where);

@@ -9,3 +9,4 @@ export const updateProductApi = (params) => postData('/admin/products/updateProd
 
 export const getListProductWebApi = (params) => getData('/web/products/getListProduct', params);
 export const detailProductWebApi = (params) => getData('/web/products/detailProduct', params);
+export const getListProductReviewWebApi = (params) => getData('/web/products/getListProductReviewWeb', params);

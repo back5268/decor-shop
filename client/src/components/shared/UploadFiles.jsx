@@ -45,7 +45,7 @@ export const UploadFiles = (props) => {
             {files.map((f, index) => (
               <div key={index} className="card flex items-center justify-between !p-2">
                 <Linkz to={typeof f === 'string' ? f : ''} target="_blank" className="text-sm">
-                  {f.name || f}
+                  {f?.name || f}
                 </Linkz>
                 {!isView && (
                   <Buttonz color="red" variant="outlined" className="p-2" onClick={() => removeFile(f)}>

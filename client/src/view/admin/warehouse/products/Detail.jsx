@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { useGetApi } from '@lib/react-query';
 import { productType } from '@constant';
 import { UploadFiles, UploadImage } from '@components/shared';
+import Editorz from '@components/core/Editorz';
 
 const defaultValues = {
   name: '',
@@ -33,7 +34,7 @@ const ProductInfo = (props) => {
         <UploadImage label="Ảnh đại diện" data={avatar} setData={setAvatar} className="lg:mr-6" />
       </div>
       <div className="w-full lg:w-8/12">
-        <UploadFiles label="Hình ảnh mô tả" files={images} setFiles={setImages} />
+        <UploadFiles label="Hình ảnh mô tả" type="image" files={images} setFiles={setImages} />
       </div>
     </div>
   );
@@ -69,7 +70,8 @@ const DetailProduct = () => {
   }, [item]);
 
   const handleData = (data) => {
-    const newData = { ...data };
+    let newData = { ...data };
+    if (isUpdate) newData = { ...checkEqualProp(newData, item), _id }
     if (images?.length > 0) {
       if (JSON.stringify(images) !== JSON.stringify(item?.images)) {
         const newImages = [];
@@ -86,8 +88,7 @@ const DetailProduct = () => {
       if (newData.formData) newData.formData = { ...newData.formData, avatar };
       else newData.formData = { avatar };
     }
-    if (isUpdate) return { ...checkEqualProp(newData, item), _id };
-    else return newData;
+    return newData;
   };
 
   const data = [
@@ -111,7 +112,7 @@ const DetailProduct = () => {
         <InputForm id="code" label="Mã sản phẩm (*)" errors={errors} register={register} />
         <InputForm id="price" label="Giá bán ra (*)" type="number" errors={errors} register={register} />
         <InputForm id="sale" label="Khuyến mãi (*)" type="number" errors={errors} register={register} />
-        <TextAreaz id="description" label="Mô tả" value={watch('description')} setValue={(e) => setValue('description', e)} />
+        <Editorz id="description" label="Mô tả sản phẩm" data={watch('description')} setData={(e) => setValue('description', e)} />
         <div className="flex flex-col gap-2 card m-2 w-full">
           <Tabz data={data} activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>

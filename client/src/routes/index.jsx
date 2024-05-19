@@ -13,7 +13,7 @@ const Router = () => {
       {routes.map((route, index) => {
         const DefaultLayout = route.layout ? (route.layout === 'admin' ? AdminLayout : WebLayout) : Fragment;
         const Page = route.element;
-        const checkPermission = route.public ? true : userInfo?.type === 'user';
+        const checkPermission = route.public ? true : ["admin", "user"].includes(userInfo.type);
 
         return (
           <Route

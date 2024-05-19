@@ -41,9 +41,9 @@ const WebCourses = () => {
             </div>
           </div>
           <Hrz />
-          <div className="p-4 flex flex-wrap mt-4">
-            {data?.documents?.length > 0 ? (
-              data.documents.map((item, index) => {
+          <div className="p-4 flex flex-wrap">
+            {data?.data?.length > 0 ? (
+              data.data.map((item, index) => {
                 return (
                   <div key={index} className="xs:w-full sm:w-6/12 md:w-4/12 py-2">
                     <CardProduct item={item} />

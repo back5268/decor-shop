@@ -1,5 +1,5 @@
 export const addToCartValid = {
-  project: 'string',
+  product: 'string',
 };
 
 export const deleteProductCartValid = {

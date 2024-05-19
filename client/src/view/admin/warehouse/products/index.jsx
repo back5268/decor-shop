@@ -22,9 +22,9 @@ const Products = () => {
     { label: 'Mã sản phẩm', field: 'code' },
     { label: 'Loại sản phẩm', body: (item) => Body(productType, item.type) },
     { label: 'Giá bán ra', body: (item) => NumberBody(item.price) },
+    { label: 'Khuyến mãi', body: (item) => NumberBody(item.sale) },
     { label: 'Đánh giá', body: (item) => NumberBody(item.vote) },
     { label: 'Số lượng trong kho', body: (item) => NumberBody(item.quantity) },
-    { label: 'Thời gian tạo', body: (item) => TimeBody(item.createdAt) }
   ];
 
   return (

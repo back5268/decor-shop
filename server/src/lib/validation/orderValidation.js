@@ -1,5 +1,6 @@
 export const orderProductValid = {
-  projects: 'json',
+  products: 'json',
+  type: 'number',
   name: 'string',
   phone: 'string',
   city: 'string',
@@ -10,7 +11,12 @@ export const orderProductValid = {
   note: { type: 'string', allowNull: true }
 };
 
+export const listOrderValid = {
+  page: 'number',
+  limit: 'number',
+  status: { type: 'string', allowNull: true }
+};
+
 export const cancelOrderValid = {
   _id: 'string',
-  reason: 'string',
 };

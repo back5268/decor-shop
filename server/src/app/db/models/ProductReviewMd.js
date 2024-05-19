@@ -8,8 +8,7 @@ class ProductReviewMd extends ModelBase {
   product;
   rating;
   content;
-  file;
-  likes;
+  files;
   deletedAt;
 }
 
@@ -18,8 +17,7 @@ ProductReviewMd.init('ProductReview', {
   product: { type: ObjectId, ref: 'Product', required: true },
   rating: { type: Number, enum: [1, 2, 3, 4, 5], required: true },
   content: { type: String },
-  file: { type: String },
-  likes: [{ type: ObjectId, ref: 'User' }],
+  files: [{ type: String }],
   deletedAt: { type: Date }
 });
 

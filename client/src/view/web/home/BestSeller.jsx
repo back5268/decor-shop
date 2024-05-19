@@ -43,15 +43,28 @@ const BestSeller = ({ data }) => {
       <Title label="Sản phẩm bán chạy" />
       <div className="card">
         <div className="slider-container mt-4">
-          <Slider {...settings}>
-            {data?.map((item, index) => {
-              return <CardProduct item={item} key={index} />;
-            })}
-          </Slider>
+          {data?.length > 3 ? (
+            <Slider {...settings}>
+              {data?.map((item, index) => {
+                return <CardProduct item={item} key={index} />;
+              })}
+            </Slider>
+          ) : (
+            <div className="flex flex-wrap">
+              {data?.length > 0 &&
+                data.map((item, index) => {
+                  return (
+                    <div key={index} className="xs:w-full sm:w-6/12 md:w-4/12 lg:w-3/12">
+                      <CardProduct item={item} />
+                    </div>
+                  );
+                })}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default BestSeller;

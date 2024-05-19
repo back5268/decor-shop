@@ -7,6 +7,7 @@ const AvatarSection = ({ mode = 'admin', onSignOut }) => {
   const navigate = useNavigate();
   const { userInfo } = useAuthContext();
   const isAdminLayout = mode === 'admin';
+  const isUser = ['admin', 'user'].includes(userInfo.type);
 
   return (
     <Popoverz className="p-0" header={<Imagez src={userInfo?.avatar || '/images/avatar.jpg'} alt="Avatar" />}>
@@ -19,9 +20,11 @@ const AvatarSection = ({ mode = 'admin', onSignOut }) => {
           </div>
         </div>
         <div className="flex flex-col gap-2 my-4 w-full">
-          <Buttonz className="w-full" onClick={() => navigate(isAdminLayout ? '/' : '/admin')}>
-            {isAdminLayout ? 'Chuyển đến trang chủ' : 'Chuyển đến trang admin'}
-          </Buttonz>
+          {isUser && (
+            <Buttonz className="w-full" onClick={() => navigate(isAdminLayout ? '/' : '/admin')}>
+              {isAdminLayout ? 'Chuyển đến trang chủ' : 'Chuyển đến trang admin'}
+            </Buttonz>
+          )}
           <Buttonz onClick={onSignOut} variant="outlined" className="w-full">
             Đăng xuất
           </Buttonz>

@@ -17,6 +17,7 @@ export { default as Popoverz } from './Popoverz';
 export { default as Tablez } from './Tablez';
 export { default as Hrz } from './Hrz';
 export { default as MultiSelectz } from './MultiSelectz';
+export { default as Ratez } from './Ratez';
 export * from './DatePickerz';
 export * from './Dropdownz';
 export * from './Inputz';

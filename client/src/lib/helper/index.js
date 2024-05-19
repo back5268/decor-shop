@@ -36,6 +36,7 @@ export const convertFileToUrl = (file) => URL.createObjectURL(file);
 
 export const formatNumber = (amount, round) => {
   if (amount) return new Intl.NumberFormat('en-US').format(round ? Math.round(amount) : amount);
+  else return 0
 };
 
 export const removeSpecialCharacter = (string) => {

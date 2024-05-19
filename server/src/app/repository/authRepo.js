@@ -23,7 +23,7 @@ export const signinRp = async ({ username, password }) => {
   const passLogin = await bcrypt.compare(password, checkUsername.password);
   if (!passLogin) return { mess: 'Mật khẩu không hợp lệ!' };
   const token = jwt.sign({ _id: checkUsername._id }, process.env.JWT_SECRET_TOKEN);
-  await updateUserMd({ _id: checkUsername._id }, { token });
+  await updateUserMd({ _id: checkUsername._id }, { token, lastLogin: new Date() });
   return { data: token };
 };
 

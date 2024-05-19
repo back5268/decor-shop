@@ -7,9 +7,9 @@ import { Carousel, IconButton } from '@material-tailwind/react';
 
 const Home = () => {
   const { data: dataBestSell } = useGetApi(getListProductWebApi, { page: 1, limit: 10, sort: { saleNumber: -1 } }, 'dataBestSell');
-  const { data: dataDiy } = useGetApi(getListProductWebApi, { page: 1, limit: 4, type: 'diy' }, 'dataDiy');
-  const { data: data3d } = useGetApi(getListProductWebApi, { page: 1, limit: 4, type: '3d' }, 'data3d');
-  const { data: dataTdiy } = useGetApi(getListProductWebApi, { page: 1, limit: 4, type: 't-diy' }, 'dataTdiy');
+  const { data: dataDiy } = useGetApi(getListProductWebApi, { limit: 4, type: 'diy' }, 'dataDiy');
+  const { data: data3d } = useGetApi(getListProductWebApi, { limit: 4, type: '3d' }, 'data3d');
+  const { data: dataTdiy } = useGetApi(getListProductWebApi, { limit: 4, type: 't-diy' }, 'dataTdiy');
 
   return (
     <div>
