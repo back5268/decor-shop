@@ -41,7 +41,7 @@ const DatePickerz = (props) => {
           error={error}
         />
       </PopoverHandler>
-      <PopoverContent className="z-50">
+      <PopoverContent className="z-[999]">
         <DayPicker
           {...prop}
           mode="single"

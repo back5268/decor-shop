@@ -29,15 +29,15 @@ const WebLayout = ({ children }) => {
     if (pathname === '/') item = { label: 'Trang chủ', route: '/' };
     else {
       items.forEach((i) => {
-        if (i.route && i.route === pathname) item = i;
-        else item = i.children?.find((c) => c.route === pathname);
+        if (!i.route && !item) item = i.children?.find((c) => c.route === pathname);
+        else if (i.route === pathname) item = i;
       });
     }
     if (item) {
       setSelect(item.route);
       document.title = item.label;
     }
-  }, [pathname]);
+  }, [pathname, JSON.stringify(items)]);
 
   return (
     <div className="antialiased font-normal text-base text-color transition-all duration-500 ease-in-out ">

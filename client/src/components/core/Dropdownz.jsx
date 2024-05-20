@@ -37,14 +37,14 @@ export const Dropdownz = (props) => {
 };
 
 export const DropdownForm = (props) => {
-  const { id, size = 'lg', optionValue = 'key', optionLabel = 'label', watch, setValue, errors = {}, options = [], className = '', ...prop } = props;
+  const { emptyMessage = "Không có dữ liệu", id, size = 'lg', optionValue = 'key', optionLabel = 'label', watch, setValue, errors = {}, options = [], onChange, className = '', ...prop } = props;
 
   return (
     <div className={`flex flex-col gap-1 w-full lg:w-6/12 p-2 ${className}`}>
       <Select
         id={id}
         value={watch(id) ? String(watch(id)) : ""}
-        onChange={e => setValue(id, e)}
+        onChange={e => onChange ? onChange(e) : setValue(id, e)}
         size={size}
         color="cyan"
         error={Boolean(errors[id])}
@@ -65,7 +65,7 @@ export const DropdownForm = (props) => {
             );
           })
         ) : (
-          <div className="cursor-default">Không có dữ liệu</div>
+          <div className="cursor-default">{emptyMessage}</div>
         )}
       </Select>
       {errors[id] && <small className="w-full ml-2 text-red-600">{errors[id].message}</small>}

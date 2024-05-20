@@ -6,7 +6,7 @@ export const orderProductValid = {
   city: 'string',
   district: 'string',
   ward: 'string',
-  address: 'string',
+  address: { type: 'string', allowNull: true },
   promotionCode: { type: 'string', allowNull: true },
   note: { type: 'string', allowNull: true }
 };

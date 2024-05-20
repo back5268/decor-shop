@@ -43,8 +43,8 @@ export const orderProduct = async (req, res) => {
       const product = await getDetailProductMd({ _id: p._id, status: 1 });
       if (!product) return res.status(400).json({ status: false, mess: 'Sản phẩm không tồn tại' });
       p.number = product.quantity - p.quantity;
-      p.saleNumber = product.saleNumber + 1;
-      if (p.number < 0) return res.status(400).json({ status: false, mess: `Số lượng sản phẩm ${product.name} không đủ` });
+      p.saleNumber = product.saleNumber + p.quantity;
+      if (p.number < 0) return res.status(400).json({ status: false, mess: `Số lượng sản phẩm "${product.name}" trong kho không đủ!` });
       productInfo.push({
         avatar: product.avatar,
         _id: product._id,
@@ -61,8 +61,8 @@ export const orderProduct = async (req, res) => {
       const promotion = await getDetailPromotionMd({
         code: promotionCode,
         status: 1,
-        start: { $gt: new Date() },
-        end: { $lt: new Date() },
+        start: { $lte: new Date() },
+        end: { $gte: new Date() },
         max: { $gte: 0 }
       });
       if (!promotion) return res.status(400).json({ status: false, mess: `Mã khuyến mãi không tồn tại hoặc đã hết hạn sử dụng` });
@@ -77,7 +77,7 @@ export const orderProduct = async (req, res) => {
     }
 
     total = total < 0 ? 0 : total;
-    const status = type === 1 ? 1 : 2;
+    const status = type === 1 ? 1 : 0;
     const code = type === 1 ? uuidv4()?.toUpperCase() : undefined;
     const qrCode = type === 1 ? generateVietQrLink(total, code) : undefined;
     const data = await addOrderMd({

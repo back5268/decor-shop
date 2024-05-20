@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Stepper, Step } from '@material-tailwind/react';
 import { ShoppingBagIcon, MapPinIcon, TrophyIcon } from '@heroicons/react/24/outline';
 import { useForm } from 'react-hook-form';
-import { paymentType, templateType } from '@constant';
+import { paymentType } from '@constant';
 import { checkPromotionApi, orderProductApi } from '@api';
 import DataTablePayment from './DataTablePayment';
 import { formatNumber } from '@lib/helper';
@@ -11,12 +11,15 @@ import { PaymentValidation } from '@lib/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToastState } from '@store';
 import moment from 'moment';
+import cities from '../../../data/cities';
+import districts from '../../../data/districts';
+import wards from '../../../data/wards';
 
 const StepOne = (props) => {
   const { products, summary, setSummary, disabled, promotion, setPromotion } = props;
   const [code, setCode] = useState();
   let total = products.reduce((accumulator, currentItem) => {
-    return accumulator + currentItem.value;
+    return accumulator + (currentItem.price - currentItem.sale) * currentItem.number;
   }, 0);
 
   const onCheckPromotion = async () => {
@@ -65,7 +68,7 @@ const StepOne = (props) => {
       <DataTablePayment data={products} columns={columns} />
       <Hrz className="w-full" />
       <div className="w-full flex items-start mt-8">
-        <div className="flex flex-col gap-2 items-center w-6/12">
+        <div className="flex flex-col gap-2 items-left w-6/12">
           <div className="flex gap-2 items-center w-full">
             <Inputz
               disabled={disabled}
@@ -77,7 +80,7 @@ const StepOne = (props) => {
             />
             <Buttonz disabled={!code || disabled} onClick={() => onCheckPromotion()} label="Áp dụng" />
           </div>
-          {Boolean(promotion) && <div className="card">{promotion.description}</div>}
+          {Boolean(promotion) && <div className="w-8/12 p-2"><div className='card'>{promotion.description}</div></div>}
         </div>
         <div className="flex flex-col gap-2 w-6/12">
           <table>
@@ -121,29 +124,45 @@ const StepTwo = (props) => {
       <DropdownForm
         id="city"
         label="Tỉnh / Thành phố (*)"
-        options={templateType}
+        options={cities}
+        optionLabel="name"
+        optionValue="code"
         errors={errors}
         watch={watch}
-        setValue={setValue}
+        onChange={(e) => {
+          setValue('city', e);
+          setValue('district', undefined);
+        }}
         disabled={disabled}
       />
       <DropdownForm
         id="district"
         label="Quận / Huyện (*)"
-        options={templateType}
+        options={districts.filter((d) => d.city_code === watch('city'))}
+        optionLabel="name"
+        optionValue="id"
         errors={errors}
         watch={watch}
-        setValue={setValue}
+        onChange={(e) => {
+          setValue('district', e);
+          setValue('ward', undefined);
+        }}
         disabled={disabled}
+        emptyMessage="Vui lòng chọn tỉnh / thành phố"
       />
       <DropdownForm
         id="ward"
         label="Phường / Xã (*)"
-        options={templateType}
+        options={wards.filter((d) => d.district_id === Number(watch('district')))}
+        optionLabel="name"
+        optionValue="id"
         errors={errors}
         watch={watch}
-        setValue={setValue}
         disabled={disabled}
+        onChange={(e) => {
+          setValue('ward', e);
+        }}
+        emptyMessage="Vui lòng chọn quận / huyện"
       />
       <InputForm id="address" label="Địa chỉ cụ thể" errors={errors} register={register} disabled={disabled} />
       <TextAreaz id="note" label="Ghi chú" value={watch('note')} setValue={(e) => setValue('note', e)} disabled={disabled} />
@@ -257,8 +276,12 @@ const PaymentSection = ({ products, open, setOpen }) => {
   }, [activeStep]);
 
   const onSubmit = async (data) => {
+    const params = { ...data };
+    params.city = cities.find((c) => c.code === data.city)?.name;
+    params.district = districts.find((c) => String(c.id) === data.district)?.name;
+    params.ward = wards.find((c) => String(c.id) === data.ward)?.name;
     const response = await orderProductApi({
-      ...data,
+      ...params,
       products: products.map((p) => ({ _id: p._id, quantity: p.number })),
       promotionCode: promotion?.code
     });

@@ -1,20 +1,9 @@
 import { Buttonz, Dropdownz, Hrz, Inputz } from '@components/core';
 import { rates } from '@constant';
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Filter = ({ params, setParams }) => {
-  const location = useLocation();
   const [price, setPrice] = useState({});
-
-  useEffect(() => {
-    const query = {};
-    const queryParams = new URLSearchParams(location.search);
-    for (let [key, value] of queryParams.entries()) {
-      if (['fromPrice', 'toPrice'].includes(key)) query[key] = Number(value);
-    }
-    setPrice(query);
-  }, [location.search]);
 
   return (
     <div className="card !p-0 w-full">
@@ -23,7 +12,13 @@ const Filter = ({ params, setParams }) => {
       </div>
       <Hrz />
       <div className="text-left p-4 flex flex-col text-sm">
-        <Dropdownz label="Đánh giá" className="!w-full !p-0" options={rates} />
+        <Dropdownz
+          label="Đánh giá"
+          className="!w-full !p-0"
+          value={params.vote}
+          onChange={(e) => setParams({ ...params, vote: e })}
+          options={rates}
+        />
         <div className="my-4 flex flex-col">
           <h4>Khoảng giá:</h4>
           <div className="flex items-center my-2">
@@ -59,7 +54,10 @@ const Filter = ({ params, setParams }) => {
         <Buttonz
           color="red"
           variant="outlined"
-          onClick={() => setParams((pre) => ({ sort: pre.sort, page: pre.page, limit: pre.limit }))}
+          onClick={() => {
+            setParams((pre) => ({ sort: pre.sort, page: pre.page, limit: pre.limit }));
+            setPrice({});
+          }}
           className="w-full mt-4"
           label="Xóa tất cả"
         />

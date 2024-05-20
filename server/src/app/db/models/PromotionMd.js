@@ -28,7 +28,7 @@ PromotionMd.init('Promotion', {
   start: { type: Date },
   end: { type: Date },
   max: { type: Number, min: 0 },
-  amountType: { type: Number, enum: [0, 1], require: true, description: '1: VND, 2: %' },
+  amountType: { type: Number, enum: [1, 2], require: true, description: '1: VND, 2: %' },
   amount: { type: Number, min: 0 },
   amountMax: { type: Number, min: 0 },
   status: { type: Number, enum: [0, 1], default: 1 },

@@ -116,7 +116,7 @@ export const checkPromotion = async (req, res) => {
     if (error) return res.status(400).json({ status: false, mess: error });
     const { code } = value;
 
-    const promotion = await getDetailPromotionMd({ code, status: 1, start: { $gt: new Date() }, end: { $lt: new Date() }, max: { $gte: 0 } });
+    const promotion = await getDetailPromotionMd({ code, status: 1, start: { $lte: new Date() }, end: { $gte: new Date() }, max: { $gte: 0 } });
     if (!promotion) return res.status(400).json({ status: false, mess: 'Mã khuyến mãi không tồn tại hoặc đã hết hạn sử dụng!' });
 
     res.status(201).json({ status: true, data: promotion });

@@ -64,7 +64,7 @@ const OrderSection = ({ status }) => {
       }
     },
     { label: 'Hình thức thanh toán', body: (e) => Body(paymentType, e.type) },
-    { label: 'Mã QR', body: (e) => (e.qrCode ? <Imagez className="w-20 h-20" src={e.qrCode} /> : '') },
+    { label: 'Mã QR', body: (e) => (e.qrCode ? <Imagez isZoom className="w-20 h-20" src={e.qrCode} /> : '') },
     { label: 'Trạng thái', body: (e) => Body(paymentStatus, e.status) }
   ];
 

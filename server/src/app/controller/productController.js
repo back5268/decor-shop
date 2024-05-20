@@ -42,8 +42,10 @@ export const getListProduct = async (req, res) => {
 
 export const getListProductWeb = async (req, res) => {
   try {
-    const { page, limit, keySearch, type, sort } = req.query;
+    const { page, limit, keySearch, type, sort, vote, fromPrice = 0, toPrice = Number.MAX_SAFE_INTEGER } = req.query;
     const where = { status: 1 };
+    where.$and = [{ price: { $gte: fromPrice } }, { price: { $lte: toPrice } }];
+    if (vote) where.vote = { $gte: vote }
     if (keySearch) where.$or = [{ name: { $regex: keySearch, $options: 'i' } }];
     if (type) where.type = type;
     const data = await getListProductMd(where, page || 1, limit, false, sort, "_id name price sale quantity saleNumber avatar images vote");
@@ -211,11 +213,11 @@ export const addReceipt = async (req, res) => {
 
     if (!['imp', 'exp'].includes(type)) return res.status(400).json({ status: false, mess: 'Loại thao tác không đúng!' });
     else {
-      if (type === 'imp') await updateProductMd({ quantity: checkProduct.quantity + quantity }, { _id: product });
+      if (type === 'imp') await updateProductMd({ _id: product }, { quantity: checkProduct.quantity + quantity });
       else {
         const newQuantity = checkProduct.quantity - quantity;
         if (newQuantity < 0) return res.status(400).json({ status: false, mess: 'Số lượng sản phẩm trong kho không đủ!' });
-        await updateProductMd({ quantity: newQuantity }, { _id: product });
+        await updateProductMd({ _id: product }, { quantity: newQuantity });
       }
     }
 

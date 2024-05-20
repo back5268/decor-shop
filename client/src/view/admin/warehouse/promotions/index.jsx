@@ -44,8 +44,8 @@ const Promotions = () => {
   ];
 
   return (
-    <FormList title="Danh sách sản phẩm">
-      <DataFilter setParams={setParams} filter={filter} setFilter={setFilter} className="md:w-6/12">
+    <FormList title="Danh sách khuyến mãi">
+      <DataFilter setParams={setParams} filter={filter} setFilter={setFilter} className="lg:w-6/12">
         <Inputz
           value={filter.keySearch}
           onChange={(e) => setFilter({ ...filter, keySearch: e.target.value })}

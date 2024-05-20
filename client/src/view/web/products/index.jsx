@@ -36,8 +36,8 @@ const WebCourses = () => {
             <h2 className="uppercase font-semibold text-nowrap ml-4">{label}</h2>
             <div className="h-16 flex gap-2 items-center p-4 w-full justify-end">
               <h4>Sắp xếp theo:</h4>
-              <Dropdownz options={orderBy} value={sort?.orderBy} label="giá trị" />
-              <Dropdownz options={orderType} value={sort?.orderType} label="Kiểu" />
+              <Dropdownz options={orderBy} value={sort?.orderBy} onChange={e => setSort({ ...sort, orderBy: e })} label="giá trị" />
+              <Dropdownz options={orderType} value={sort?.orderType} onChange={e => setSort({ ...sort, orderType: e })} label="Kiểu" />
             </div>
           </div>
           <Hrz />

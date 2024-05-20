@@ -16,3 +16,6 @@ export * from './UserMd';
 export * from './UserVerifyMd';
 export * from './ToolMd';
 export * from './PermissionMd';
+export * from './CityMd';
+export * from './DistrictMd';
+export * from './WardMd';

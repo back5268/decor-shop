@@ -22,7 +22,7 @@ const CartSection = () => {
   useEffect(() => {
     if (myCarts?.length > 0) {
       const newProducts = [];
-      myCarts.forEach((cart) => newProducts.push({ ...cart.product, cartId: cart._id, time: cart.createdAt, number: 0 }));
+      myCarts.forEach((cart) => newProducts.push({ ...cart.product, cartId: cart._id, time: cart.createdAt, number: 1 }));
       setProducts(newProducts);
     }
   }, [JSON.stringify(myCarts)]);
@@ -63,6 +63,7 @@ const CartSection = () => {
           <div className="flex flex-col gap-1 justify-center">
             <div className="flex w-full items-center justify-center">
               <Buttonz
+                disabled={e.number <= 1}
                 onClick={() => setProducts((pre) => pre.map((p) => (p._id === e._id ? { ...p, number: p.number - 1 } : p)))}
                 variant="text"
                 color="gray"
@@ -74,6 +75,7 @@ const CartSection = () => {
                 <span>{e.number}</span>
               </div>
               <Buttonz
+                disabled={e.number >= e.quantity}
                 onClick={() => setProducts((pre) => pre.map((p) => (p._id === e._id ? { ...p, number: p.number + 1 } : p)))}
                 variant="text"
                 color="gray"

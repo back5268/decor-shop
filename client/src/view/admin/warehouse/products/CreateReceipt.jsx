@@ -60,7 +60,7 @@ const CreateReceipt = (props) => {
       setParams={setParams}
     >
       <div className="flex flex-wrap w-full">
-        <DropdownForm id="product" label="Sản phẩm (*)" options={productData} errors={errors} watch={watch} setValue={setValue} />
+        <DropdownForm id="product" label="Sản phẩm (*)" options={productData} optionLabel="name" optionValue="_id" errors={errors} watch={watch} setValue={setValue} />
         <DropdownForm id="type" label="Loại phiếu (*)" options={receiptType} errors={errors} watch={watch} setValue={setValue} />
         <InputForm id="price" label="Giá nhập / xuất (*)" type="number" errors={errors} register={register} />
         <InputForm id="quantity" label="Số lượng (*)" type="number" errors={errors} register={register} />
