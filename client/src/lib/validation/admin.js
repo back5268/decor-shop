@@ -84,3 +84,9 @@ export const PaymentValidation = yup.object({
   district: yup.string().required('Quận / Huyện không được bỏ trống!'),
   ward: yup.string().required('Phường / Xã không được bỏ trống!'),
 });
+
+export const NewsValidation = yup.object({
+  title: yup.string().required('Tiêu đề không được bỏ trống!'),
+  content: yup.string().required('Nội dung không được bỏ trống!'),
+  time: yup.number().required('Thời gian đọc không được bỏ trống!'),
+});

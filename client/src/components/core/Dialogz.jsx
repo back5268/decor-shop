@@ -8,13 +8,13 @@ const Dialogz = (props) => {
   return (
     <>
       <div
-        className={`z-[60] fixed inset-x-0 inset-y-0 duration-600 ease-in-out transform w-full h-full bg-black bg-opacity-50 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`z-[70] fixed inset-x-0 inset-y-0 duration-600 ease-in-out transform w-full h-full bg-black bg-opacity-50 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       ></div>
       <div
-        className={`fixed inset-x-0 inset-y-0 w-screen h-screen z-[60] flex justify-center ${position === "center" ? "items-center" : "items-start pt-12"} p-6 ${open ? '' : 'pointer-events-none'}`}
+        className={`fixed inset-x-0 inset-y-0 w-screen h-screen z-[70] flex justify-center ${position === "center" ? "items-center" : "items-start pt-12"} p-6 ${open ? '' : 'pointer-events-none'}`}
       >
         <div
-          className={`relative min-h-40 bg-white shadow-xl rounded-xl transition-all z-[61] p-6 ${className}
+          className={`relative min-h-40 bg-white shadow-xl rounded-xl transition-all z-[71] p-6 ${className}
           duration-300 ease-in-out transform ${open ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0 pointer-events-none'}`}
         >
           <div className="flex justify-between items-center">

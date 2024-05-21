@@ -8,3 +8,5 @@ export * from './product';
 export * from './promotion';
 export * from './cart';
 export * from './order';
+export * from './news';
+export * from './transaction';

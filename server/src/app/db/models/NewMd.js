@@ -3,7 +3,7 @@ import { ModelBase } from '@config';
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
-class NewMd extends ModelBase {
+class NewsMd extends ModelBase {
   by;
   updateBy;
   title;
@@ -11,42 +11,40 @@ class NewMd extends ModelBase {
   hagtag;
   status;
   time;
-  type;
   deletedAt;
 }
 
-NewMd.init('New', {
+NewsMd.init('News', {
   by: { type: ObjectId, ref: 'User', required: true },
   updateBy: { type: ObjectId, ref: 'User' },
   title: { type: String, required: true },
   content: { type: String, required: true },
-  hagtag: [{ type: String }],
+  hashtag: [{ type: String }],
   status: { type: Number, enum: [0, 1], default: 1 },
-  time: { type: Date },
-  type: { isWeb: { type: Boolean, require: true }, isEmail: { type: Boolean, require: true } },
+  time: { type: Number },
   deletedAt: { type: Date }
 });
 
-export const getListNewMd = (where, page, limit, populates, sort, attr) => {
-  return NewMd.find({ where, page, limit, sort, attr, populates });
+export const getListNewsMd = (where, page, limit, populates, sort, attr) => {
+  return NewsMd.find({ where, page, limit, sort, attr, populates });
 };
 
-export const countListNewMd = (where) => {
-  return NewMd.count({ where });
+export const countListNewsMd = (where) => {
+  return NewsMd.count({ where });
 };
 
-export const getDetailNewMd = (where, populates, attr) => {
-  return NewMd.findOne({ where, attr, populates });
+export const getDetailNewsMd = (where, populates, attr) => {
+  return NewsMd.findOne({ where, attr, populates });
 };
 
-export const addNewMd = (attr) => {
-  return NewMd.create({ attr });
+export const addNewsMd = (attr) => {
+  return NewsMd.create({ attr });
 };
 
-export const updateNewMd = (where, attr) => {
-  return NewMd.update({ where, attr });
+export const updateNewsMd = (where, attr) => {
+  return NewsMd.update({ where, attr });
 };
 
-export const deleteNewMd = (where) => {
-  return NewMd.delete({ where });
+export const deleteNewsMd = (where) => {
+  return NewsMd.delete({ where });
 };

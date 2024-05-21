@@ -39,8 +39,8 @@ const OrderSection = ({ status }) => {
                 <Imagez src={product.avatar} className="h-20 w-20" />
               </div>
               <div className="flex flex-col gap-2 text-left">
-                <span>{product.name}</span>
-                <span className="font-medium">#{product.code}</span>
+                <p>{product.name}</p>
+                <p className="font-medium">#{product.code}</p>
               </div>
             </div>
           ))}
@@ -54,11 +54,11 @@ const OrderSection = ({ status }) => {
         if (a)
           return (
             <div className="flex flex-col gap-2">
-              <span>Tên: {a.name}</span>
-              <span>Số điện thoại: {a.phone}</span>
-              <span>
+              <p>Tên: {a.name}</p>
+              <p>Số điện thoại: {a.phone}</p>
+              <p>
                 Địa chỉ: {a.city}, {a.district}, {a.ward}
-              </span>
+              </p>
             </div>
           );
       }
@@ -71,7 +71,7 @@ const OrderSection = ({ status }) => {
   return (
     <DataTablePayment
       loading={isLoading}
-      data={data?.data}
+      data={data?.documents}
       total={data?.total}
       params={params}
       setParams={setParams}

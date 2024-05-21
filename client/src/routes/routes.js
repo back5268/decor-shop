@@ -1,5 +1,6 @@
 import { Dashboard, DetailPermission, Permissions } from '@view/admin';
-import { Logs, Templates } from '@view/admin/configs';
+import { Logs, News, Templates } from '@view/admin/configs';
+import { Carts, Orders, Transactions } from '@view/admin/transactions';
 import { Customers, Personnel } from '@view/admin/users';
 import { DetailProduct, DetailPromotion, Products, Promotions } from '@view/admin/warehouse';
 import { ForgotPassword, SignIn, SignUp } from '@view/auth';
@@ -18,6 +19,12 @@ const routes = [
   { path: '/admin', element: Dashboard, layout: 'admin' },
   { path: '/admin/personnel', element: Personnel, layout: 'admin' },
   { path: '/admin/customers', element: Customers, layout: 'admin' },
+
+  { path: '/admin/carts', element: Carts, layout: 'admin' },
+  { path: '/admin/orders', element: Orders, layout: 'admin' },
+  { path: '/admin/transactions', element: Transactions, layout: 'admin' },
+  
+  { path: '/admin/news', element: News, layout: 'admin' },
   { path: '/admin/logs', element: Logs, layout: 'admin' },
   { path: '/admin/templates', element: Templates, layout: 'admin' },
 

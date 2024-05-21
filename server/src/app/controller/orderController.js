@@ -4,6 +4,7 @@ import { generateVietQrLink } from '@lib/viet-qr';
 import {
   addOrderMd,
   countListOrderMd,
+  getDetailOrderMd,
   getDetailProductMd,
   getDetailPromotionMd,
   getListOrderMd,
@@ -21,9 +22,24 @@ export const getListOrderByUser = async (req, res) => {
     const { page, limit, status } = value;
     const where = { by: req.userInfo._id };
     if (status || status === 0) where.status = status;
-    const data = await getListOrderMd(where, page, limit);
+    const documents = await getListOrderMd(where, page, limit);
     const total = await countListOrderMd(where);
-    res.json({ status: true, data: { data, total } });
+    res.json({ status: true, data: { documents, total } });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const getListOrder = async (req, res) => {
+  try {
+    const { error, value } = validateData(listOrderValid, req.query);
+    if (error) return res.status(400).json({ status: false, mess: error });
+    const { page, limit, status } = value;
+    const where = {};
+    if (status || status === 0) where.status = status;
+    const documents = await getListOrderMd(where, page, limit);
+    const total = await countListOrderMd(where);
+    res.json({ status: true, data: { documents, total } });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }
@@ -103,9 +119,18 @@ export const cancelOrder = async (req, res) => {
     const { error, value } = validateData(cancelOrderValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
     const { _id } = value;
-    const data = await updateOrderMd({ _id }, { status: 5 });
-    if (!data) return res.status(400).json({ status: false, mess: 'Đơn hàng không tồn tại!' });
-    else return res.json({ status: false, data });
+
+    const order = await getDetailOrderMd({ _id });
+    if (!order) return res.status(400).json({ status: false, mess: 'Đơn hàng không tồn tại!' });
+
+    if (order.productInfo?.length > 0) {
+      for (const productInfo of order.productInfo) {
+        const product = await getDetailProductMd({ _id: productInfo._id })
+        await updateProductMd({ _id: productInfo._id }, { quantity: product?.quantity + productInfo.quantity })
+      }
+    }
+
+    res.json({ status: false, data });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }

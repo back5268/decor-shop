@@ -1,5 +1,5 @@
 import { addToCartValid, deleteProductCartValid } from '@lib/validation';
-import { addCartMd, deleteCartMd, getDetailCartMd, getListCartMd } from '@models';
+import { addCartMd, countListCartMd, deleteCartMd, getDetailCartMd, getListCartMd } from '@models';
 import { validateData } from '@utils';
 
 export const getListCartByUser = async (req, res) => {
@@ -10,6 +10,24 @@ export const getListCartByUser = async (req, res) => {
         { path: 'product', select: '_id name code price sale avatar quantity' }
       ])
     });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const getListCart = async (req, res) => {
+  try {
+    const { error, value } = validateData(getListCart, req.body);
+    if (error) return res.status(400).json({ status: false, mess: error });
+    const { page, limit, product } = value;
+    const where = {};
+    if (product) where.product = product;
+    const documents = await getListCartMd(where, page, limit, [
+      { path: 'product', select: '_id name code price sale avatar quantity' },
+      { path: 'by', select: 'name' }
+    ]);
+    const total = await countListCartMd(where);
+    res.json({ status: true, data: { documents, total } });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }

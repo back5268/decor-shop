@@ -60,7 +60,7 @@ const CarouselThumb = ({ data }) => {
 };
 
 const ProductDialog = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { showToast } = useToastState();
   const { isAuthenticated } = useAuthContext();
   const { showConfirm } = useConfirmState();
@@ -82,7 +82,7 @@ const ProductDialog = () => {
 
   const onAddToCart = async () => {
     const response = await addToCartApi({ product: productId });
-    if (response) showToast({ title: "Thêm sản phẩm vào giỏ hàng thành công", severity: 'success' });
+    if (response) showToast({ title: 'Thêm sản phẩm vào giỏ hàng thành công', severity: 'success' });
   };
 
   return (
@@ -122,12 +122,12 @@ const ProductDialog = () => {
                 </>
               )}
             </div>
-            <span>
-              Số lượng:{' '}
+            <div className='flex gap-2'>
+              Số lượng:
               {formatNumber(product?.quantity) || (
-                <span className="uppercase text-xs font-medium bg-red-100 text-red-500 rounded-lg px-2 py-1">Hết hàng</span>
+                <h3 className="uppercase text-xs font-medium bg-red-100 text-red-500 rounded-lg px-2 py-1">Hết hàng</h3>
               )}
-            </span>
+            </div>
             <span>Vận chuyển: Miễn phí vận chuyển</span>
             <span>Chính sách trả hàng: Trả hàng 15 ngày</span>
           </div>
@@ -140,7 +140,7 @@ const ProductDialog = () => {
             <Buttonz color="red" variant="outlined">
               Đánh giá
             </Buttonz>
-            <Buttonz onClick={() => isAuthenticated ? onAddToCart() : onWarning()}>
+            <Buttonz onClick={() => (isAuthenticated ? onAddToCart() : onWarning())}>
               <div className="flex gap-2 items-center">
                 <ShoppingCartIcon className="w-5 stroke-2" />
                 Thêm vào giỏ hàng

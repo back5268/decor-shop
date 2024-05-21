@@ -48,8 +48,8 @@ const StepOne = (props) => {
             <Imagez src={e.avatar} className="h-20 w-20" />
           </div>
           <div className="flex flex-col gap-2 text-left">
-            <span>{e.name}</span>
-            <span className="font-medium">#{e.code}</span>
+            <p>{e.name}</p>
+            <p className="font-medium">#{e.code}</p>
           </div>
         </div>
       ),
@@ -80,7 +80,11 @@ const StepOne = (props) => {
             />
             <Buttonz disabled={!code || disabled} onClick={() => onCheckPromotion()} label="Áp dụng" />
           </div>
-          {Boolean(promotion) && <div className="w-8/12 p-2"><div className='card'>{promotion.description}</div></div>}
+          {Boolean(promotion) && (
+            <div className="w-8/12 p-2">
+              <div className="card">{promotion.description}</div>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-2 w-6/12">
           <table>
@@ -107,6 +111,9 @@ const StepOne = (props) => {
 
 const StepTwo = (props) => {
   const { watch, register, errors, setValue, disabled } = props;
+  const a = districts.filter((d) => d.city_code === watch('city'));
+  console.log(a);
+  console.log(watch("city"));
 
   return (
     <div className="w-10/12 flex flex-wrap">
@@ -135,25 +142,25 @@ const StepTwo = (props) => {
         }}
         disabled={disabled}
       />
-      <DropdownForm
-        id="district"
-        label="Quận / Huyện (*)"
-        options={districts.filter((d) => d.city_code === watch('city'))}
-        optionLabel="name"
-        optionValue="id"
-        errors={errors}
-        watch={watch}
-        onChange={(e) => {
-          setValue('district', e);
-          setValue('ward', undefined);
-        }}
-        disabled={disabled}
-        emptyMessage="Vui lòng chọn tỉnh / thành phố"
-      />
+        <DropdownForm
+          id="district"
+          label="Quận / Huyện (*)"
+          options={districts}
+          optionLabel="name"
+          optionValue="id"
+          errors={errors}
+          watch={watch}
+          onChange={(e) => {
+            setValue('district', e);  
+            setValue('ward', undefined);
+          }}
+          disabled={disabled}
+          emptyMessage="Vui lòng chọn tỉnh / thành phố"
+        />
       <DropdownForm
         id="ward"
         label="Phường / Xã (*)"
-        options={wards.filter((d) => d.district_id === Number(watch('district')))}
+        options={wards}
         optionLabel="name"
         optionValue="id"
         errors={errors}

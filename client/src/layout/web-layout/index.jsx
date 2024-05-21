@@ -46,7 +46,7 @@ const WebLayout = ({ children }) => {
         <div className="container flex justify-between items-center h-full">
           <div className="flex gap-12 items-center">
             <Linkz to="/" className="flex gap-4 items-center !text-border">
-              <Logo size={8} className="text-xl" />
+              <Logo size="[8px]" className="text-xl" />
             </Linkz>
             <div className="flex gap-2 justify-center items-center">
               {items?.map((item, index) => {

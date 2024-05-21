@@ -46,17 +46,18 @@ export const items = [
     icon: icons.Cog6ToothIcon,
     type: 'group',
     items: [
+      { label: 'Tin tức', type: 'item', route: '/news' },
       { label: 'Cấu hình mẫu thông báo', type: 'item', route: '/templates' },
       { label: 'Lịch sử thông báo', type: 'item', route: '/logs' },
     ]
   },
-  {
-    label: 'Phản hồi người dùng',
-    icon: icons.PaperAirplaneIcon,
-    type: 'group',
-    items: [
-      { label: 'Đánh giá sản phẩm', type: 'item', route: '/evaluates' },
-      { label: 'Phản hồi người dùng', type: 'item', route: '/feedbacks' }
-    ]
-  }
+  // {
+  //   label: 'Phản hồi người dùng',
+  //   icon: icons.PaperAirplaneIcon,
+  //   type: 'group',
+  //   items: [
+  //     { label: 'Đánh giá sản phẩm', type: 'item', route: '/evaluates' },
+  //     { label: 'Phản hồi người dùng', type: 'item', route: '/feedbacks' }
+  //   ]
+  // }
 ];

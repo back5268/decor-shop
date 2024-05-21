@@ -62,3 +62,5 @@ export const updateProductMd = (where, attr) => {
 export const deleteProductMd = (where) => {
   return ProductMd.delete({ where });
 };
+
+export const Product = ProductMd

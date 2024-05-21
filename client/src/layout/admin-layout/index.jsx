@@ -4,9 +4,10 @@ import { useToastState } from '@store';
 import { useNavigate } from 'react-router-dom';
 import TopBar from './Topbar';
 import Sidebar from './SideBar';
+import { ProductDialog } from '@layout/shared';
 
 const AdminLayout = ({ children }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showSidebar, setShowSidebar] = useState(true);
   const { setUserInfo, setIsAuthenticated } = useAuthContext();
   const { showToast } = useToastState();
@@ -33,6 +34,7 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className="antialiased font-normal text-base text-color">
+      <ProductDialog />
       {showSidebar && (
         <div
           onClick={() => setShowSidebar(false)}

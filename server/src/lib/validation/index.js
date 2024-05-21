@@ -10,3 +10,5 @@ export * from './permissionValidation';
 export * from './promotionValidation';
 export * from './cartValidation';
 export * from './orderValidation';
+export * from './newsValidation';
+export * from './transactionValidation';

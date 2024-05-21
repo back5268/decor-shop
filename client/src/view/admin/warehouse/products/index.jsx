@@ -1,7 +1,7 @@
 import { deleteProductApi, getListProductApi, updateProductApi } from '@api';
 import { Body, DataTable, FormList, NumberBody, TimeBody } from '@components/base';
 import DataFilter from '@components/base/DataFilter';
-import { Dropdownz, Hrz, Inputz } from '@components/core';
+import { Dropdownz, Hrz, Imagez, Inputz } from '@components/core';
 import { statuses, productType } from '@constant';
 import { useGetParams } from '@hook';
 import { useGetApi } from '@lib/react-query';
@@ -18,6 +18,7 @@ const Products = () => {
   const { isLoading, data } = useGetApi(getListProductApi, params, 'products');
 
   const columns = [
+    { label: 'Hình ảnh', body: e => <Imagez className="w-20 h-20" src={e.avatar} /> },
     { label: 'Tên sản phẩm', field: 'name' },
     { label: 'Mã sản phẩm', field: 'code' },
     { label: 'Loại sản phẩm', body: (item) => Body(productType, item.type) },

@@ -8,3 +8,5 @@ export * from './permissionController';
 export * from './promotionController';
 export * from './cartController';
 export * from './orderController';
+export * from './newController';
+export * from './transactionController';
