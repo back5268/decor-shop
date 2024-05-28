@@ -1,4 +1,4 @@
-import { Imagez } from '@components/core';
+import { Hrz, Imagez } from '@components/core';
 import React from 'react';
 
 const About = () => {
@@ -13,7 +13,7 @@ const About = () => {
               <p className="text-lg">We are committed to delivering the best services.</p>
             </div>
             <h2 className="mt-8 uppercase mb-2 font-bold text-xl">Decor Day</h2>
-            <div className="card flex p-8">
+            <div className="card flex flex-wrap p-8">
               <div className="w-full lg:w-6/12">
                 <p>
                   Chào mừng đến với Decor.day, nơi mang đến cho bạn không gian ánh sáng cá nhân hóa và đầy sáng tạo cho căn phòng của bạn.
@@ -41,8 +41,11 @@ const About = () => {
                   của bạn!
                 </p>
               </div>
+              <div className="w-full block lg:hidden my-8">
+                <Hrz />
+              </div>
               <div className="w-full lg:w-6/12">
-                <div className='flex flex-col px-32 items-center justify-center gap-8'>
+                <div className="flex flex-col px-16 items-center justify-center gap-8">
                   <Imagez src="/images/image1.jpg" className="w-full h-full rounded-xl" />
                   <Imagez src="/images/image2.jpg" className="w-full h-full rounded-xl" />
                 </div>

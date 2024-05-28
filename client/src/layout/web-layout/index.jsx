@@ -7,7 +7,8 @@ import { Logo } from '@components/base';
 import { useToastState } from '@store';
 import { INITIAL_USER_INFO, useAuthContext } from '@context/AuthContext';
 import { AvatarSection, ContactSection, Menuz, NewsSection, NotifySection, ProductDialog, SearchSection } from '@layout/shared';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline';
+import SidebarWeb from './SideBar';
 
 const WebLayout = ({ children }) => {
   const { isAuthenticated, setUserInfo, setIsAuthenticated } = useAuthContext();
@@ -16,6 +17,7 @@ const WebLayout = ({ children }) => {
   const { pathname } = useLocation();
   const [select, setSelect] = useState(null);
   const isCart = pathname === '/payment';
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const onSignOut = () => {
     setUserInfo(INITIAL_USER_INFO);
@@ -23,6 +25,18 @@ const WebLayout = ({ children }) => {
     localStorage.removeItem('token');
     showToast({ title: 'Đăng xuất thành công', severity: 'success' });
   };
+
+  useEffect(() => {
+    const checkWindowSize = () => {
+      if (window.innerWidth < 1024) setShowSidebar(false);
+      else setShowSidebar(true);
+    };
+    checkWindowSize();
+    window.addEventListener('resize', checkWindowSize);
+    return () => {
+      window.removeEventListener('resize', checkWindowSize);
+    };
+  }, []);
 
   useEffect(() => {
     let item;
@@ -41,10 +55,22 @@ const WebLayout = ({ children }) => {
 
   return (
     <div className="antialiased font-normal text-base text-color transition-all duration-500 ease-in-out ">
+      {showSidebar && (
+        <div
+          onClick={() => setShowSidebar(false)}
+          className="fixed inset-x-0 inset-y-0 bg-black bg-opacity-50 z-30 w-screen h-screen block lg:hidden"
+        ></div>
+      )}
+      <SidebarWeb showSidebar={showSidebar} />
       <ProductDialog />
       <div className="fixed inset-x-0 top-0 h-16 bg-sidebar shadow-blue-gray-900/5 z-[51]">
         <div className="container flex justify-between items-center h-full">
-          <div className="flex gap-12 items-center">
+          <div className="block lg:hidden">
+            <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="white" className="p-1 text-on-sidebar">
+              <Bars3Icon className="h-8 w-8 stroke-1" />
+            </Buttonz>
+          </div>
+          <div className="gap-12 items-center hidden lg:flex">
             <Linkz to="/" className="flex gap-4 items-center !text-border">
               <Logo size="[8px]" className="text-xl" />
             </Linkz>
@@ -86,7 +112,7 @@ const WebLayout = ({ children }) => {
           )}
         </div>
       </div>
-      <div className="mt-16 mx-auto min-h-screen z-10">{children}</div>
+      <div className="mt-10 mx-auto min-h-screen z-10">{children}</div>
       <div className="fixed">
         <div className="flex justify-between">
           <NewsSection />

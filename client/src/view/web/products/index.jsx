@@ -27,14 +27,14 @@ const WebCourses = () => {
 
   return (
     <div className="container flex mt-24">
-      <div className="w-[400px] p-4">
+      <div className="hidden w-[400px] p-4 lg:block">
         <Filter params={params} setParams={setParams} />
       </div>
       <div className="w-full min-h-screen p-4">
         <div className="card !p-0">
           <div className="flex justify-between items-center">
-            <h2 className="uppercase font-semibold text-nowrap ml-4">{label}</h2>
-            <div className="h-16 flex gap-2 items-center p-4 w-full justify-end">
+            <h2 className="uppercase font-semibold text-nowrap ml-4 h-16 items-center flex">{label}</h2>
+            <div className="hidden lg:flex h-16 gap-2 items-center p-4 w-full justify-end">
               <h4>Sắp xếp theo:</h4>
               <Dropdownz options={orderBy} value={sort?.orderBy} onChange={e => setSort({ ...sort, orderBy: e })} label="giá trị" />
               <Dropdownz options={orderType} value={sort?.orderType} onChange={e => setSort({ ...sort, orderType: e })} label="Kiểu" />

@@ -58,7 +58,7 @@ export const DropdownForm = (props) => {
     <div className={`flex flex-col gap-1 w-full lg:w-6/12 p-2 ${className}`}>
       <Select
         id={id}
-        value={watch(id) ? String(watch(id)) : ''}
+        // value={watch(id) ? String(watch(id)) : ''}
         onChange={(e) => (onChange ? onChange(e) : setValue(id, e))}
         size={size}
         color="cyan"

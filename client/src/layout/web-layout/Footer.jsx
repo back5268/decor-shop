@@ -123,7 +123,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3">
             <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">Liên hệ</h6>
             {contacts.map((contact, index) => (
-              <div key={index} className='flex gap-1'>
+              <div key={index} className='flex gap-1 justify-center'>
                 {contact.icon}
                 <span>{contact.label}</span>
               </div>
@@ -134,7 +134,7 @@ const Footer = () => {
 
       <div className="bg-blue-gray-100 p-6 text-center">
         <span>© 2024 Copyright: </span>
-        <a className="font-semibold">Decor Day</a>
+        <a className="font-semibold">Decor Star</a>
       </div>
     </footer>
   );

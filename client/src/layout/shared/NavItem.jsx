@@ -4,14 +4,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavItem = (props) => {
-  const { children, item = {}, pathname = '', className = '', ...prop } = props;
+  const { children, item = {}, pathname = '', className = '', type = '/admin', ...prop } = props;
   const Item = item.icon;
+  const pathSplit = pathname.toString().split('/');
   const isSelected =
-    item.type === 'item' ? (pathname === '/admin' ? item.route === '' : '/' + pathname.toString().split('/')[2] === item.route) : false;
+    item.type === 'item'
+      ? (pathname === type ? item.route === '' : '/' + (pathSplit?.[2] || pathSplit?.[1]) === item.route) || pathname === item.route
+      : false;
 
   const Fragment = ({ children }) => {
     if (item.type === 'item') {
-      const route = '/admin' + item.route;
+      const route = type + item.route;
       return <Link to={route}>{children}</Link>;
     } else return <>{children}</>;
   };

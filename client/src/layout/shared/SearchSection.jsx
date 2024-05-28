@@ -32,7 +32,7 @@ const SearchSection = () => {
   }, [value]);
 
   return (
-    <div ref={ref} className="relative flex w-[400px] flex-wrap items-stretch text-sm">
+    <div ref={ref} className="relative w-[400px] flex-wrap items-stretch text-sm lg:block hidden">
       <Inputz
         classInput="text-border"
         size="md"
