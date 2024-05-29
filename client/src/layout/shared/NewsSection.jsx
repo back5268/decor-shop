@@ -6,7 +6,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 
 const NewsSection = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [news, setNews] = useState([]);
   const { data } = useInfinityApi((params) => getListNewsWebApi(params), 'news', 10);
 
@@ -30,7 +30,7 @@ const NewsSection = () => {
           </div>
         </Buttonz>
       </div>
-      <Dialogz title="Decor Day New Feed" open={open} setOpen={setOpen} className="w-[1000px]">
+      <Dialogz title="Decor Star New Feed" open={open} setOpen={setOpen} className="w-[1000px]">
         {news?.length > 0 ? (
           <div className="flex flex-col gap-8 h-[520px] overflow-scroll">
             {news.map((item, index) => {

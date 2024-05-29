@@ -43,7 +43,7 @@ const SearchSection = () => {
         className="!w-full"
       />
       <div
-        className={`absolute w-full right-0 mt-14 bg-white shadow-xl rounded-md transition-all z-50
+        className={`absolute w-full right-0 mt-1 bg-white shadow-xl rounded-md transition-all z-50
         duration-300 ease-in-out transform ${isShow ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'}`}
       >
         <div className="flex flex-col gap-1">

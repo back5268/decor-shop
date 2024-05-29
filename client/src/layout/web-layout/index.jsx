@@ -112,7 +112,7 @@ const WebLayout = ({ children }) => {
           )}
         </div>
       </div>
-      <div className="mt-10 mx-auto min-h-screen z-10">{children}</div>
+      <div className="mt-16 mx-auto min-h-screen z-10">{children}</div>
       <div className="fixed">
         <div className="flex justify-between">
           <NewsSection />

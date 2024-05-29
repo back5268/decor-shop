@@ -51,7 +51,7 @@ const Orders = () => {
       }
     },
     { label: 'Hình thức thanh toán', body: (e) => Body(paymentType, e.type) },
-    { label: 'Mã QR', body: (e) => (e.qrCode ? <Imagez isZoom className="w-20 h-20" src={e.qrCode} /> : '') },
+    { label: 'Mã QR', body: (e) => (e.qrCode ? <div className='w-full flex justify-center'><Imagez isZoom className="w-20 h-20" src={e.qrCode} /></div> : '') },
     { label: 'Trạng thái', body: (e) => Body(paymentStatus, e.status), className: "min-w-[150px]" }
   ];
 

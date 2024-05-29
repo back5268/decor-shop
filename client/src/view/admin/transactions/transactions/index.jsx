@@ -23,7 +23,7 @@ const Transactions = () => {
 
   return (
     <FormList title="Lịch sử giao dịch">
-      <DataFilter setParams={setParams} filter={filter} setFilter={setFilter} className="lg:6/12">
+      <DataFilter setParams={setParams} filter={filter} setFilter={setFilter} className="lg:w-6/12">
         <InputCalendarz value={filter.fromDate} onChange={(e) => setFilter({ ...filter, fromDate: e })} label="Từ ngày" />
         <InputCalendarz value={filter.toDate} onChange={(e) => setFilter({ ...filter, toDate: e })} label="Đến ngày" />
       </DataFilter>
