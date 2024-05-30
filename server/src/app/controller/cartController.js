@@ -1,5 +1,5 @@
 import { addToCartValid, deleteProductCartValid } from '@lib/validation';
-import { addCartMd, countListCartMd, deleteCartMd, getDetailCartMd, getListCartMd } from '@models';
+import { addCartMd, countListCartMd, deleteCartMd, getDetailCartMd, getListCartMd, updateUserMd } from '@models';
 import { validateData } from '@utils';
 
 export const getListCartByUser = async (req, res) => {
@@ -39,6 +39,7 @@ export const addToCart = async (req, res) => {
     if (error) return res.status(400).json({ status: false, mess: error });
     const { product } = value;
     const checkProduct = await getDetailCartMd({ product, by: req.userInfo._id });
+    await updateUserMd({ _id: req.userInfo._id }, { countCart: Number(req.userInfo?.countCart) || 0 + 1 })
     if (checkProduct) return res.status(400).json({ status: false, mess: 'Sản phẩm đã có trong giỏ hàng' });
     else res.json({ status: true, data: await addCartMd({ product, by: req.userInfo._id }) });
   } catch (error) {
@@ -52,6 +53,7 @@ export const deleteCart = async (req, res) => {
     if (error) return res.status(400).json({ status: false, mess: error });
     const { _id } = value;
     const data = await deleteCartMd({ _id });
+    await updateUserMd({ _id: req.userInfo._id }, { countCart: Number(req.userInfo?.countCart) || 0 - 1 })
     if (!data) return res.status(400).json({ status: false, mess: 'Sản phẩm trong giỏ hàng không tồn tại!' });
     else res.json({ status: true, data });
   } catch (error) {

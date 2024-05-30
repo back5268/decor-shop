@@ -23,7 +23,7 @@ const FormAuth = (props) => {
             <Logo className="m-4" />
             <p className="mb-8 text-md">{title}</p>
           </div>
-          {children}
+          <div className="px-4">{children}</div>
         </Cardz>
       </div>
     </div>

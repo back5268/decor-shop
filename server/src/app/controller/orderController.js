@@ -130,7 +130,7 @@ export const cancelOrder = async (req, res) => {
       }
     }
 
-    res.json({ status: false, data });
+    res.json({ status: true, data: await updateOrderMd({ _id }, { status: 5 }) });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }

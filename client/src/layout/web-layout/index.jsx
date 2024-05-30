@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import { items } from './items';
-import { Buttonz, Linkz } from '@components/core';
+import { Buttonz, Cardz, Linkz } from '@components/core';
 import { Logo } from '@components/base';
-import { useToastState } from '@store';
+import { useToastState, useUserState } from '@store';
 import { INITIAL_USER_INFO, useAuthContext } from '@context/AuthContext';
-import { AvatarSection, ContactSection, Menuz, NewsSection, NotifySection, ProductDialog, SearchSection } from '@layout/shared';
+import { AvatarSection, ContactSection, Menuz, NewsSection, ProductDialog, SearchSection } from '@layout/shared';
 import { Bars3Icon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import SidebarWeb from './SideBar';
 
 const WebLayout = ({ children }) => {
-  const { isAuthenticated, setUserInfo, setIsAuthenticated } = useAuthContext();
+  const { isAuthenticated, userInfo, setUserInfo, setIsAuthenticated } = useAuthContext();
   const navigate = useNavigate();
   const { showToast } = useToastState();
   const { pathname } = useLocation();
@@ -54,7 +54,7 @@ const WebLayout = ({ children }) => {
   }, [pathname, JSON.stringify(items)]);
 
   return (
-    <div className="antialiased font-normal text-base text-color transition-all duration-500 ease-in-out ">
+    <div className="antialiased font-normal text-base text-color transition-all duration-500 ease-in-out">
       {showSidebar && (
         <div
           onClick={() => setShowSidebar(false)}
@@ -63,15 +63,15 @@ const WebLayout = ({ children }) => {
       )}
       <SidebarWeb showSidebar={showSidebar} />
       <ProductDialog />
-      <div className="fixed inset-x-0 top-0 h-16 bg-sidebar shadow-blue-gray-900/5 z-[51]">
+      <Cardz className="fixed inset-x-0 top-0 h-16 shadow-blue-gray-900/5">
         <div className="container flex justify-between items-center h-full">
           <div className="block lg:hidden">
-            <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="white" className="p-1 text-on-sidebar">
+            <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="white" className="p-1 text-color">
               <Bars3Icon className="h-8 w-8 stroke-1" />
             </Buttonz>
           </div>
           <div className="gap-12 items-center hidden lg:flex">
-            <Linkz to="/" className="flex gap-4 items-center !text-border">
+            <Linkz to="/" className="flex gap-4 items-center !text-color">
               <Logo size="[8px]" className="text-xl" />
             </Linkz>
             <div className="flex gap-2 justify-center items-center">
@@ -82,8 +82,8 @@ const WebLayout = ({ children }) => {
                       <Buttonz
                         variant="text"
                         color="white"
-                        className={`!py-2 !px-3 transition-all duration-300 ease-in-out text-border font-medium text-base 
-                      !normal-case !bg-none hover:bg-hover-sidebar ${select === item.route ? 'bg-hover-sidebar' : ''}`}
+                        className={`!py-2 !px-3 transition-all duration-300 ease-in-out text-color font-medium text-base 
+                      !normal-case !bg-none hover:bg-blue-gray-50 ${select === item.route ? 'bg-blue-gray-50' : ''}`}
                       >
                         {item.label}
                       </Buttonz>
@@ -96,22 +96,24 @@ const WebLayout = ({ children }) => {
           <SearchSection />
           {isAuthenticated ? (
             <div className="flex gap-4 items-center">
-              <Buttonz
-                onClick={() => navigate('/payment')}
-                color="gray"
-                variant="text"
-                className={`!p-0 hover:bg-hover-sidebar ${isCart ? 'bg-hover-sidebar' : ''}`}
-              >
-                <ShoppingCartIcon className="w-6 m-2 text-on-sidebar" />
-              </Buttonz>
-              <NotifySection mode="web" />
+              <div className="relative">
+                <Buttonz
+                  onClick={() => navigate('/payment')}
+                  color="gray"
+                  variant="text"
+                  className={`!p-0 hover:bg-blue-gray-50 ${isCart ? 'bg-blue-gray-50' : ''}`}
+                >
+                  <ShoppingCartIcon className="w-6 m-2 text-color" />
+                </Buttonz>
+                {userInfo?.countCart > 0 && <span className="p-[5px] rounded-full bg-red-600 absolute top-[6px] right-[3px]"></span>}
+              </div>
               <AvatarSection mode="web" onSignOut={onSignOut} />
             </div>
           ) : (
             <Buttonz onClick={() => navigate('/auth/signin')}>Đăng nhập</Buttonz>
           )}
         </div>
-      </div>
+      </Cardz>
       <div className="mt-16 mx-auto min-h-screen z-10">{children}</div>
       <div className="fixed">
         <div className="flex justify-between">

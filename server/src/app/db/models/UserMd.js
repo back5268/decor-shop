@@ -43,6 +43,7 @@ UserMd.init('User', {
       isDefault: { type: Boolean }
     }
   ],
+  countCart: { type: Number, default: 0 },
   notifies: { type: Array, default: [] },
   lastLogin: { type: Date },
   token: { type: String },

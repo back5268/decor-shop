@@ -20,11 +20,9 @@ const CartSection = () => {
   const { showToast } = useToastState();
 
   useEffect(() => {
-    if (myCarts?.length > 0) {
-      const newProducts = [];
-      myCarts.forEach((cart) => newProducts.push({ ...cart.product, cartId: cart._id, time: cart.createdAt, number: 1 }));
-      setProducts(newProducts);
-    }
+    const newProducts = [];
+    myCarts?.forEach((cart) => newProducts.push({ ...cart.product, cartId: cart._id, time: cart.createdAt, number: 1 }));
+    setProducts(newProducts);
   }, [JSON.stringify(myCarts)]);
 
   const onDelete = (item) => {

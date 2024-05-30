@@ -5,11 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { usePostApi } from '@lib/react-query';
 import { SigninValidation } from '@lib/validation';
 import { useToastState } from '@store';
-import { getInfoApi, signinApi } from '@api';
+import { getInfoApi, signinApi, signinGoogleApi } from '@api';
 import { useAuthContext } from '@context/AuthContext';
 import { Buttonz, CheckBoxz, InputForm, Linkz } from '@components/core';
 import { useNavigate } from 'react-router-dom';
 import { InputPassword } from '@components/shared';
+import { GoogleLogin } from '@react-oauth/google';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const SignIn = () => {
   } = useForm({
     resolver: yupResolver(SigninValidation)
   });
+
   const onSubmit = async (data) => {
     const response = await mutateAsync(data);
     if (response) {
@@ -36,6 +38,11 @@ const SignIn = () => {
         navigate(-1);
       }
     }
+  };
+
+  const handleLogin = async (response) => {
+    const res = await signinGoogleApi({ token: response.credential });
+    console.log(res);
   };
 
   return (
@@ -57,14 +64,13 @@ const SignIn = () => {
           <div className="flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-border after:mt-0.5 after:flex-1 after:border-t after:border-border">
             <p className="mx-4 mb-0 text-center font-semibold">or</p>
           </div>
-          <Buttonz className='mt-2'>
-            <div className="flex justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032 s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2 C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
-              </svg>
-              Đăng nhập bằng Google
-            </div>
-          </Buttonz>
+          <GoogleLogin
+            className="font-medium"
+            onSuccess={handleLogin}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
         </div>
       </form>
     </FormAuth>

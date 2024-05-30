@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronUpIcon } from '@heroicons/react/24/solid';
-import { Buttonz, Linkz } from '@components/core';
+import { Buttonz, Cardz, Linkz } from '@components/core';
 import { ListItem } from '@material-tailwind/react';
 
 const Menuz = ({ label, items, select }) => {
@@ -12,8 +12,8 @@ const Menuz = ({ label, items, select }) => {
       <Buttonz
         variant="text"
         color="white"
-        className={`!py-2 !px-3 transition-all duration-300 ease-in-out text-border 
-        font-medium text-base !normal-case !bg-none ${active ? 'bg-hover-sidebar' : ''}`}
+        className={`!py-2 !px-3 transition-all duration-300 ease-in-out text-color 
+        font-medium text-base !normal-case !bg-none ${active ? 'bg-blue-gray-50' : ''}`}
       >
         <div className="flex items-center gap-2">
           <span>{label}</span>
@@ -23,18 +23,18 @@ const Menuz = ({ label, items, select }) => {
       <div
         className={`absolute duration-300 ease-in-out transform ${isHovered ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0 pointer-events-none'}`}
       >
-        <div className="!bg-sidebar mt-4 rounded-lg py-2 min-w-48">
+        <Cardz className="mt-4 rounded-lg py-2 min-w-48">
           {items?.map((item, index) => (
             <Linkz key={index} to={item.route}>
               <ListItem
-                className={`p-3 transition-all duration-300 ease-in-out !text-border font-medium 
-                text-base text-nowrap hover:!bg-hover-sidebar ${select === item.route ? '!bg-hover-sidebar' : ''}`}
+                className={`p-3 transition-all duration-300 ease-in-out !text-color font-medium 
+                text-base text-nowrap hover:!bg-blue-gray-50 ${select === item.route ? '!bg-blue-gray-50' : ''}`}
               >
                 {item.label}
               </ListItem>
             </Linkz>
           ))}
-        </div>
+        </Cardz>
       </div>
     </div>
   );

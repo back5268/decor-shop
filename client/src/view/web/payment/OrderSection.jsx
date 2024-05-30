@@ -81,7 +81,8 @@ const OrderSection = ({ status }) => {
         {
           color: 'red',
           icon: XMarkIcon,
-          onClick: (item) => onDelete(item)
+          onClick: (item) => onDelete(item),
+          condition: (item) => item.status !== 5
         }
       ]}
     />

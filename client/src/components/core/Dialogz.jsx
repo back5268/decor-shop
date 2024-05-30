@@ -3,7 +3,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import { Buttonz, Hrz } from '.';
 
 const Dialogz = (props) => {
-  const { title, children, open, setOpen, position = "center", className = '', z = 20 } = props;
+  const { title, children, open, setOpen, position = "center", className = '' } = props;
 
   return (
     <>

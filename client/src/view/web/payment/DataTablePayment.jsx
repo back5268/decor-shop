@@ -2,12 +2,12 @@ import { Buttonz, CheckBoxz, Hrz, Paginationz } from '@components/core';
 import React from 'react';
 
 const HeaderColumn = ({ children, className = '', ...prop }) => (
-  <th className={`p-2 bg-blue-gray-50 font-medium text-center ${className}`} {...prop}>
+  <th className={`p-2 bg-blue-gray-50 font-medium text-center border-[1px] border-blue-gray-200 ${className}`} {...prop}>
     {children}
   </th>
 );
 const BodyColumn = ({ children, className = '', ...prop }) => (
-  <td className={`p-2 text-xs text-center ${className}`} {...prop}>
+  <td className={`p-2 text-xs text-center border-[1px] border-blue-gray-200 ${className}`} {...prop}>
     {children}
   </td>
 );
@@ -81,17 +81,20 @@ const DataTablePayment = (props) => {
                                 const color = action.color || 'cyan';
                                 const variant = action.variant || 'outlined';
                                 const Icon = action.icon;
+                                const condition = action.condition(item);
 
                                 return (
-                                  <Buttonz
-                                    key={index}
-                                    color={color}
-                                    onClick={() => action.onClick(item)}
-                                    variant={variant}
-                                    className="rounded-full p-2"
-                                  >
-                                    <Icon className="w-5" />
-                                  </Buttonz>
+                                  condition && (
+                                    <Buttonz
+                                      key={index}
+                                      color={color}
+                                      onClick={() => action.onClick(item)}
+                                      variant={variant}
+                                      className="rounded-full p-2"
+                                    >
+                                      <Icon className="w-5" />
+                                    </Buttonz>
+                                  )
                                 );
                               })}
                           </div>

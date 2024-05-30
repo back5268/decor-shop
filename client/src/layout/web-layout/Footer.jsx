@@ -107,7 +107,7 @@ const Footer = () => {
       <Hrz />
       <div className="mx-6 py-10 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <Logo classNameImg="h-32" />
+          <Logo classNameImg="h-24" />
           <div className="flex flex-col gap-3">
             <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">Sản phẩm</h6>
             {productType.map((product) => (
@@ -123,7 +123,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3">
             <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start">Liên hệ</h6>
             {contacts.map((contact, index) => (
-              <div key={index} className='flex gap-1 justify-center'>
+              <div key={index} className='flex gap-1 md:justify-start justify-center'>
                 {contact.icon}
                 <span>{contact.label}</span>
               </div>
