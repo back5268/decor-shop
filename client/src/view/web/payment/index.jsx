@@ -44,7 +44,7 @@ export default function UnderlineTabs() {
           <OrderSection />
         ) : activeTab === 'payment' ? (
           <OrderSection status={1} />
-        ) : activeTab === 'payment' ? (
+        ) : activeTab === 'pending' ? (
           <OrderSection status={3} />
         ) : (
           <OrderSection status={5} />

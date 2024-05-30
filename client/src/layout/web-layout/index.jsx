@@ -63,7 +63,7 @@ const WebLayout = ({ children }) => {
       )}
       <SidebarWeb showSidebar={showSidebar} />
       <ProductDialog />
-      <Cardz className="fixed inset-x-0 top-0 h-16 shadow-blue-gray-900/5">
+      <Cardz className="fixed inset-x-0 top-0 h-16 shadow-blue-gray-900/5 z-10">
         <div className="container flex justify-between items-center h-full">
           <div className="block lg:hidden">
             <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="white" className="p-1 text-color">
@@ -117,11 +117,11 @@ const WebLayout = ({ children }) => {
       <div className="mt-16 mx-auto min-h-screen z-10">{children}</div>
       <div className="fixed">
         <div className="flex justify-between">
-          <NewsSection />
           <ContactSection />
         </div>
       </div>
       <Footer />
+      <NewsSection />
     </div>
   );
 };

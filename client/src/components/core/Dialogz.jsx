@@ -8,7 +8,8 @@ const Dialogz = (props) => {
   return (
     <>
       <div
-        className={`z-[70] fixed inset-x-0 inset-y-0 duration-600 ease-in-out transform w-full h-full bg-black bg-opacity-50 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`z-[50] fixed inset-x-0 inset-y-0 duration-600 ease-in-out transform w-full h-full 
+        bg-black bg-opacity-50 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       ></div>
       <div
         className={`fixed inset-x-0 inset-y-0 w-screen h-screen z-[70] flex justify-center ${position === "center" ? "items-center" : "items-start pt-12"} p-6 ${open ? '' : 'pointer-events-none'}`}
