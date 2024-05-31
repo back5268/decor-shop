@@ -34,12 +34,12 @@ const SearchSection = () => {
   return (
     <div ref={ref} className="relative w-[400px] flex-wrap items-stretch text-sm lg:block hidden">
       <Inputz
-        classInput="text-border"
+        classInput="text-color"
         size="md"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         label="Tìm kiếm sản phẩm"
-        icon={<MagnifyingGlassIcon className="h-6 cursor-pointer hover:text-primary stroke-2 text-border" />}
+        icon={<MagnifyingGlassIcon className="h-6 cursor-pointer hover:text-primary stroke-2 text-color" />}
         className="!w-full"
       />
       <div
@@ -53,7 +53,7 @@ const SearchSection = () => {
                 <ListItem
                   onClick={() => setProductId(item._id)}
                   key={index}
-                  className="hover:bg-primary-50 rounded-md w-full flex gap-4 items-center p-2"
+                  className="hover:bg-blue-gray-50 rounded-md w-full flex gap-4 items-center p-2"
                 >
                   <div className="w-16 h-16">
                     <Imagez src={item.avatar} className="w-16 h-16" />

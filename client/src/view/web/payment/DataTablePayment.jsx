@@ -78,24 +78,26 @@ const DataTablePayment = (props) => {
                           <div className="flex justify-center items-center gap-2">
                             {moreActions?.length > 0 &&
                               moreActions.map((action, index) => {
-                                const color = action.color || 'cyan';
-                                const variant = action.variant || 'outlined';
-                                const Icon = action.icon;
-                                const condition = action.condition(item);
+                                if (action) {
+                                  const color = action.color || 'cyan';
+                                  const variant = action.variant || 'outlined';
+                                  const Icon = action.icon;
+                                  const condition = action.condition ? action.condition(item) : true;
 
-                                return (
-                                  condition && (
-                                    <Buttonz
-                                      key={index}
-                                      color={color}
-                                      onClick={() => action.onClick(item)}
-                                      variant={variant}
-                                      className="rounded-full p-2"
-                                    >
-                                      <Icon className="w-5" />
-                                    </Buttonz>
-                                  )
-                                );
+                                  return (
+                                    condition && (
+                                      <Buttonz
+                                        key={index}
+                                        color={color}
+                                        onClick={() => action.onClick(item)}
+                                        variant={variant}
+                                        className="rounded-full p-2"
+                                      >
+                                        <Icon className="w-5" />
+                                      </Buttonz>
+                                    )
+                                  );
+                                }
                               })}
                           </div>
                         </BodyColumn>
