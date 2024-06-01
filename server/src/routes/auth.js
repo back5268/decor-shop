@@ -18,10 +18,11 @@ authRouter.post('/google', async (req, res) => {
     });
     const payload = ticket.getPayload();
     if (payload) {
-      let user = getDetailUserMd({ typeLogin: 'google', email: payload?.email });
+      let user = await getDetailUserMd({ typeLogin: 'google', email: payload?.email });
       if (!user) {
         user = await addUserMd({
           email: payload?.email,
+          username: payload?.email,
           typeLogin: 'google',
           fullName: payload?.name,
           avatar: payload?.picture
@@ -29,10 +30,10 @@ authRouter.post('/google', async (req, res) => {
       }
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
       await updateUserMd({ _id: user._id }, { token });
+      return res.status(200).json({ status: true, data: token });
     }
-    res.status(200).json({ status: true, data: token });
+    res.status(401).json({ status: false, mess: 'User authentication failed' });
   } catch (error) {
-    console.log(error);
     res.status(401).json({ status: false, mess: 'User authentication failed' });
   }
 });

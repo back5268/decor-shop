@@ -17,7 +17,7 @@ export const authMiddleware = async (req, res, next) => {
         .status(401)
         .json({ status: false, mess: 'Tài khoản của bạn chưa được kích hoạt hoặc đã bị khóa, vui lòng liên hệ quản trị viên!' });
     req.userInfo = userInfo;
-    next();
+    next(); 
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
   }
