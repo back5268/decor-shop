@@ -64,13 +64,15 @@ const SignIn = () => {
           <div className="flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-border after:mt-0.5 after:flex-1 after:border-t after:border-border">
             <p className="mx-4 mb-0 text-center font-semibold">or</p>
           </div>
-          <GoogleLogin
-            className="font-medium"
-            onSuccess={handleLogin}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
+          <div className="flex justify-center">
+            <GoogleLogin
+              className="w-full"
+              onSuccess={handleLogin}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+          </div>
         </div>
       </form>
     </FormAuth>
