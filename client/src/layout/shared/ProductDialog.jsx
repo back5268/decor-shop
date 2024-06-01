@@ -107,7 +107,7 @@ const ProductDialog = () => {
           <Hrz />
         </div>
         <div className="flex flex-col gap-4 mt-4 overflow-scroll h-body-product px-6 py-4">
-          <CarouselThumb data={product?.images} />
+          <CarouselThumb data={product?.images ? [...product?.images, product?.avatar] : [product?.avatar]} />
           <Hrz />
           <div className="flex flex-col gap-3">
             <h3 className="text-lg font-medium">{product?.name}</h3>
@@ -137,9 +137,6 @@ const ProductDialog = () => {
           </div>
           <Hrz />
           <div className="flex py-2 gap-4 justify-center items-center w-full">
-            <Buttonz color="red" variant="outlined">
-              Đánh giá
-            </Buttonz>
             <Buttonz onClick={() => (isAuthenticated ? onAddToCart() : onWarning())}>
               <div className="flex gap-2 items-center">
                 <ShoppingCartIcon className="w-5 stroke-2" />
