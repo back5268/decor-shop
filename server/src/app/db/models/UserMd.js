@@ -1,7 +1,6 @@
 import { ModelBase } from '@config';
 
 class UserMd extends ModelBase {
-  syncId;
   name;
   username;
   code;
@@ -22,7 +21,6 @@ class UserMd extends ModelBase {
 }
 
 UserMd.init('User', {
-  syncId: { type: String },
   name: { type: String, required: true },
   username: { type: String, required: true },
   code: { type: String },

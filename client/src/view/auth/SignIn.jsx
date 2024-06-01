@@ -35,14 +35,23 @@ const SignIn = () => {
         setUserInfo(res);
         setIsAuthenticated(true);
         showToast({ title: 'Đăng nhập thành công', severity: 'success' });
-        navigate(-1);
+        navigate('/');
       }
     }
   };
 
-  const handleLogin = async (response) => {
-    const res = await signinGoogleApi({ token: response.credential });
-    console.log(res);
+  const handleLogin = async (responsez) => {
+    const response = await signinGoogleApi({ token: responsez.credential });
+    if (response) {
+      localStorage.setItem('token', response);
+      const res = await getInfoApi();
+      if (res) {
+        setUserInfo(res);
+        setIsAuthenticated(true);
+        showToast({ title: 'Đăng nhập thành công', severity: 'success' });
+        navigate('/');
+      }
+    }
   };
 
   return (
@@ -65,13 +74,7 @@ const SignIn = () => {
             <p className="mx-4 mb-0 text-center font-semibold">or</p>
           </div>
           <div className="flex justify-center">
-            <GoogleLogin
-              className="w-full"
-              onSuccess={handleLogin}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-            />
+            <GoogleLogin className="w-full" onSuccess={handleLogin} />
           </div>
         </div>
       </form>

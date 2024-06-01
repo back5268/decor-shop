@@ -1,39 +1,41 @@
 import express from 'express';
-import passport from 'passport';
 import { confirmPassword, getInfo, getToolByUser, sendOtpForgotPassword, sendOtpSignup, signIn, signUp } from '@controller';
 import { authMiddleware, permissionMiddleware } from '@middleware';
 require('dotenv').config();
+import { OAuth2Client } from 'google-auth-library';
+import { addUserMd, getDetailUserMd, updateUserMd } from '@models';
+import jwt from 'jsonwebtoken';
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET);
 
 export const authRouter = express.Router();
-authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
+authRouter.post('/google', async (req, res) => {
+  const { token } = req.body;
 
-authRouter.get(
-  '/google/callback',
-  (req, res, next) => {
-    passport.authenticate('google', (err, profile) => {
-      req.user = profile;
-      next();
-    })(req, res, next);
-  },
-  (req, res) => {
-    res.redirect(`${process.env.URL_CLIENT}/login-success/${req.user?.id}/${req.user.tokenLogin}`);
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID
+    });
+    const payload = ticket.getPayload();
+    if (payload) {
+      let user = getDetailUserMd({ typeLogin: 'google', email: payload?.email });
+      if (!user) {
+        user = await addUserMd({
+          email: payload?.email,
+          typeLogin: 'google',
+          fullName: payload?.name,
+          avatar: payload?.picture
+        });
+      }
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_TOKEN);
+      await updateUserMd({ _id: user._id }, { token });
+    }
+    res.status(200).json({ status: true, data: token });
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ status: false, mess: 'User authentication failed' });
   }
-);
-
-authRouter.get('/facebook', passport.authenticate('facebook', { session: false, scope: ['email'] }));
-
-authRouter.get(
-  '/facebook/callback',
-  (req, res, next) => {
-    passport.authenticate('facebook', (err, profile) => {
-      req.user = profile;
-      next();
-    })(req, res, next);
-  },
-  (req, res) => {
-    res.redirect(`${process.env.URL_CLIENT}/login-success/${req.user?.id}/${req.user.tokenLogin}`);
-  }
-);
+});
 
 authRouter.get('/getInfo', authMiddleware, getInfo);
 authRouter.get('/getToolByUser', authMiddleware, permissionMiddleware, getToolByUser);
