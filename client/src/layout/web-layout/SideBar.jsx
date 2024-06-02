@@ -27,7 +27,7 @@ const SidebarWeb = (props) => {
 
   return (
     <div
-      className={`fixed left-0 inset-y-0 h-screen z-[999] w-full max-w-[18rem] p-2 shadow-xl shadow-blue-gray-900/5 lg:hidden
+      className={`fixed left-0 inset-y-0 h-screen z-[999] w-full max-w-[16rem] p-2 shadow-xl shadow-blue-gray-900/5 lg:hidden
       bg-sidebar text-on-sidebar transition-all duration-500 ease-in-out ${showSidebar ? '' : '-translate-x-full'}`}
     >
       <div className="mb-2 flex items-center gap-4 p-4">

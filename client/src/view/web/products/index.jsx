@@ -15,7 +15,7 @@ const WebCourses = () => {
   const [sort, setSort] = useState({ orderBy: 'createdAt', orderType: '-1' });
   const label = slug === 'diy-night-light' ? 'Đèn ngủ DIY' : slug === '3d-night-light' ? 'Đèn ngủ 3D' : 'Trang DIY';
   const type = slug === 'diy-night-light' ? 'diy' : slug === '3d-night-light' ? '3d' : 't-diy';
-  const { data } = useGetApi(getListProductWebApi, { ...params, type }, 'products');
+  const { data } = useGetApi(getListProductWebApi, { ...params, page: 1, limit: 100, type }, 'products');
 
   useEffect(() => {
     if (sort?.orderBy && sort?.orderType) {
@@ -45,7 +45,7 @@ const WebCourses = () => {
             {data?.data?.length > 0 ? (
               data.data.map((item, index) => {
                 return (
-                  <div key={index} className="xs:w-full sm:w-6/12 md:w-4/12 py-2">
+                  <div key={index} className="w-4/12 py-2">
                     <CardProduct item={item} />
                   </div>
                 );
@@ -55,7 +55,7 @@ const WebCourses = () => {
             )}
           </div>
           <Hrz />
-          <div className="flex justify-center my-4">
+          <div className="lg:flex justify-center my-4 sm:block hidden">
             <Paginationz totalRecord={data?.total} params={params} setParams={setParams} rows={[10, 20, 50]} />
           </div>
         </div>

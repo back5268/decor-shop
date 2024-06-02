@@ -14,7 +14,7 @@ const ListProduct = (props) => {
         <div className="mt-4 flex">
           {data?.map((item, index) => {
             return (
-              <div key={index} className="w-full md:w-6/12 lg:w-3/12">
+              <div key={index} className="w-3/12">
                 <CardProduct item={item} />
               </div>
             );

@@ -64,6 +64,7 @@ export const DropdownForm = (props) => {
         color="cyan"
         error={Boolean(errors[id])}
         className="rounded-md px-0"
+        labelProps={{ className: 'sm:text-nomal text-xs' }}
         {...prop}
       >
         {options?.length > 0 ? (

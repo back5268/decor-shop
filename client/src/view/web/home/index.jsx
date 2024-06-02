@@ -17,7 +17,7 @@ const Home = () => {
         loop={true}
         autoplay={true}
         autoplayDelay={3000}
-        className="h-96"
+        className="sm:h-96 h-64"
         navigation={({ setActiveIndex, activeIndex, length }) => (
           <div className="absolute bottom-4 left-2/4 flex -translate-x-2/4 gap-2">
             {new Array(length).fill('').map((_, i) => (

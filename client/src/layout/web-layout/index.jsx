@@ -64,7 +64,7 @@ const WebLayout = ({ children }) => {
       <SidebarWeb showSidebar={showSidebar} />
       <ProductDialog />
       <Cardz className="fixed inset-x-0 top-0 h-16 shadow-blue-gray-900/5 z-10">
-        <div className="container flex justify-between items-center h-full">
+        <div className="sm:container flex justify-between items-center h-full w-full">
           <div className="block lg:hidden">
             <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="white" className="p-1 text-color">
               <Bars3Icon className="h-8 w-8 stroke-1" />
@@ -105,7 +105,7 @@ const WebLayout = ({ children }) => {
                 >
                   <ShoppingCartIcon className="w-6 m-2 text-color" />
                 </Buttonz>
-                {userInfo?.countCart > 0 && <span className="p-[5px] rounded-full bg-red-600 absolute top-[6px] right-[3px]"></span>}
+                {userInfo?.countCart > 0 && <span className="p-[0.25rem] rounded-full bg-red-600 absolute top-[0.4rem] right-[0.3rem]"></span>}
               </div>
               <AvatarSection mode="web" onSignOut={onSignOut} />
             </div>

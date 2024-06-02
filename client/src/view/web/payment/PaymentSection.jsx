@@ -76,7 +76,7 @@ const StepOne = (props) => {
               id="subject"
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              label="Mã khuyến mãi"
+              placeholder="Mã khuyến mãi"
             />
             <Buttonz disabled={!code || disabled} onClick={() => onCheckPromotion()} label="Áp dụng" />
           </div>
@@ -175,14 +175,14 @@ const StepThree = ({ order }) => {
     <div className="w-10/12 mt-8">
       <div className="flex items-center justify-center">
         {order?.qrCode && (
-          <div className="flex flex-col w-6/12 items-center">
+          <div className="flex flex-col lg:w-6/12 w-full items-center">
             <Imagez className="w-80" src={order.qrCode} />
             <i className="text-red-600 text-sm">
               *Vui lòng thanh toán đơn hàng trước {moment().add(1, 'days').format('DD/MM/YYYY HH:mm:ss')}
             </i>
           </div>
         )}
-        <div className="flex flex-col w-6/12">
+        <div className="flex flex-col lg:w-6/12 w-full">
           <h3>Cảm ơn bạn đã đặt mua sản phẩm của Decor Day</h3>
           <h3>Đơn hàng của bạn đã được giao cho đơn vị vận chuyển, vui lòng để ý điện thoại.</h3>
           <h3>
@@ -207,9 +207,9 @@ const Stepperz = ({ activeStep, activeStepMax, setActiveStep, trigger, onSubmit 
   };
 
   return (
-    <div className="w-full flex justify-between py-8 px-8">
-      <Buttonz onClick={() => setActiveStep((pre) => pre - 1)} disabled={activeStep === 0} variant="outlined" color="red" label="Trở lại" />
-      <div className="w-[700px]">
+    <div className="w-full flex justify-between py-8 px-8 gap-4">
+      <Buttonz className="text-nowrap" onClick={() => setActiveStep((pre) => pre - 1)} disabled={activeStep === 0} variant="outlined" color="red" label="Trở lại" />
+      <div className="sm:w-[44rem] w-[30rem]">
         <Stepper activeLineClassName="bg-primary" activeStep={activeStep}>
           <Step
             color="cyan"
@@ -240,7 +240,7 @@ const Stepperz = ({ activeStep, activeStepMax, setActiveStep, trigger, onSubmit 
           </Step>
         </Stepper>
       </div>
-      <Buttonz type="button" onClick={onNext} disabled={activeStep === 2} label="Tiếp theo" />
+      <Buttonz className="text-nowrap" type="button" onClick={onNext} disabled={activeStep === 2} label="Tiếp theo" />
     </div>
   );
 };

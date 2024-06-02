@@ -34,3 +34,28 @@
 ::-webkit-scrollbar-thumb {
   background: #a3a3a3;
 }
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  html {
+      font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+      width: 50vw;
+      padding: 0;
+      margin: 0;
+      padding: 0 !important;
+      right: 16px;
+      top: 8px;
+  }
+
+  .Toastify__toast {
+    padding: 0 !important;
+  }
+}

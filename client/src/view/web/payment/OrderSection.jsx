@@ -76,7 +76,6 @@ const OrderSection = ({ status }) => {
       params={params}
       setParams={setParams}
       columns={columns}
-      isPag
       moreActions={[
         {
           color: 'red',

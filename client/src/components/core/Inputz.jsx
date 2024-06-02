@@ -16,7 +16,16 @@ export const InputForm = (props) => {
 
   return (
     <div className={`flex flex-col gap-1 w-full lg:w-6/12 p-2 ${className}`}>
-      <Input color={color} autoComplete={id} size={size} id={id} error={Boolean(errors[id])} {...register(id)} {...prop} />
+      <Input
+        labelProps={{ className: 'sm:text-nomal text-xs' }}
+        color={color}
+        autoComplete={id}
+        size={size}
+        id={id}
+        error={Boolean(errors[id])}
+        {...register(id)}
+        {...prop}
+      />
       {errors[id] && <small className="w-full ml-2 text-red-600">{errors[id].message}</small>}
     </div>
   );
