@@ -25,7 +25,7 @@ UserMd.init('User', {
   username: { type: String, required: true },
   code: { type: String },
   email: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String },
   avatar: { type: String },
   gender: { type: Number, enum: [1, 2], description: '1: Name, 2: Nữ' },
   birthday: { type: Date },
