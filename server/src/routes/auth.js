@@ -24,7 +24,7 @@ authRouter.post('/google', async (req, res) => {
           email: payload?.email,
           username: payload?.email,
           typeLogin: 'google',
-          fullName: payload?.name,
+          name: payload?.name,
           avatar: payload?.picture
         });
       }
@@ -34,6 +34,7 @@ authRouter.post('/google', async (req, res) => {
     }
     res.status(401).json({ status: false, mess: 'User authentication failed' });
   } catch (error) {
+    console.log(error);
     res.status(401).json({ status: false, mess: 'User authentication failed' });
   }
 });
