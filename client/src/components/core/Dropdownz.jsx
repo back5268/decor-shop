@@ -16,7 +16,7 @@ export const Dropdownz = (props) => {
 
   return (
     <div className={`w-full md:w-6/12 lg:w-3/12 p-2 ${className}`}>
-      <Select id={id} value={value ? String(value) : ''} onChange={onChange} size={size} color="cyan" className="rounded-md px-0" {...prop}>
+      <Select id={id} value={value ? String(value) : ''} labelProps={{ className: 'sm:text-nomal text-xs' }} onChange={onChange} size={size} color="cyan" className="rounded-md px-0" {...prop}>
         {options?.length > 0 ? (
           options.map((item, index) => {
             let key, label;

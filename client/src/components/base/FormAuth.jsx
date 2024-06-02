@@ -18,7 +18,7 @@ const FormAuth = (props) => {
         <span className="absolute top-0 left-0 w-full h-full bg-primary opacity-50"></span>
       </div> */}
       <div className="relative flex justify-center items-center">
-        <Cardz className="w-[420px] py-4">
+        <Cardz className="w-[30rem] py-4">
           <div className="text-center">
             <Logo className="m-4" />
             <p className="mb-8 text-md">{title}</p>

@@ -53,6 +53,7 @@ html {
       padding: 0 !important;
       right: 16px;
       top: 8px;
+      left: auto;
   }
 
   .Toastify__toast {

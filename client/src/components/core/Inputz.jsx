@@ -6,7 +6,17 @@ export const Inputz = (props) => {
 
   return (
     <div className={`w-full md:w-6/12 lg:w-3/12 p-2 ${className}`}>
-      <Input color={color} autoComplete={id} size={size} id={id} value={value} onChange={onChange} className={classInput} {...prop} />
+      <Input
+        labelProps={{ className: 'sm:text-nomal text-xs' }}
+        color={color}
+        autoComplete={id}
+        size={size}
+        id={id}
+        value={value}
+        onChange={onChange}
+        className={classInput}
+        {...prop}
+      />
     </div>
   );
 };
