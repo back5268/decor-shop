@@ -29,7 +29,7 @@ ProductMd.init('Product', {
   type: { type: String, required: true },
   price: { type: Number, required: true, min: 0 },
   sale: { type: Number, min: 0 },
-  quantity: { type: Number, required: true, min: 0 },
+  quantity: { type: Number, default: 0 },
   saleNumber: { type: Number, default: 0 },
   vote: { type: Number, required: true, min: 0 },
   description: { type: String },

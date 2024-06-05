@@ -23,6 +23,7 @@ export const addProductValid = {
   price: 'number',
   description: { type: 'string', allowNull: true },
   hastag: { type: 'json', allowNull: true },
+  quantity: { type: 'number', allowNull: true },
   sale: { type: 'number', allowNull: true }
 };
 
@@ -37,6 +38,7 @@ export const updateProductValid = {
   avatar: { type: 'string', allowNull: true },
   images: { type: 'json', allowNull: true },
   hastag: { type: 'json', allowNull: true },
+  quantity: { type: 'number', allowNull: true },
   sale: { type: 'number', allowNull: true }
 };
 

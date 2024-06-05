@@ -124,7 +124,7 @@ export const addProduct = async (req, res) => {
   try {
     const { error, value } = validateData(addProductValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    let { name, code, type, price, description, sale } = value;
+    let { name, code, type, price, description, sale, quantity } = value;
 
     const checkName = await getDetailProductMd({ name });
     if (checkName) return res.status(400).json({ status: false, mess: 'Tên sản phẩm đã đã tồn tại!' });
@@ -154,7 +154,7 @@ export const addProduct = async (req, res) => {
       description,
       avatar,
       images,
-      quantity: 0,
+      quantity,
       sale,
       vote: 5
     });
@@ -168,7 +168,7 @@ export const updateProduct = async (req, res) => {
   try {
     const { error, value } = validateData(updateProductValid, req.body);
     if (error) return res.status(400).json({ status: false, mess: error });
-    let { _id, name, code, type, price, description, status, avatar, images, slug, sale } = value;
+    let { _id, name, code, type, price, description, status, avatar, images, slug, sale, quantity } = value;
 
     const product = await getDetailProductMd({ _id });
     if (!product) return res.status(400).json({ status: false, mess: 'Sản phẩm không tồn tại!' });
@@ -194,7 +194,7 @@ export const updateProduct = async (req, res) => {
       avatar = await uploadFileToFirebase(req.files['avatar'][0]);
     }
 
-    const data = await updateProductMd({ _id }, { name, code, type, price, description, status, avatar, slug, images, sale });
+    const data = await updateProductMd({ _id }, { name, code, type, price, description, quantity, status, avatar, slug, images, sale });
     res.status(201).json({ status: true, data });
   } catch (error) {
     res.status(500).json({ status: false, mess: error.toString() });
