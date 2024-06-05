@@ -12,6 +12,7 @@ class OrderMd extends ModelBase {
   promotion;
   qrCode;
   note;
+  transactionCode;
   type;
   status;
   time;
@@ -27,6 +28,7 @@ OrderMd.init('Order', {
   promotion: { type: Number, required: true, min: 0 },
   qrCode: { type: String },
   note: { type: String },
+  transactionCode: { type: String },
   type: { type: Number, required: true, enum: [1, 2], description: '1: Chuyển khoản, 2: Thanh toán khi nhận hàng' },
   status: {
     type: Number,

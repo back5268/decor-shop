@@ -135,3 +135,25 @@ export const cancelOrder = async (req, res) => {
     res.status(500).json({ status: false, mess: error.toString() });
   }
 };
+
+export const confirmOrder = async (req, res) => {
+  try {
+    const { _id, value } = req.body;
+    const order = await getDetailOrderMd({ _id });
+    if (!order) return res.status(400).json({ status: false, mess: 'Đơn hàng không tồn tại!' });
+    res.json({ status: true, data: await updateOrderMd({ _id }, { status: 2, transactionCode: value }) });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
+
+export const completeOrder = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const order = await getDetailOrderMd({ _id });
+    if (!order) return res.status(400).json({ status: false, mess: 'Đơn hàng không tồn tại!' });
+    res.json({ status: true, data: await updateOrderMd({ _id }, { status: 4 }) });
+  } catch (error) {
+    res.status(500).json({ status: false, mess: error.toString() });
+  }
+};
