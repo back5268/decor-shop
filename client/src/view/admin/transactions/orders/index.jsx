@@ -36,7 +36,7 @@ const Orders = () => {
                   <p>{product.name}</p>
                   <p className="font-medium">#{product.code}</p>
                   <p>
-                    {formatNumber(product.price)} x {product.quantity || 1} = {formatNumber(product.price * product.quantity || 1)}
+                    {formatNumber(product.price)} x {product.quantity || 1} = {formatNumber(product.price * (product.quantity || 1))}
                   </p>
                 </div>
               </div>
