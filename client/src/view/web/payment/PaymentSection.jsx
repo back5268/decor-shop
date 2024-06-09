@@ -183,13 +183,13 @@ const StepThree = ({ order }) => {
           </div>
         )}
         <div className="flex flex-col lg:w-6/12 w-full">
-          <h3>Cảm ơn bạn đã đặt mua sản phẩm của Decor Day</h3>
+          <h3>Cảm ơn bạn đã đặt mua sản phẩm của Decor Star</h3>
           <h3>Đơn hàng của bạn đã được giao cho đơn vị vận chuyển, vui lòng để ý điện thoại.</h3>
           <h3>
-            Nếu có bất kỳ thắc mắc nào về sản phẩm và dịch vụ hãy liên hệ với bộ phận CSKH của Decor Day để chúng tôi được phục vụ bạn tốt
+            Nếu có bất kỳ thắc mắc nào về sản phẩm và dịch vụ hãy liên hệ với bộ phận CSKH của Decor Star để chúng tôi được phục vụ bạn tốt
             hơn
           </h3>
-          <h3>Decor Day xin được cảm ơn bạn rất nhiều và chúc bạn có một ngày may mắn và an lành ạ!</h3>
+          <h3>Decor Star xin được cảm ơn bạn rất nhiều và chúc bạn có một ngày may mắn và an lành ạ!</h3>
         </div>
       </div>
     </div>
