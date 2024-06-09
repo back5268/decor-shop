@@ -34,7 +34,7 @@ const Orders = () => {
               <div className="flex flex-col gap-2 text-left">
                 <p>{product.name}</p>
                 <p className="font-medium">#{product.code}</p>
-                <p>{formatNumber(product.price * (product.quantity || 1))}</p>
+                <p>{formatNumber(product.price)} x {(product.quantity || 1)}</p>
               </div>
             </div>
           ))}
