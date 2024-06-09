@@ -1,4 +1,4 @@
-import { completeOrderApi, getListOrderApi } from '@api';
+import { completeOrderApi, exportOrderApi, getListOrderApi } from '@api';
 import { Body, DataTable, FormList } from '@components/base';
 import DataFilter from '@components/base/DataFilter';
 import { Dropdownz, Hrz, Imagez } from '@components/core';
@@ -9,6 +9,8 @@ import { useProductState, useToastState } from '@store';
 import React, { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import DetailOrder from './Detail';
+import { formatNumber } from '@lib/helper';
+import moment from 'moment';
 
 const Orders = () => {
   const initParams = useGetParams();
@@ -32,6 +34,7 @@ const Orders = () => {
               <div className="flex flex-col gap-2 text-left">
                 <p>{product.name}</p>
                 <p className="font-medium">#{product.code}</p>
+                <p>{formatNumber(product.price * (product.quantity || 1))}</p>
               </div>
             </div>
           ))}
@@ -47,15 +50,23 @@ const Orders = () => {
             <div className="flex flex-col gap-2">
               <p>Tên: {a.name}</p>
               <p>Số điện thoại: {a.phone}</p>
-              <p>
-                Địa chỉ: {a.city}, {a.district}, {a.ward}
-              </p>
+              {Boolean(a.city) && (
+                <p>
+                  Địa chỉ: {a.city}, {a.district}, {a.ward}
+                </p>
+              )}
             </div>
           );
       }
     },
-    { label: 'Hình thức thanh toán', body: (e) => Body(paymentType, e.type) },
-    { label: 'Mã giao dịch', field: "transactionCode" },
+    {
+      label: 'Giá trị đơn hàng',
+      body: (e) => formatNumber(e.total)
+    },
+    {
+      label: 'Thời gian',
+      body: (e) => moment(e.time).format('DD/MM/YYYY')
+    },
     {
       label: 'Mã QR',
       body: (e) =>
@@ -86,12 +97,15 @@ const Orders = () => {
       </DataFilter>
       <Hrz />
       <DataTable
+        title="Đơn hàng"
         isLoading={isLoading}
         data={data?.documents}
         total={data?.total}
         columns={columns}
         params={params}
         setParams={setParams}
+        baseActions={['export']}
+        headerInfo={{ exportApi: exportOrderApi }}
         actionsInfo={{
           moreActions: [
             {

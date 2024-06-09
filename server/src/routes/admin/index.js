@@ -14,7 +14,7 @@ import { orderRouter } from './order';
 
 export const adminRouter = express.Router();
 
-adminRouter.use(authMiddleware);
+// adminRouter.use(authMiddleware);
 adminRouter.use('/users', userRouter);
 adminRouter.use('/templates', templateRouter);
 adminRouter.use('/logs', logRouter);

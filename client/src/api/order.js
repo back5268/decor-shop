@@ -7,3 +7,4 @@ export const cancelOrderApi = (params) => postData('/web/orders/cancelOrder', pa
 export const checkPromotionApi = (params) => postData('/web/orders/checkPromotion', params);
 export const confirmOrderApi = (params) => postData('/admin/orders/confirmOrder', params);
 export const completeOrderApi = (params) => postData('/admin/orders/completeOrder', params);
+export const exportOrderApi = (params) => getData('/admin/orders/exportOrder', params, true);

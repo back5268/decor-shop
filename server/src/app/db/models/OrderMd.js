@@ -25,7 +25,7 @@ OrderMd.init('Order', {
   productInfo: { type: Array, required: true },
   customerInfo: { type: Object, required: true },
   total: { type: Number, required: true, min: 0 },
-  promotion: { type: Number, required: true, min: 0 },
+  promotion: { type: Number, min: 0 },
   qrCode: { type: String },
   note: { type: String },
   transactionCode: { type: String },
