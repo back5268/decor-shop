@@ -27,15 +27,20 @@ const Orders = () => {
       body: (e) => (
         <div className="flex flex-col gap-1">
           {e.productInfo?.map((product, index) => (
-            <div key={index} className="flex gap-2 items-center">
-              <div className="h-20 w-20 cursor-pointer">
-                <Imagez src={product.avatar} className="h-20 w-20" onClick={() => setProductId(product._id)} />
+            <div key={index}>
+              <div className="flex gap-2 items-center">
+                <div className="h-20 w-20 cursor-pointer">
+                  <Imagez src={product.avatar} className="h-20 w-20" onClick={() => setProductId(product._id)} />
+                </div>
+                <div className="flex flex-col gap-2 text-left">
+                  <p>{product.name}</p>
+                  <p className="font-medium">#{product.code}</p>
+                  <p>
+                    {formatNumber(product.price)} x {product.quantity || 1}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-col gap-2 text-left">
-                <p>{product.name}</p>
-                <p className="font-medium">#{product.code}</p>
-                <p>{formatNumber(product.price)} x {(product.quantity || 1)}</p>
-              </div>
+              <Hrz />
             </div>
           ))}
         </div>
