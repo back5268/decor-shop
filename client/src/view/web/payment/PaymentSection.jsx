@@ -126,7 +126,7 @@ const StepTwo = (props) => {
         label="Tỉnh / Thành phố (*)"
         options={cities}
         optionLabel="name"
-        optionValue="code"
+        optionValue="id"
         errors={errors}
         watch={watch}
         onChange={(e) => {
@@ -138,7 +138,7 @@ const StepTwo = (props) => {
       <DropdownForm
         id="district"
         label="Quận / Huyện (*)"
-        options={districts.filter((d) => d.city_code === watch('city'))}
+        options={districts.filter((d) => d.province_id === Number(watch('city')))}
         optionLabel="name"
         optionValue="id"
         errors={errors}
@@ -277,7 +277,7 @@ const PaymentSection = ({ products, open, setOpen }) => {
 
   const onSubmit = async (data) => {
     const params = { ...data };
-    params.city = cities.find((c) => c.code === data.city)?.name;
+    params.city = cities.find((c) => String(c.id) === data.city)?.name;
     params.district = districts.find((c) => String(c.id) === data.district)?.name;
     params.ward = wards.find((c) => String(c.id) === data.ward)?.name;
     const response = await orderProductApi({
