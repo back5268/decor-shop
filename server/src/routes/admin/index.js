@@ -11,6 +11,7 @@ import { newsRouter } from './news';
 import { cartRouter } from './cart';
 import { transactionRouter } from './transaction';
 import { orderRouter } from './order';
+import { dashboardRouter } from './dashboard';
 
 export const adminRouter = express.Router();
 
@@ -26,3 +27,4 @@ adminRouter.use('/news', newsRouter);
 adminRouter.use('/carts', cartRouter);
 adminRouter.use('/orders', orderRouter);
 adminRouter.use('/transactions', transactionRouter);
+adminRouter.use('/dashboard', dashboardRouter);

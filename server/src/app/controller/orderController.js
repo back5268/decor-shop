@@ -109,7 +109,8 @@ export const orderProduct = async (req, res) => {
       promotion: amount,
       qrCode,
       note,
-      status
+      status,
+      time: new Date()
     });
     res.json({ status: true, data });
   } catch (error) {

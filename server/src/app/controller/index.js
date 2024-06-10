@@ -10,3 +10,4 @@ export * from './cartController';
 export * from './orderController';
 export * from './newController';
 export * from './transactionController';
+export * from './dashboardController';

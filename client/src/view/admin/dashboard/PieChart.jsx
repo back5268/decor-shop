@@ -4,33 +4,24 @@ import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const data = {
-  labels: ['Hủy', 'Đã thanh toán', 'Chờ thanh toán', 'Đã nhận hàng'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-      ],
-      borderWidth: 1
-    }
-  ]
-};
-
-const PieChart = () => {
+const PieChart = ({ title = '', data = [], label = '' }) => {
   return (
-    <div className="max-h-[400px] flex justify-center">
-      <Pie data={data} />
+    <div className="max-h-[360px] flex justify-center items-center flex-col gap-4 mb-4">
+      <h3 className="font-bold uppercase">{title}</h3>
+      <Pie
+        data={{
+          labels: ['Đèn ngủ DIY', 'Đèn ngủ 3D', 'Tranh DIY'],
+          datasets: [
+            {
+              label,
+              data,
+              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+              borderWidth: 1
+            }
+          ]
+        }}
+      />
     </div>
   );
 };
