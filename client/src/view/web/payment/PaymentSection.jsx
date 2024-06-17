@@ -80,7 +80,11 @@ const StepOne = (props) => {
             />
             <Buttonz disabled={!code || disabled} onClick={() => onCheckPromotion()} label="Áp dụng" />
           </div>
-          {Boolean(promotion) && <div className="w-8/12 p-2"><div className='card'>{promotion.description}</div></div>}
+          {Boolean(promotion) && (
+            <div className="w-8/12 p-2">
+              <div className="card">{promotion.description}</div>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-2 w-6/12">
           <table>
@@ -182,14 +186,17 @@ const StepThree = ({ order }) => {
             </i>
           </div>
         )}
-        <div className="flex flex-col lg:w-6/12 w-full">
-          <h3>Cảm ơn bạn đã đặt mua sản phẩm của Decor Star</h3>
-          <h3>Đơn hàng của bạn đã được giao cho đơn vị vận chuyển, vui lòng để ý điện thoại.</h3>
-          <h3>
-            Nếu có bất kỳ thắc mắc nào về sản phẩm và dịch vụ hãy liên hệ với bộ phận CSKH của Decor Star để chúng tôi được phục vụ bạn tốt
-            hơn
-          </h3>
-          <h3>Decor Star xin được cảm ơn bạn rất nhiều và chúc bạn có một ngày may mắn và an lành ạ!</h3>
+        <div className="flex flex-col lg:w-6/12 w-full gap-4">
+          <div>
+            <b>Decor Star</b> chuyên cung cấp:
+          </div>
+          <div>✨ Đèn ngủ DIY</div>
+          <div>✨ Khung tranh đính đá pha lê</div>
+          <div>✨ Đèn LED 3D</div>
+          <div>
+          🎁 Chúng tôi cam kết mang đến cho bạn những sản phẩm chất lượng, giúp không gian sống trở nên ấm áp và đầy phong cách. Hãy đến và
+            khám phá, bạn sẽ tìm thấy những điều tuyệt vời nhất tại <b>Decor Star</b>!
+          </div>
         </div>
       </div>
     </div>
@@ -208,7 +215,14 @@ const Stepperz = ({ activeStep, activeStepMax, setActiveStep, trigger, onSubmit 
 
   return (
     <div className="w-full flex justify-between py-8 px-8 gap-4">
-      <Buttonz className="text-nowrap" onClick={() => setActiveStep((pre) => pre - 1)} disabled={activeStep === 0} variant="outlined" color="red" label="Trở lại" />
+      <Buttonz
+        className="text-nowrap"
+        onClick={() => setActiveStep((pre) => pre - 1)}
+        disabled={activeStep === 0}
+        variant="outlined"
+        color="red"
+        label="Trở lại"
+      />
       <div className="sm:w-[44rem] w-[30rem]">
         <Stepper activeLineClassName="bg-primary" activeStep={activeStep}>
           <Step

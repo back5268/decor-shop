@@ -20,7 +20,7 @@ class OrderMd extends ModelBase {
 }
 
 OrderMd.init('Order', {
-  by: { type: ObjectId, ref: 'User', required: true },
+  by: { type: ObjectId, ref: 'User' },
   code: { type: String },
   productInfo: { type: Array, required: true },
   customerInfo: { type: Object, required: true },
