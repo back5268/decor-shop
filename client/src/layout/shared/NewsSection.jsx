@@ -24,7 +24,7 @@ const NewsSection = () => {
   return (
     <Fragment>
       <div className="fixed bottom-4 left-4">
-        <Buttonz color="red" onClick={() => setOpen(true)}>
+        <Buttonz color="red" onClick={() => setOpen(true)} style={{ backgroundColor: '#a45909' }}>
           <div className="flex gap-2 justify-center items-center">
             <SpeakerWaveIcon className="w-4 h-4 stroke-2" /> Tin tức ({news?.length})
           </div>

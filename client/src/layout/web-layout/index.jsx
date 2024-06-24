@@ -64,12 +64,12 @@ const WebLayout = ({ children }) => {
       )}
       <SidebarWeb showSidebar={showSidebar} />
       <ProductDialog />
-      <Cardz className="fixed inset-x-0 top-0 h-16 shadow-blue-gray-900/5 z-10">
+      <Cardz className="fixed inset-x-0 top-0 h-18 shadow-blue-gray-900/5 z-10" style={{ background: 'linear-gradient(to bottom, #fff6aa 10%, #ffffff 100%)' }}>
         <div className="sm:container flex justify-between items-center h-full w-full">
           <div className="block lg:hidden">
             <Buttonz onClick={() => setShowSidebar(!showSidebar)} variant="text" color="white" className="p-1 text-color">
               <Bars3Icon className="h-8 w-8 stroke-1" />
-            </Buttonz>
+            </Buttonz>  
           </div>
           <div className="gap-12 items-center hidden lg:flex">
             <Linkz to="/" className="flex gap-4 items-center !text-color">

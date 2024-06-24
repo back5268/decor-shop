@@ -22,7 +22,7 @@ const ListProduct = (props) => {
         </div>
       </div>
       <div className="flex w-full justify-center">
-        <Buttonz onClick={() => navigate(`/products${route}`)} label="Xem thêm" color="red" />
+        <Buttonz onClick={() => navigate(`/products${route}`)} label="Xem thêm" color="red" style={{ backgroundColor: '#a45909' }} />
       </div>
     </div>
   );

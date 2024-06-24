@@ -2,9 +2,9 @@ import { Card, CardBody, CardFooter, CardHeader } from '@material-tailwind/react
 import React from 'react';
 
 const Cardz = (props) => {
-  const { children, footer, header, className = '' } = props;
+  const { children, footer, header, style = {}, className = '' } = props;
   return (
-    <Card className={`text-color transition-all duration-500 ease-in-out ${className}`}>
+    <Card className={`text-color transition-all duration-500 ease-in-out ${className}`} style={style}>
       {header && (  
         <CardHeader color="blue-gray" className="relative h-56">
           {header}

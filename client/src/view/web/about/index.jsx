@@ -9,8 +9,8 @@ const About = () => {
         <div className="bg-white p-8 shadow-lg -mt-16 z-10">
           <div className="flex flex-col">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">Welcome to Our Company</h1>
-              <p className="text-lg">We are committed to delivering the best services.</p>
+              <h1 className="text-3xl font-bold mb-2">Chào mừng đến với công ty của chúng tôi</h1>
+              <p className="text-lg">Chúng tôi cam kết mang đến những dịch vụ tốt nhất.</p>
             </div>
             <h2 className="mt-8 uppercase mb-2 font-bold text-xl">Decor Star</h2>
             <div className="card flex flex-wrap p-8">
