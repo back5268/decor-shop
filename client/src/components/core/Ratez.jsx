@@ -8,8 +8,8 @@ const Ratez = ({ value = 5, className = '' }) => {
   return (
     <div className={`flex lg:gap-2 ${className}`}>
       {data.map((datum, index) => {
-        if (datum < 0) return <StarIcon key={index} color="red" className={`sm:w-4 w-2`} />;
-        else return <StarIconz key={index} color="red" className={`sm:w-4 w-2`} />;
+        if (datum < 0) return <StarIcon key={index} color="red" className={`sm:w-4 w-2`} style={{ color: '#ff7c08' }} />;
+        else return <StarIconz key={index} color="red" className={`sm:w-4 w-2`} style={{ color: '#ff7c08' }} />;
       })}
     </div>
   );

@@ -78,7 +78,7 @@ const StepOne = (props) => {
               onChange={(e) => setCode(e.target.value)}
               placeholder="Mã khuyến mãi"
             />
-            <Buttonz disabled={!code || disabled} onClick={() => onCheckPromotion()} label="Áp dụng" />
+            <Buttonz disabled={!code || disabled} onClick={() => onCheckPromotion()} label="Áp dụng"         style={{ backgroundColor: '#ff7c08' }} />
           </div>
           {Boolean(promotion) && (
             <div className="w-8/12 p-2">
@@ -224,12 +224,12 @@ const Stepperz = ({ activeStep, activeStepMax, setActiveStep, trigger, onSubmit 
         label="Trở lại"
       />
       <div className="sm:w-[44rem] w-[30rem]">
-        <Stepper activeLineClassName="bg-primary" activeStep={activeStep}>
+        <Stepper activeLineClassName="bg-[#ff7c08]" activeStep={activeStep}>
           <Step
             color="cyan"
             className="cursor-pointer"
-            activeClassName="bg-primary"
-            completedClassName="bg-primary"
+            activeClassName="bg-[#ff7c08]"
+            completedClassName="bg-[#ff7c08]"
             onClick={() => setActiveStep(0)}
           >
             <ShoppingBagIcon className="h-5 w-5" />
@@ -237,8 +237,8 @@ const Stepperz = ({ activeStep, activeStepMax, setActiveStep, trigger, onSubmit 
           <Step
             color="cyan"
             className="cursor-pointer"
-            activeClassName="bg-primary"
-            completedClassName="bg-primary"
+            activeClassName="bg-[#ff7c08]"
+            completedClassName="bg-[#ff7c08]"
             onClick={() => setActiveStep(1)}
           >
             <MapPinIcon className="h-5 w-5" />
@@ -246,15 +246,15 @@ const Stepperz = ({ activeStep, activeStepMax, setActiveStep, trigger, onSubmit 
           <Step
             color="cyan"
             className="cursor-pointer"
-            activeClassName="bg-primary"
-            completedClassName="bg-primary"
+            activeClassName="bg-[#ff7c08]"
+            completedClassName="bg-[#ff7c08]"
             onClick={() => activeStepMax === 2 && setActiveStep(2)}
           >
             <TrophyIcon className="h-5 w-5" />
           </Step>
         </Stepper>
       </div>
-      <Buttonz className="text-nowrap" type="button" onClick={onNext} disabled={activeStep === 2} label="Tiếp theo" />
+      <Buttonz className="text-nowrap" type="button" onClick={onNext} disabled={activeStep === 2} label="Tiếp theo"         style={{ backgroundColor: '#ff7c08' }} />
     </div>
   );
 };

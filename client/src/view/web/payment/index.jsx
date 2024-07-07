@@ -26,8 +26,8 @@ export default function UnderlineTabs() {
                 <ListItem
                   key={index}
                   onClick={() => setActiveTab(item.value)}
-                  className={`w-full rounded-xl bg-blue-gray-50 p-3 text-sm font-medium text-color hover:bg-primary 
-                hover:text-white focus:bg-primary focus:text-white ${activeTab === item.value ? 'bg-primary text-white' : ''}`}
+                  className={`w-full rounded-xl bg-blue-gray-50 p-3 text-sm font-medium text-color hover:bg-[#ff7c08] 
+                hover:text-white focus:bg-[#ff7c08] focus:text-white ${activeTab === item.value ? 'bg-[#ff7c08] text-white' : ''}`}
                 >
                   <ListItemPrefix className='sm:block hidden'>
                     <Icon className="h-5" />

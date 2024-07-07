@@ -27,12 +27,20 @@
 }
 
 ::-webkit-scrollbar {
-  height: 4px;
-  width: 4px;
+  width: 10px; /* Chiều rộng của thanh cuộn */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Màu nền của track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #a3a3a3;
+  background-color: #ff7c08; /* Màu của thanh cuộn */
+}
+
+/* Optional: Hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #db6906; /* Màu của thanh cuộn khi hover */
 }
 
 html {

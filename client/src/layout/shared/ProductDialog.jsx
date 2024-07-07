@@ -187,7 +187,7 @@ const ProductDialog = () => {
             </div>
             <Hrz />
             <div className="flex py-2 gap-4 justify-center items-center w-full">
-              <Buttonz onClick={() => (isAuthenticated ? onAddToCart() : onWarning())}>
+              <Buttonz onClick={() => (isAuthenticated ? onAddToCart() : onWarning())} style={{ backgroundColor: '#ff7c08' }}>
                 <div className="flex gap-2 items-center">
                   <ShoppingCartIcon className="w-5 stroke-2" />
                   Thêm vào giỏ hàng
@@ -199,6 +199,7 @@ const ProductDialog = () => {
                   setProductId(null);
                   setProducts([]);
                 }}
+                style={{ backgroundColor: '#ff7c08' }}
               >
                 <div className="flex gap-2 items-center">
                   <ArchiveBoxIcon className="w-5 stroke-2" />

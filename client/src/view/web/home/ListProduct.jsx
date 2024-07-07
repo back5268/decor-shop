@@ -2,10 +2,11 @@ import React from 'react';
 import { CardProduct, Title } from '../shared';
 import { Buttonz } from '@components/core';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const ListProduct = (props) => {
-  const { label, data = [], route } = props
-  const navigate = useNavigate()
+  const { label, data = [], route } = props;
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -21,9 +22,15 @@ const ListProduct = (props) => {
           })}
         </div>
       </div>
-      <div className="flex w-full justify-center">
-        <Buttonz onClick={() => navigate(`/products${route}`)} label="Xem thêm" color="red" style={{ backgroundColor: '#a45909' }} />
-      </div>
+      <motion.div
+        initial={{ y: 12, opacity: 0.5 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="flex w-full justify-center"
+      >
+        <Buttonz onClick={() => navigate(`/products${route}`)} label="Xem thêm" color="red" style={{ backgroundColor: '#ff7c08' }} />
+      </motion.div>
     </div>
   );
 };

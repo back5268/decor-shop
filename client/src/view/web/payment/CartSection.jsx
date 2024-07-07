@@ -96,6 +96,7 @@ const CartSection = () => {
       <PaymentSection products={products.filter((p) => select.includes(p._id))} open={open} setOpen={setOpen} />
       <div color="red" className="flex justify-end mb-2">
         <Buttonz
+        style={{ backgroundColor: '#ff7c08' }}
           onClick={() =>
             select?.length > 0 ? setOpen(true) : showToast({ title: 'Vui lòng chọn sản phẩm trước khi thanh toán', severity: 'warning' })
           }

@@ -13,10 +13,18 @@ module.exports = withMT({
       }
     },
     extend: {
+      backgroundPosition: {
+        'top-1/4': 'center top 25%'
+        // thêm các vị trí khác nếu cần
+      },
+      filter: {
+        'none': 'none',
+        'blur': 'blur(8px)',
+      },
       height: {
         'body-sidebar': 'calc(100vh - 18rem)',
         'body-product': 'calc(100vh - 4rem)',
-        'body-payment': 'calc(100vh - 24rem)',
+        'body-payment': 'calc(100vh - 24rem)'
       },
       minWidth: {
         '[200px]': '0px'
