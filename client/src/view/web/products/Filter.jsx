@@ -46,6 +46,7 @@ const Filter = ({ params, setParams }) => {
             }}
             className="w-full"
             label="Áp dụng"
+            style={{ backgroundColor: '#ff7c08' }}
           />
         </div>
         <Hrz />

@@ -96,9 +96,6 @@ const ProductDialog = () => {
     if (response) showToast({ title: 'Thêm sản phẩm vào giỏ hàng thành công', severity: 'success' });
   };
 
-  console.log(products);
-  console.log(productss);
-
   return (
     <>
       <PaymentSection products={productss} open={open} setOpen={setOpen} />

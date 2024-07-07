@@ -115,7 +115,7 @@ const WebLayout = ({ children }) => {
               <AvatarSection mode="web" onSignOut={onSignOut} />
             </div>
           ) : (
-            <Buttonz onClick={() => navigate('/auth/signin')}>Đăng nhập</Buttonz>
+            <Buttonz style={{ backgroundColor: '#ff7c08' }} onClick={() => navigate('/auth/signin')}>Đăng nhập</Buttonz>
           )}
         </div>
       </Cardz>

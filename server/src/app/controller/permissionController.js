@@ -98,7 +98,6 @@ export const getListPermission = async (req, res) => {
     const total = await countListPermissionMd(where);
     res.json({ status: true, data: { documents, total } });
   } catch (error) {
-    console.log(1);
     res.status(500).json({ status: false, mess: error.toString() });
   }
 };

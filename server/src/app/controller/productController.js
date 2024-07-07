@@ -74,7 +74,6 @@ export const getListProductInfo = async (req, res) => {
     const data = await getListProductMd({}, false, false, false, false, "_id name code price");
     res.json({ status: true, data });
   } catch (error) {
-    console.log(1);
     res.status(500).json({ status: false, mess: error.toString() });
   }
 };
