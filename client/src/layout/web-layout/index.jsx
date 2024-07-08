@@ -119,7 +119,7 @@ const WebLayout = ({ children }) => {
           )}
         </div>
       </Cardz>
-      <div className="mt-16 mx-auto min-h-screen z-[6] pb-24 relative bg-contain">
+      <div className="mt-16 mx-auto min-h-screen pb-24 relative bg-contain">
         <div className='absolute inset-0 bg-contain -z-[1] opacity-20' style={{ backgroundImage: `url('/images/pt.jpg')` }}></div>
         <div>{children}</div>
       </div>

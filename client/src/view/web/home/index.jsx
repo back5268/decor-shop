@@ -14,7 +14,6 @@ const Home = () => {
   return (
     <div>
       <div className="relative">
-        <div className="absolute inset-0 bg-[#231f40e0] z-[5] opacity-20"></div>
         <Carousel
           loop={true}
           autoplay={true}
